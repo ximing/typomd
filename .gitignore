@@ -42,3 +42,8 @@ jspm_packages
 public
 .DS_Store
 !src/assets
+
+# Monorepo build artifacts
+dist/
+.turbo/
+*.tsbuildinfo

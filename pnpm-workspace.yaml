@@ -1,0 +1,26 @@
+packages:
+  - 'packages/*'
+  - 'apps/*'
+
+catalog:
+  # Milkdown 全线锁 7.x（已核实 latest 7.22.x，同锁步发布）
+  '@milkdown/core': ^7.22.0
+  '@milkdown/ctx': ^7.22.0
+  '@milkdown/prose': ^7.22.0
+  '@milkdown/transformer': ^7.22.0
+  '@milkdown/utils': ^7.22.0
+  '@milkdown/preset-commonmark': ^7.22.0
+  '@milkdown/preset-gfm': ^7.22.0
+  '@milkdown/plugin-listener': ^7.22.0
+  '@milkdown/plugin-history': ^7.22.0
+  # 渲染依赖
+  katex: ^0.16.11
+  mermaid: ^11.4.0
+  shiki: ^3.0.0
+  remark-math: ^6.0.0
+  unist-util-visit: ^5.0.0
+  '@types/unist': ^3.0.0
+  # 构建与测试
+  tsup: ^8.3.0
+  vitest: ^3.0.0
+  jsdom: ^25.0.0
