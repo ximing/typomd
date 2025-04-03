@@ -1,0 +1,37 @@
+{
+  "name": "@mdeditor/core",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "dev": "tsup --watch"
+  },
+  "dependencies": {
+    "@milkdown/core": "catalog:",
+    "@milkdown/ctx": "catalog:",
+    "@milkdown/prose": "catalog:",
+    "@milkdown/transformer": "catalog:",
+    "@milkdown/utils": "catalog:",
+    "@milkdown/preset-commonmark": "catalog:",
+    "@milkdown/preset-gfm": "catalog:",
+    "@milkdown/plugin-listener": "catalog:",
+    "@milkdown/plugin-history": "catalog:",
+    "katex": "catalog:",
+    "mermaid": "catalog:",
+    "shiki": "catalog:",
+    "remark-math": "catalog:",
+    "unist-util-visit": "catalog:"
+  },
+  "devDependencies": {
+    "tsup": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:",
+    "jsdom": "catalog:",
+    "@types/katex": "^0.16.7",
+    "@types/unist": "catalog:"
+  }
+}
