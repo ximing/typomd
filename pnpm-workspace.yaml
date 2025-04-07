@@ -20,6 +20,7 @@ catalog:
   remark-math: ^6.0.0
   unist-util-visit: ^5.0.0
   '@types/unist': ^3.0.0
+  '@types/node': ^22.0.0
   # 构建与测试
   tsup: ^8.3.0
   typescript: ^5.6.0
