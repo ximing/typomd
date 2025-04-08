@@ -9,6 +9,7 @@ import { internalHandles } from './internal'
 import { basePlugins } from './presets/base'
 import { featureLoaders } from './presets/index'
 import { createHandle } from './handle'
+import { createSlashPlugin } from './slash'
 import type { CreateEditorOptions, EditorError, EditorHandle } from './types'
 
 interface ChangeGate {
@@ -80,6 +81,11 @@ export async function createEditor(options: CreateEditorOptions): Promise<Editor
     }),
   )
   plugins.push(changePlugin)
+
+  // slashTrigger：默认开；features.slash === false 时不装插件、不发事件（spec §5.2）
+  if (features.slash !== false) {
+    plugins.push(createSlashPlugin((payload) => emitter.emit('slashTrigger', payload)))
+  }
 
   let editor: Editor
   try {
