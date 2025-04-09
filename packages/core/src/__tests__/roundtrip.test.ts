@@ -14,7 +14,7 @@ const fixtures = readdirSync(fixturesDir).filter((f) => f.endsWith('.md'))
  * （Task 8 登记 math.md，Task 9 登记 mermaid.md），否则测试不经过目标节点。
  */
 const FEATURES: Record<string, FeatureFlags> = {
-  // 'math.md': { math: true },        // Task 8 取消注释
+  'math.md': { math: true },          // Task 8
   // 'mermaid.md': { mermaid: true },  // Task 9 取消注释
 }
 
