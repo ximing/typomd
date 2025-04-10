@@ -15,7 +15,7 @@ const fixtures = readdirSync(fixturesDir).filter((f) => f.endsWith('.md'))
  */
 const FEATURES: Record<string, FeatureFlags> = {
   'math.md': { math: true },          // Task 8
-  // 'mermaid.md': { mermaid: true },  // Task 9 取消注释
+  'mermaid.md': { mermaid: true },    // Task 9
 }
 
 describe('canonical fixture roundtrip（字符串恒等）', () => {

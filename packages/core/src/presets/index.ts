@@ -2,6 +2,7 @@
 import type { MilkdownPlugin } from '@milkdown/ctx'
 import type { CreateEditorOptions, EditorError } from '../types'
 import { mathPreset } from './math/index'
+import { mermaidPreset } from './mermaid/index'
 
 export interface FeatureContext {
   onError: (error: EditorError) => void
@@ -14,4 +15,5 @@ export interface FeatureContext {
  */
 export const featureLoaders: Record<string, (fc: FeatureContext) => MilkdownPlugin[]> = {
   math: (fc) => mathPreset(fc),
+  mermaid: (fc) => mermaidPreset(fc),
 }
