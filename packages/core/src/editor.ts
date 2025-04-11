@@ -87,6 +87,13 @@ export async function createEditor(options: CreateEditorOptions): Promise<Editor
     plugins.push(createSlashPlugin((payload) => emitter.emit('slashTrigger', payload)))
   }
 
+  // image 上传钩子（spec §6.1）：onUploadImage 存在时才装载占位节点 + 粘贴/拖拽入口。
+  // 动态 import 避免未传钩子时的模块开销。不走 featureLoaders——image 由 option 直接驱动，非 feature flag。
+  if (options.onUploadImage) {
+    const { createImageUploadPlugins } = await import('./presets/image')
+    plugins.push(...createImageUploadPlugins({ onError, onUploadImage: options.onUploadImage }))
+  }
+
   let editor: Editor
   try {
     editor = await Editor.make()
