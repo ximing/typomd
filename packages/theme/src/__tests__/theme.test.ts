@@ -26,4 +26,10 @@ describe('theme tokens', () => {
     expect(tokens.light['color-bg']).toBe('#ffffff')
     expect(tokens.dark['color-bg']).toBe('#0d1117')
   })
+
+  test('暗色覆写包含 shiki 双主题规则', () => {
+    const css = buildCss(tokens)
+    expect(css).toContain('.mdeditor-dark .ProseMirror pre span')
+    expect(css).toContain('var(--shiki-dark)')
+  })
 })

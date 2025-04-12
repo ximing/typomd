@@ -47,6 +47,10 @@ export function buildCss(tokens) {
   lines.push(`  border-radius: var(${PREFIX}radius);`)
   lines.push(`  padding: var(${PREFIX}space-1) var(${PREFIX}space-2);`)
   lines.push('}')
+  // Shiki 双主题（core codeHighlight preset 输出 --shiki-light/--shiki-dark 变量）
+  lines.push('.mdeditor-dark .ProseMirror pre span {')
+  lines.push('  color: var(--shiki-dark) !important;')
+  lines.push('}')
   return lines.join('\n') + '\n'
 }
 
