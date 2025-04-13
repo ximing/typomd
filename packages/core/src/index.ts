@@ -9,3 +9,5 @@ export type {
   FeatureFlags,
   SlashTriggerPayload,
 } from './types'
+export { commandRegistry } from './commands/registry'
+export type { CommandPlacement, CommandSpec } from './commands/registry'
