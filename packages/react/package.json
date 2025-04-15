@@ -1,0 +1,37 @@
+{
+  "name": "@mdeditor/react",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
+    "./styles.css": "./dist/styles.css"
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup && cp src/styles.css dist/styles.css",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "dev": "tsup --watch"
+  },
+  "dependencies": {
+    "@floating-ui/dom": "catalog:",
+    "@mdeditor/core": "workspace:*",
+    "@mdeditor/theme": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^18.3.0 || ^19.0.0",
+    "react-dom": "^18.3.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "catalog:",
+    "@testing-library/react": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "jsdom": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "tsup": "catalog:",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  }
+}
