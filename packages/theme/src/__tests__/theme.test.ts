@@ -32,4 +32,10 @@ describe('theme tokens', () => {
     expect(css).toContain('.mdeditor-dark .ProseMirror pre span')
     expect(css).toContain('var(--shiki-dark)')
   })
+
+  test('包含 placeholder 结构性规则（trailingBreak 命中条件）', () => {
+    const css = buildCss(tokens)
+    expect(css).toContain('[data-placeholder]')
+    expect(css).toContain('br.ProseMirror-trailingBreak:only-child')
+  })
 })
