@@ -1,5 +1,6 @@
 // __tests__/helpers.tsx
 import { render, screen, waitFor, type RenderResult } from '@testing-library/react'
+import { expect } from 'vitest'
 import type { EditorHandle } from '@mdeditor/core'
 import { MdEditor } from '../MdEditor'
 import type { MdEditorProps } from '../types'

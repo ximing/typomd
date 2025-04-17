@@ -1,4 +1,5 @@
 // index.ts
+export { MdEditor } from './MdEditor'
 export type {
   EditorError,
   EditorHandle,
