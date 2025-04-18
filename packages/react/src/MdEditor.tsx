@@ -2,6 +2,7 @@
 import { forwardRef, useEffect, useImperativeHandle, useMemo, useState } from 'react'
 import type { EditorHandle } from '@mdeditor/core'
 import { MdEditorInner } from './MdEditorInner'
+import { Toolbar } from './Toolbar'
 import type { MdEditorProps } from './types'
 
 export const MdEditor = forwardRef<EditorHandle, MdEditorProps>(function MdEditor(props, ref) {
@@ -41,7 +42,9 @@ export const MdEditor = forwardRef<EditorHandle, MdEditorProps>(function MdEdito
 
   return (
     <div className="mdeditor-root">
-      {/* Task 4 在此插入 <Toolbar>（toolbar?.visible !== false 时） */}
+      {handle && toolbar?.visible !== false && (
+        <Toolbar handle={handle} config={toolbar} hasUpload={onUploadImage !== undefined} />
+      )}
       <div className="mdeditor-body">
         <MdEditorInner options={options} placeholder={placeholder} onReady={setHandle} />
         {/* Task 5/6 在此插入 FloatingToolbar / SlashMenu（handle 就绪后） */}
