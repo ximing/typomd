@@ -1,6 +1,7 @@
 // MdEditor.tsx
 import { forwardRef, useEffect, useImperativeHandle, useMemo, useState } from 'react'
 import type { EditorHandle } from '@mdeditor/core'
+import { FloatingToolbar } from './FloatingToolbar'
 import { MdEditorInner } from './MdEditorInner'
 import { Toolbar } from './Toolbar'
 import type { MdEditorProps } from './types'
@@ -47,7 +48,8 @@ export const MdEditor = forwardRef<EditorHandle, MdEditorProps>(function MdEdito
       )}
       <div className="mdeditor-body">
         <MdEditorInner options={options} placeholder={placeholder} onReady={setHandle} />
-        {/* Task 5/6 在此插入 FloatingToolbar / SlashMenu（handle 就绪后） */}
+        {handle && features?.floatingToolbar !== false && <FloatingToolbar handle={handle} />}
+        {/* Task 6 在此插入 SlashMenu（handle 就绪后） */}
       </div>
     </div>
   )
