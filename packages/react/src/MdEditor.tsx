@@ -3,6 +3,7 @@ import { forwardRef, useEffect, useImperativeHandle, useMemo, useState } from 'r
 import type { EditorHandle } from '@mdeditor/core'
 import { FloatingToolbar } from './FloatingToolbar'
 import { MdEditorInner } from './MdEditorInner'
+import { SlashMenu } from './SlashMenu'
 import { Toolbar } from './Toolbar'
 import type { MdEditorProps } from './types'
 
@@ -49,7 +50,7 @@ export const MdEditor = forwardRef<EditorHandle, MdEditorProps>(function MdEdito
       <div className="mdeditor-body">
         <MdEditorInner options={options} placeholder={placeholder} onReady={setHandle} />
         {handle && features?.floatingToolbar !== false && <FloatingToolbar handle={handle} />}
-        {/* Task 6 在此插入 SlashMenu（handle 就绪后） */}
+        {handle && <SlashMenu handle={handle} hasUpload={onUploadImage !== undefined} />}
       </div>
     </div>
   )
