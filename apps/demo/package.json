@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "test": "echo 'demo 无单测；e2e 见 pnpm e2e' && exit 0",
+    "e2e": "playwright test",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -17,6 +18,7 @@
     "react-dom": "catalog:"
   },
   "devDependencies": {
+    "@playwright/test": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@vitejs/plugin-react": "catalog:",

@@ -11,7 +11,8 @@
     "dev": "turbo run dev",
     "changeset": "changeset",
     "version": "changeset version",
-    "release": "turbo run build && changeset publish"
+    "release": "turbo run build && changeset publish",
+    "e2e": "pnpm --filter demo e2e"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.0",
