@@ -47,3 +47,7 @@ public
 dist/
 .turbo/
 *.tsbuildinfo
+
+# Playwright e2e artifacts (apps/demo)
+test-results/
+playwright-report/
