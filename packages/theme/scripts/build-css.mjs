@@ -7,12 +7,20 @@ const pkgRoot = join(here, '..')
 
 const PREFIX = '--mdeditor-'
 
+/** 旧令牌 → 新令牌 构建层别名（§12：只存在于生成层，过渡一个阶段后由 Task 10 删除；任何源码不得引用旧令牌名） */
+const ALIASES = {
+  'radius': `var(${PREFIX}radius-md)`,
+  'color-error': `var(${PREFIX}color-danger)`,
+  'color-quote-border': `var(${PREFIX}color-text)`,
+}
+
 /** tokens.json → default.css 文本。亮色落在 :root/.mdeditor，暗色只覆写颜色。 */
 export function buildCss(tokens) {
   const lines = ['/* 由 scripts/build-css.mjs 生成，请勿手改 */', '']
   lines.push(':root, .mdeditor {')
   for (const [k, v] of Object.entries(tokens.shared)) lines.push(`  ${PREFIX}${k}: ${v};`)
   for (const [k, v] of Object.entries(tokens.light)) lines.push(`  ${PREFIX}${k}: ${v};`)
+  for (const [k, v] of Object.entries(ALIASES)) lines.push(`  ${PREFIX}${k}: ${v};`)
   lines.push('}', '')
   lines.push('.mdeditor-dark {')
   for (const [k, v] of Object.entries(tokens.dark)) lines.push(`  ${PREFIX}${k}: ${v};`)

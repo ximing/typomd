@@ -24,7 +24,31 @@ describe('theme tokens', () => {
 
   test('JSON 导出与 CSS 数据源一致（同一份 tokens 对象）', () => {
     expect(tokens.light['color-bg']).toBe('#ffffff')
-    expect(tokens.dark['color-bg']).toBe('#0d1117')
+    expect(tokens.dark['color-bg']).toBe('#191919')
+  })
+
+  test('v2 令牌集：shared 扩展键与新语义颜色键存在', () => {
+    for (const k of ['space-0_5', 'space-1_5', 'space-5', 'space-8', 'radius-sm', 'radius-md', 'radius-lg', 'radius-full',
+      'font-size-ui', 'font-size-ui-sm', 'duration-fast', 'duration-base', 'ease-standard', 'ease-out',
+      'z-sticky', 'z-floating', 'z-slash', 'z-tooltip']) {
+      expect(tokens.shared).toHaveProperty(k)
+    }
+    for (const k of ['color-bg-secondary', 'color-bg-elevated', 'color-text-secondary', 'color-border-strong',
+      'color-hover', 'color-active', 'color-accent-contrast', 'color-accent-subtle', 'color-focus-ring',
+      'color-danger', 'color-code-bg', 'shadow-popover']) {
+      expect(tokens.light).toHaveProperty(k)
+      expect(tokens.dark).toHaveProperty(k)
+    }
+    // 字体栈保持现值（spec 未授权改字栈）
+    expect(tokens.shared['font-text']).toContain('PingFang SC')
+    expect(tokens.shared['font-mono']).toContain('SF Mono')
+  })
+
+  test('构建层别名：旧令牌以 var() 引用生成（§12 阶段 1，过渡期）', () => {
+    const css = buildCss(tokens)
+    expect(css).toContain('--mdeditor-radius: var(--mdeditor-radius-md);')
+    expect(css).toContain('--mdeditor-color-error: var(--mdeditor-color-danger);')
+    expect(css).toContain('--mdeditor-color-quote-border: var(--mdeditor-color-text);')
   })
 
   test('暗色覆写包含 shiki 双主题规则', () => {
