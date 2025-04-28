@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'vitest'
 import { buildCss } from '../../scripts/build-css.mjs'
 import { tokens } from '../index'
+import { contrast } from './contrast'
 
 describe('theme tokens', () => {
   test('亮/暗两组颜色令牌键完全对齐', () => {
@@ -61,5 +62,15 @@ describe('theme tokens', () => {
     const css = buildCss(tokens)
     expect(css).toContain('[data-placeholder]')
     expect(css).toContain('br.ProseMirror-trailingBreak:only-child')
+  })
+
+  test('WCAG 对比度（§6）：正文/次级 ≥ 4.5，focus-ring ≥ 3（亮/暗）', () => {
+    for (const theme of [tokens.light, tokens.dark] as Record<string, string>[]) {
+      const bg = theme['color-bg']!
+      expect(contrast(theme['color-text']!, bg)).toBeGreaterThanOrEqual(4.5)
+      expect(contrast(theme['color-text-secondary']!, bg)).toBeGreaterThanOrEqual(4.5)
+      expect(contrast(theme['color-focus-ring']!, bg)).toBeGreaterThanOrEqual(3)
+    }
+    // text-muted 与 hairline 边框为装饰性/非必要信息，不断言（§6）
   })
 })
