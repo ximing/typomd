@@ -1,0 +1,7 @@
+/* content-dark.css — 类限定的暗色内容规则。
+   硬约束（§3.2）：每条规则选择器必须以 ".mdeditor-dark " 开头，
+   build-css.mjs 靠 ".mdeditor-dark " → ".mdeditor " 机械替换生成 auto.css。 */
+/* Shiki 双主题（core codeHighlight preset 输出 --shiki-light/--shiki-dark 变量） */
+.mdeditor-dark .ProseMirror pre span {
+  color: var(--shiki-dark) !important;
+}

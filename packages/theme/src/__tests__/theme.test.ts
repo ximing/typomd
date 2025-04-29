@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import { buildCss } from '../../scripts/build-css.mjs'
+import { buildAutoCss, buildCss } from '../../scripts/build-css.mjs'
 import { tokens } from '../index'
 import { contrast } from './contrast'
 
@@ -72,5 +72,22 @@ describe('theme tokens', () => {
       expect(contrast(theme['color-focus-ring']!, bg)).toBeGreaterThanOrEqual(3)
     }
     // text-muted 与 hairline 边框为装饰性/非必要信息，不断言（§6）
+  })
+
+  test('default.css 拼接 content.css 与 content-dark.css；auto.css 含媒体查询与机械变换', () => {
+    const css = buildCss(tokens)
+    expect(css).toContain('.mdeditor .ProseMirror {')
+    expect(css).toContain('.mdeditor-dark .ProseMirror pre span')
+    const auto = buildAutoCss(tokens)
+    expect(auto).toContain('@media (prefers-color-scheme: dark)')
+    // 类限定规则机械变换：.mdeditor-dark X → @media 内 .mdeditor X（§3.2）
+    expect(auto).toContain('.mdeditor .ProseMirror pre span')
+    // 健壮断言：不存在任何 .mdeditor-dark 选择器行（注释里出现该字符串不算）
+    expect(auto).not.toMatch(/^\s*\.mdeditor-dark /m)
+  })
+
+  test('buildCss/buildAutoCss 输出快照（§11：含 content.css 拼接）', () => {
+    expect(buildCss(tokens)).toMatchSnapshot()
+    expect(buildAutoCss(tokens)).toMatchSnapshot()
   })
 })

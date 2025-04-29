@@ -1,0 +1,271 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`theme tokens > buildCss/buildAutoCss 输出快照（§11：含 content.css 拼接） 1`] = `
+"/* 由 scripts/build-css.mjs 生成，请勿手改 */
+
+:root, .mdeditor {
+  --mdeditor-font-text: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --mdeditor-font-mono: 'SF Mono', 'JetBrains Mono', Menlo, Consolas, 'Courier New', monospace;
+  --mdeditor-space-0_5: 2px;
+  --mdeditor-space-1: 4px;
+  --mdeditor-space-1_5: 6px;
+  --mdeditor-space-2: 8px;
+  --mdeditor-space-3: 12px;
+  --mdeditor-space-4: 16px;
+  --mdeditor-space-5: 20px;
+  --mdeditor-space-6: 24px;
+  --mdeditor-space-8: 32px;
+  --mdeditor-radius-sm: 4px;
+  --mdeditor-radius-md: 6px;
+  --mdeditor-radius-lg: 10px;
+  --mdeditor-radius-full: 999px;
+  --mdeditor-font-size: 16px;
+  --mdeditor-font-size-ui: 13px;
+  --mdeditor-font-size-ui-sm: 12px;
+  --mdeditor-line-height: 1.6;
+  --mdeditor-duration-fast: 100ms;
+  --mdeditor-duration-base: 160ms;
+  --mdeditor-ease-standard: cubic-bezier(0.2,0,0,1);
+  --mdeditor-ease-out: cubic-bezier(0.16,1,0.3,1);
+  --mdeditor-z-sticky: 10;
+  --mdeditor-z-floating: 20;
+  --mdeditor-z-slash: 30;
+  --mdeditor-z-tooltip: 40;
+  --mdeditor-color-bg: #ffffff;
+  --mdeditor-color-bg-secondary: #f7f7f5;
+  --mdeditor-color-bg-elevated: #ffffff;
+  --mdeditor-color-text: #37352f;
+  --mdeditor-color-text-secondary: rgba(55,53,47,0.70);
+  --mdeditor-color-text-muted: rgba(55,53,47,0.45);
+  --mdeditor-color-border: rgba(55,53,47,0.09);
+  --mdeditor-color-border-strong: rgba(55,53,47,0.16);
+  --mdeditor-color-hover: rgba(55,53,47,0.06);
+  --mdeditor-color-active: rgba(55,53,47,0.10);
+  --mdeditor-color-accent: #37352f;
+  --mdeditor-color-accent-contrast: #ffffff;
+  --mdeditor-color-accent-subtle: rgba(55,53,47,0.08);
+  --mdeditor-color-focus-ring: rgba(55,53,47,0.60);
+  --mdeditor-color-selection: rgba(55,53,47,0.14);
+  --mdeditor-color-danger: #eb5757;
+  --mdeditor-color-code-bg: #f7f6f3;
+  --mdeditor-shadow-popover: 0 0 0 1px rgba(15,15,15,0.05), 0 3px 6px rgba(15,15,15,0.1), 0 9px 24px rgba(15,15,15,0.2);
+  --mdeditor-radius: var(--mdeditor-radius-md);
+  --mdeditor-color-error: var(--mdeditor-color-danger);
+  --mdeditor-color-quote-border: var(--mdeditor-color-text);
+}
+
+.mdeditor-dark {
+  --mdeditor-color-bg: #191919;
+  --mdeditor-color-bg-secondary: #202020;
+  --mdeditor-color-bg-elevated: #252525;
+  --mdeditor-color-text: rgba(255,255,255,0.81);
+  --mdeditor-color-text-secondary: rgba(255,255,255,0.46);
+  --mdeditor-color-text-muted: rgba(255,255,255,0.32);
+  --mdeditor-color-border: rgba(255,255,255,0.09);
+  --mdeditor-color-border-strong: rgba(255,255,255,0.16);
+  --mdeditor-color-hover: rgba(255,255,255,0.055);
+  --mdeditor-color-active: rgba(255,255,255,0.10);
+  --mdeditor-color-accent: #d4d4d2;
+  --mdeditor-color-accent-contrast: #191919;
+  --mdeditor-color-accent-subtle: rgba(255,255,255,0.10);
+  --mdeditor-color-focus-ring: rgba(255,255,255,0.45);
+  --mdeditor-color-selection: rgba(255,255,255,0.16);
+  --mdeditor-color-danger: #eb5757;
+  --mdeditor-color-code-bg: #202020;
+  --mdeditor-shadow-popover: 0 0 0 1px rgba(255,255,255,0.06), 0 3px 6px rgba(0,0,0,0.4), 0 9px 24px rgba(0,0,0,0.5);
+}
+
+/* content.css — 文档排版（.mdeditor .ProseMirror 内），由 build-css.mjs 拼进 default.css/auto.css，请勿直接改 dist */
+/* 结构性样式：仅编辑容器必需的最小集（前序 spec §6.4：仅含极少量结构性 CSS） */
+.mdeditor .ProseMirror {
+  background: var(--mdeditor-color-bg);
+  color: var(--mdeditor-color-text);
+  font-family: var(--mdeditor-font-text);
+  font-size: var(--mdeditor-font-size);
+  line-height: var(--mdeditor-line-height);
+  padding: var(--mdeditor-space-4);
+  outline: none;
+}
+.mdeditor .ProseMirror code, .mdeditor .ProseMirror pre {
+  font-family: var(--mdeditor-font-mono);
+  background: var(--mdeditor-color-code-bg);
+  border-radius: var(--mdeditor-radius-md);
+}
+.mdeditor .ProseMirror blockquote {
+  border-left: 3px solid var(--mdeditor-color-text);
+  color: var(--mdeditor-color-text-muted);
+  margin-left: 0; padding-left: var(--mdeditor-space-3);
+}
+.mdeditor .ProseMirror ::selection {
+  background: var(--mdeditor-color-selection);
+}
+/* math/mermaid 失败降级角标 */
+.mdeditor-node-error {
+  color: var(--mdeditor-color-danger);
+  border: 1px dashed var(--mdeditor-color-danger);
+  border-radius: var(--mdeditor-radius-md);
+  padding: var(--mdeditor-space-1) var(--mdeditor-space-2);
+}
+/* placeholder：react 层把 data-placeholder 直接挂在 .ProseMirror 上
+   （MdEditorInner 在 ready 后执行 setAttribute——::before 的 attr() 只能读
+   伪元素所在元素自身的属性，挂祖先 .mdeditor 上 content: attr() 会读空串）。
+   空文档判定不能用 p:empty——已核实 prosemirror-view 会给空 textblock 插入
+   <br class="ProseMirror-trailingBreak">，空段落实为 <p><br ...></p>，:empty 永不匹配。
+   改为匹配 trailing break：有文本时 PM 不再插入该 br，条件自然失效；
+   段落末尾硬换行也会加 trailingBreak，但那时 br 不是 only-child，不误判。 */
+.mdeditor .ProseMirror[data-placeholder]:has(> p:first-child:last-child > br.ProseMirror-trailingBreak:only-child)::before {
+  content: attr(data-placeholder);
+  color: var(--mdeditor-color-text-muted);
+  /* 备查：::before 用 position: absolute 但未给 .ProseMirror 加 position: relative；
+     当前无偏移量时按静态位置放置表现正确，若未来给 ::before 加 top/left 偏移，
+     需补 .ProseMirror { position: relative } */
+  position: absolute;
+  pointer-events: none;
+}
+
+/* content-dark.css — 类限定的暗色内容规则。
+   硬约束（§3.2）：每条规则选择器必须以 ".mdeditor-dark " 开头，
+   build-css.mjs 靠 ".mdeditor-dark " → ".mdeditor " 机械替换生成 auto.css。 */
+/* Shiki 双主题（core codeHighlight preset 输出 --shiki-light/--shiki-dark 变量） */
+.mdeditor-dark .ProseMirror pre span {
+  color: var(--shiki-dark) !important;
+}
+"
+`;
+
+exports[`theme tokens > buildCss/buildAutoCss 输出快照（§11：含 content.css 拼接） 2`] = `
+"/* 由 scripts/build-css.mjs 生成，请勿手改 */
+
+:root, .mdeditor {
+  --mdeditor-font-text: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --mdeditor-font-mono: 'SF Mono', 'JetBrains Mono', Menlo, Consolas, 'Courier New', monospace;
+  --mdeditor-space-0_5: 2px;
+  --mdeditor-space-1: 4px;
+  --mdeditor-space-1_5: 6px;
+  --mdeditor-space-2: 8px;
+  --mdeditor-space-3: 12px;
+  --mdeditor-space-4: 16px;
+  --mdeditor-space-5: 20px;
+  --mdeditor-space-6: 24px;
+  --mdeditor-space-8: 32px;
+  --mdeditor-radius-sm: 4px;
+  --mdeditor-radius-md: 6px;
+  --mdeditor-radius-lg: 10px;
+  --mdeditor-radius-full: 999px;
+  --mdeditor-font-size: 16px;
+  --mdeditor-font-size-ui: 13px;
+  --mdeditor-font-size-ui-sm: 12px;
+  --mdeditor-line-height: 1.6;
+  --mdeditor-duration-fast: 100ms;
+  --mdeditor-duration-base: 160ms;
+  --mdeditor-ease-standard: cubic-bezier(0.2,0,0,1);
+  --mdeditor-ease-out: cubic-bezier(0.16,1,0.3,1);
+  --mdeditor-z-sticky: 10;
+  --mdeditor-z-floating: 20;
+  --mdeditor-z-slash: 30;
+  --mdeditor-z-tooltip: 40;
+  --mdeditor-color-bg: #ffffff;
+  --mdeditor-color-bg-secondary: #f7f7f5;
+  --mdeditor-color-bg-elevated: #ffffff;
+  --mdeditor-color-text: #37352f;
+  --mdeditor-color-text-secondary: rgba(55,53,47,0.70);
+  --mdeditor-color-text-muted: rgba(55,53,47,0.45);
+  --mdeditor-color-border: rgba(55,53,47,0.09);
+  --mdeditor-color-border-strong: rgba(55,53,47,0.16);
+  --mdeditor-color-hover: rgba(55,53,47,0.06);
+  --mdeditor-color-active: rgba(55,53,47,0.10);
+  --mdeditor-color-accent: #37352f;
+  --mdeditor-color-accent-contrast: #ffffff;
+  --mdeditor-color-accent-subtle: rgba(55,53,47,0.08);
+  --mdeditor-color-focus-ring: rgba(55,53,47,0.60);
+  --mdeditor-color-selection: rgba(55,53,47,0.14);
+  --mdeditor-color-danger: #eb5757;
+  --mdeditor-color-code-bg: #f7f6f3;
+  --mdeditor-shadow-popover: 0 0 0 1px rgba(15,15,15,0.05), 0 3px 6px rgba(15,15,15,0.1), 0 9px 24px rgba(15,15,15,0.2);
+  --mdeditor-radius: var(--mdeditor-radius-md);
+  --mdeditor-color-error: var(--mdeditor-color-danger);
+  --mdeditor-color-quote-border: var(--mdeditor-color-text);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root, .mdeditor {
+    --mdeditor-color-bg: #191919;
+    --mdeditor-color-bg-secondary: #202020;
+    --mdeditor-color-bg-elevated: #252525;
+    --mdeditor-color-text: rgba(255,255,255,0.81);
+    --mdeditor-color-text-secondary: rgba(255,255,255,0.46);
+    --mdeditor-color-text-muted: rgba(255,255,255,0.32);
+    --mdeditor-color-border: rgba(255,255,255,0.09);
+    --mdeditor-color-border-strong: rgba(255,255,255,0.16);
+    --mdeditor-color-hover: rgba(255,255,255,0.055);
+    --mdeditor-color-active: rgba(255,255,255,0.10);
+    --mdeditor-color-accent: #d4d4d2;
+    --mdeditor-color-accent-contrast: #191919;
+    --mdeditor-color-accent-subtle: rgba(255,255,255,0.10);
+    --mdeditor-color-focus-ring: rgba(255,255,255,0.45);
+    --mdeditor-color-selection: rgba(255,255,255,0.16);
+    --mdeditor-color-danger: #eb5757;
+    --mdeditor-color-code-bg: #202020;
+    --mdeditor-shadow-popover: 0 0 0 1px rgba(255,255,255,0.06), 0 3px 6px rgba(0,0,0,0.4), 0 9px 24px rgba(0,0,0,0.5);
+  }
+}
+
+/* content.css — 文档排版（.mdeditor .ProseMirror 内），由 build-css.mjs 拼进 default.css/auto.css，请勿直接改 dist */
+/* 结构性样式：仅编辑容器必需的最小集（前序 spec §6.4：仅含极少量结构性 CSS） */
+.mdeditor .ProseMirror {
+  background: var(--mdeditor-color-bg);
+  color: var(--mdeditor-color-text);
+  font-family: var(--mdeditor-font-text);
+  font-size: var(--mdeditor-font-size);
+  line-height: var(--mdeditor-line-height);
+  padding: var(--mdeditor-space-4);
+  outline: none;
+}
+.mdeditor .ProseMirror code, .mdeditor .ProseMirror pre {
+  font-family: var(--mdeditor-font-mono);
+  background: var(--mdeditor-color-code-bg);
+  border-radius: var(--mdeditor-radius-md);
+}
+.mdeditor .ProseMirror blockquote {
+  border-left: 3px solid var(--mdeditor-color-text);
+  color: var(--mdeditor-color-text-muted);
+  margin-left: 0; padding-left: var(--mdeditor-space-3);
+}
+.mdeditor .ProseMirror ::selection {
+  background: var(--mdeditor-color-selection);
+}
+/* math/mermaid 失败降级角标 */
+.mdeditor-node-error {
+  color: var(--mdeditor-color-danger);
+  border: 1px dashed var(--mdeditor-color-danger);
+  border-radius: var(--mdeditor-radius-md);
+  padding: var(--mdeditor-space-1) var(--mdeditor-space-2);
+}
+/* placeholder：react 层把 data-placeholder 直接挂在 .ProseMirror 上
+   （MdEditorInner 在 ready 后执行 setAttribute——::before 的 attr() 只能读
+   伪元素所在元素自身的属性，挂祖先 .mdeditor 上 content: attr() 会读空串）。
+   空文档判定不能用 p:empty——已核实 prosemirror-view 会给空 textblock 插入
+   <br class="ProseMirror-trailingBreak">，空段落实为 <p><br ...></p>，:empty 永不匹配。
+   改为匹配 trailing break：有文本时 PM 不再插入该 br，条件自然失效；
+   段落末尾硬换行也会加 trailingBreak，但那时 br 不是 only-child，不误判。 */
+.mdeditor .ProseMirror[data-placeholder]:has(> p:first-child:last-child > br.ProseMirror-trailingBreak:only-child)::before {
+  content: attr(data-placeholder);
+  color: var(--mdeditor-color-text-muted);
+  /* 备查：::before 用 position: absolute 但未给 .ProseMirror 加 position: relative；
+     当前无偏移量时按静态位置放置表现正确，若未来给 ::before 加 top/left 偏移，
+     需补 .ProseMirror { position: relative } */
+  position: absolute;
+  pointer-events: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  /* content-dark.css — 类限定的暗色内容规则。
+     硬约束（§3.2）：每条规则选择器必须以 ".mdeditor " 开头，
+     build-css.mjs 靠 ".mdeditor " → ".mdeditor " 机械替换生成 auto.css。 */
+  /* Shiki 双主题（core codeHighlight preset 输出 --shiki-light/--shiki-dark 变量） */
+  .mdeditor .ProseMirror pre span {
+    color: var(--shiki-dark) !important;
+  }
+}
+"
+`;

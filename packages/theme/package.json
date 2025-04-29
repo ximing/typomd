@@ -5,6 +5,7 @@
   "exports": {
     ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
     "./default.css": "./dist/default.css",
+    "./auto.css": "./dist/auto.css",
     "./tokens.json": "./dist/tokens.json"
   },
   "files": ["dist"],
