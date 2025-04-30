@@ -1,34 +1,134 @@
 /* content.css — 文档排版（.mdeditor .ProseMirror 内），由 build-css.mjs 拼进 default.css/auto.css，请勿直接改 dist */
-/* 结构性样式：仅编辑容器必需的最小集（前序 spec §6.4：仅含极少量结构性 CSS） */
+
+/* ---- 容器（§4：声明一项不落；outline:none 必须保留——丢失会让 contenteditable 聚焦出现浏览器默认蓝环） ---- */
 .mdeditor .ProseMirror {
   background: var(--mdeditor-color-bg);
   color: var(--mdeditor-color-text);
   font-family: var(--mdeditor-font-text);
   font-size: var(--mdeditor-font-size);
   line-height: var(--mdeditor-line-height);
-  padding: var(--mdeditor-space-4);
   outline: none;
+  padding: var(--mdeditor-space-6) var(--mdeditor-space-8);
 }
-.mdeditor .ProseMirror code, .mdeditor .ProseMirror pre {
-  font-family: var(--mdeditor-font-mono);
-  background: var(--mdeditor-color-code-bg);
-  border-radius: var(--mdeditor-radius-md);
+/* 不设 max-width：嵌入方自行约束（§4） */
+
+/* ---- 块节奏（§4） ---- */
+.mdeditor .ProseMirror > * + * { margin-top: var(--mdeditor-block-gap, 6px); }
+.mdeditor .ProseMirror h1,
+.mdeditor .ProseMirror h2,
+.mdeditor .ProseMirror h3 { font-weight: 600; letter-spacing: -0.01em; }
+.mdeditor .ProseMirror h1 { font-size: 1.875em; margin-top: 1.2em; margin-bottom: 0; }
+.mdeditor .ProseMirror h2 { font-size: 1.5em; margin-top: 1.1em; margin-bottom: 0; }
+.mdeditor .ProseMirror h3 { font-size: 1.25em; margin-top: 1em; margin-bottom: 0; }
+.mdeditor .ProseMirror > h1:first-child,
+.mdeditor .ProseMirror > h2:first-child,
+.mdeditor .ProseMirror > h3:first-child { margin-top: 0; }
+
+/* ---- 列表（§4） ---- */
+.mdeditor .ProseMirror ul,
+.mdeditor .ProseMirror ol { padding-left: 1.5em; margin: 0; }
+.mdeditor .ProseMirror li { margin-top: 2px; }
+.mdeditor .ProseMirror li > p { margin: 0; }
+
+/* 任务列表（GFM；DOM 侦查为 li[data-checked] 无原生 checkbox，用 ::before 画勾选框 + accent 色） */
+.mdeditor .ProseMirror li[data-checked='true'],
+.mdeditor .ProseMirror li[data-checked='false'] {
+  list-style: none;
+  position: relative;
+  padding-left: var(--mdeditor-space-6);
 }
+.mdeditor .ProseMirror li[data-checked]::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.35em;
+  width: 0.85em;
+  height: 0.85em;
+  box-sizing: border-box;
+  border: 1px solid var(--mdeditor-color-accent);
+  border-radius: var(--mdeditor-radius-sm);
+  background: var(--mdeditor-color-bg);
+}
+.mdeditor .ProseMirror li[data-checked='true']::before {
+  background: var(--mdeditor-color-accent);
+}
+.mdeditor .ProseMirror li[data-checked='true'] { color: var(--mdeditor-color-text-secondary); }
+.mdeditor .ProseMirror li[data-checked='true'] > p { text-decoration: line-through; }
+
+/* ---- 引用（§4：Notion 引用不是灰色——边框与文字都用 color-text） ---- */
 .mdeditor .ProseMirror blockquote {
   border-left: 3px solid var(--mdeditor-color-text);
-  color: var(--mdeditor-color-text-muted);
-  margin-left: 0; padding-left: var(--mdeditor-space-3);
+  color: var(--mdeditor-color-text);
+  margin: 0;
+  padding: 0 var(--mdeditor-space-3);
 }
-.mdeditor .ProseMirror ::selection {
-  background: var(--mdeditor-color-selection);
+
+/* ---- 行内代码（§4） ---- */
+.mdeditor .ProseMirror code {
+  font-family: var(--mdeditor-font-mono);
+  font-size: 0.85em;
+  background: var(--mdeditor-color-code-bg);
+  border-radius: var(--mdeditor-radius-sm);
+  padding: 0.15em 0.35em;
 }
-/* math/mermaid 失败降级角标 */
+
+/* ---- 代码块（§4：卡片化） ---- */
+.mdeditor .ProseMirror pre {
+  font-family: var(--mdeditor-font-mono);
+  font-size: 0.85em;
+  background: var(--mdeditor-color-code-bg);
+  border: 1px solid var(--mdeditor-color-border);
+  border-radius: var(--mdeditor-radius-lg);
+  padding: var(--mdeditor-space-3) var(--mdeditor-space-4);
+  overflow-x: auto;
+}
+.mdeditor .ProseMirror pre code {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  font-size: inherit;
+}
+
+/* ---- 表格（§4） ---- */
+.mdeditor .ProseMirror table { border-collapse: collapse; width: 100%; }
+.mdeditor .ProseMirror th,
+.mdeditor .ProseMirror td {
+  border: 1px solid var(--mdeditor-color-border);
+  padding: 6px 10px;
+  text-align: left;
+}
+.mdeditor .ProseMirror th { background: var(--mdeditor-color-bg-secondary); font-weight: 600; }
+
+/* ---- 分割线（§4） ---- */
+.mdeditor .ProseMirror hr {
+  border: none;
+  border-top: 1px solid var(--mdeditor-color-border);
+  margin: var(--mdeditor-space-5) 0;
+}
+
+/* ---- 链接（§4） ---- */
+.mdeditor .ProseMirror a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--mdeditor-color-text-muted);
+  text-underline-offset: 2px;
+}
+.mdeditor .ProseMirror a:hover { text-decoration-color: var(--mdeditor-color-text); }
+
+/* ---- 图片（§4） ---- */
+.mdeditor .ProseMirror img { max-width: 100%; border-radius: var(--mdeditor-radius-md); }
+
+/* ---- 选区 ---- */
+.mdeditor .ProseMirror ::selection { background: var(--mdeditor-color-selection); }
+
+/* ---- math/mermaid 失败降级角标 ---- */
 .mdeditor-node-error {
   color: var(--mdeditor-color-danger);
   border: 1px dashed var(--mdeditor-color-danger);
   border-radius: var(--mdeditor-radius-md);
   padding: var(--mdeditor-space-1) var(--mdeditor-space-2);
 }
+
 /* placeholder：react 层把 data-placeholder 直接挂在 .ProseMirror 上
    （MdEditorInner 在 ready 后执行 setAttribute——::before 的 attr() 只能读
    伪元素所在元素自身的属性，挂祖先 .mdeditor 上 content: attr() 会读空串）。

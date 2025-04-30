@@ -90,4 +90,20 @@ describe('theme tokens', () => {
     expect(buildCss(tokens)).toMatchSnapshot()
     expect(buildAutoCss(tokens)).toMatchSnapshot()
   })
+
+  test('content.css 全量排版（§4）：块级元素规则齐备', () => {
+    const css = buildCss(tokens)
+    for (const sel of [
+      '.mdeditor .ProseMirror h1', '.mdeditor .ProseMirror h2', '.mdeditor .ProseMirror h3',
+      '.mdeditor .ProseMirror ul', '.mdeditor .ProseMirror ol',
+      '.mdeditor .ProseMirror blockquote', '.mdeditor .ProseMirror pre',
+      '.mdeditor .ProseMirror table', '.mdeditor .ProseMirror th',
+      '.mdeditor .ProseMirror hr', '.mdeditor .ProseMirror a', '.mdeditor .ProseMirror img',
+      '--mdeditor-block-gap, 6px',
+    ]) {
+      expect(css).toContain(sel)
+    }
+    // 任务列表（选择器以 Step 1 侦查到的实际 DOM 为准）
+    expect(css).toContain('data-checked')
+  })
 })
