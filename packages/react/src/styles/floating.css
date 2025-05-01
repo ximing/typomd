@@ -1,0 +1,30 @@
+/* floating.css — 悬浮工具栏（Task 5 迁移壳，Task 8 重写） */
+.mdeditor-floating {
+  position: absolute;
+  display: flex;
+  gap: var(--mdeditor-space-1);
+  padding: var(--mdeditor-space-1);
+  background: var(--mdeditor-color-bg);
+  border: 1px solid var(--mdeditor-color-border);
+  border-radius: var(--mdeditor-radius-md);
+  z-index: 20;
+}
+
+.mdeditor-floating-button {
+  border: none;
+  background: transparent;
+  color: var(--mdeditor-color-text);
+  border-radius: var(--mdeditor-radius-md);
+  padding: var(--mdeditor-space-1) var(--mdeditor-space-2);
+  font: inherit;
+  cursor: pointer;
+}
+
+.mdeditor-floating-button:hover {
+  background: var(--mdeditor-color-accent-subtle);
+}
+
+.mdeditor-floating-button[data-active='true'] {
+  color: var(--mdeditor-color-accent);
+  background: var(--mdeditor-color-accent-subtle);
+}

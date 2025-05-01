@@ -1,0 +1,35 @@
+/* toolbar.css — 顶部工具栏（Task 5 迁移壳，Task 7 重写） */
+.mdeditor-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--mdeditor-space-1);
+  padding: var(--mdeditor-space-2);
+  border-bottom: 1px solid var(--mdeditor-color-border);
+}
+
+.mdeditor-toolbar-separator {
+  width: 1px;
+  align-self: stretch;
+  margin: 0 var(--mdeditor-space-1);
+  background: var(--mdeditor-color-border);
+}
+
+.mdeditor-toolbar-button {
+  border: none;
+  background: transparent;
+  color: var(--mdeditor-color-text);
+  border-radius: var(--mdeditor-radius-md);
+  padding: var(--mdeditor-space-1) var(--mdeditor-space-2);
+  font: inherit;
+  cursor: pointer;
+}
+
+.mdeditor-toolbar-button:hover {
+  background: var(--mdeditor-color-accent-subtle);
+}
+
+.mdeditor-toolbar-button[data-active='true'] {
+  color: var(--mdeditor-color-accent);
+  background: var(--mdeditor-color-accent-subtle);
+}

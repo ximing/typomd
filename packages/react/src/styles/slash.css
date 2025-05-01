@@ -1,0 +1,33 @@
+/* slash.css — 斜杠命令菜单（Task 5 迁移壳，Task 9 重写） */
+.mdeditor-slash {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+  max-height: 260px;
+  overflow-y: auto;
+  padding: var(--mdeditor-space-1);
+  background: var(--mdeditor-color-bg);
+  border: 1px solid var(--mdeditor-color-border);
+  border-radius: var(--mdeditor-radius-md);
+  z-index: 20;
+}
+
+.mdeditor-slash-item {
+  display: flex;
+  align-items: center;
+  gap: var(--mdeditor-space-2);
+  text-align: left;
+  border: none;
+  background: transparent;
+  color: var(--mdeditor-color-text);
+  border-radius: var(--mdeditor-radius-md);
+  padding: var(--mdeditor-space-1) var(--mdeditor-space-2);
+  font: inherit;
+  cursor: pointer;
+}
+
+.mdeditor-slash-item:hover,
+.mdeditor-slash-item[data-selected='true'] {
+  background: var(--mdeditor-color-accent-subtle);
+}

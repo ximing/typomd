@@ -1,0 +1,43 @@
+/* base.css — root 容器 / 全局焦点环 / 进场关键帧 / reduced-motion 兜底（§5.1） */
+.mdeditor-root {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--mdeditor-font-text);
+  font-size: var(--mdeditor-font-size-ui);
+  color: var(--mdeditor-color-text);
+}
+/* 悬浮工具栏 / SlashMenu 绝对定位的定位上下文 */
+.mdeditor-body { position: relative; }
+
+/* 库内按钮清零（宿主页面 reset 差异防御） */
+.mdeditor-root button {
+  font: inherit;
+  color: inherit;
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+/* 焦点环（§5.1/§6）：box-shadow 实现 + 2px offset；只用 :focus-visible，不用 :focus（避免点击出环） */
+.mdeditor-toolbar-button:focus-visible,
+.mdeditor-floating-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--mdeditor-color-bg), 0 0 0 4px var(--mdeditor-color-focus-ring);
+}
+
+/* 浮层进场关键帧（§5.4/§5.5 共用）：opacity 0→1 + translateY(2px)→0 */
+@keyframes mdeditor-pop {
+  from { opacity: 0; transform: translateY(2px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* reduced-motion：全部动画/过渡归零（§2.2） */
+@media (prefers-reduced-motion: reduce) {
+  .mdeditor-root *,
+  .mdeditor-root *::before,
+  .mdeditor-root *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

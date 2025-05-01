@@ -8,7 +8,7 @@
   },
   "files": ["dist"],
   "scripts": {
-    "build": "tsup && cp src/styles.css dist/styles.css",
+    "build": "tsup && cat src/styles/base.css src/styles/toolbar.css src/styles/floating.css src/styles/slash.css > dist/styles.css",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "dev": "tsup --watch"
