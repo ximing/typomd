@@ -69,4 +69,46 @@ describe('顶部工具栏（§6.2）', () => {
     expect(warn).toHaveBeenCalled()
     warn.mockRestore()
   })
+
+  test('aria（§5.3）：容器 role=toolbar；按钮 aria-label + aria-pressed，无 title，带 data-tooltip', async () => {
+    const { root } = await renderMdEditor({ defaultValue: '# A' })
+    const bar = root.querySelector('.mdeditor-toolbar')!
+    expect(bar.getAttribute('role')).toBe('toolbar')
+    expect(bar.getAttribute('aria-label')).toBe('格式工具栏')
+    const bold = root.querySelector('[data-command="bold"]')!
+    expect(bold.getAttribute('aria-label')).toBe('加粗')
+    expect(bold.getAttribute('aria-pressed')).toBe('false')
+    expect(bold.getAttribute('title')).toBeNull()
+    expect(bold.getAttribute('data-tooltip')).toContain('加粗')
+    expect(bold.getAttribute('data-active')).toBeNull() // 未激活
+  })
+
+  test('roving tabindex（§5.3）：方向键移动焦点，Esc 回焦编辑器', async () => {
+    const { root, handle } = await renderMdEditor({ defaultValue: '# A' })
+    const bar = root.querySelector('.mdeditor-toolbar')!
+    const buttons = [...bar.querySelectorAll<HTMLButtonElement>('.mdeditor-toolbar-button')]
+    expect(buttons[0]!.tabIndex).toBe(0)
+    expect(buttons[1]!.tabIndex).toBe(-1)
+    const focusSpy = vi.spyOn(handle, 'focus')
+    buttons[0]!.focus()
+    fireEvent.keyDown(bar, { key: 'ArrowRight' })
+    expect(document.activeElement).toBe(buttons[1])
+    expect(buttons[1]!.tabIndex).toBe(0)
+    expect(buttons[0]!.tabIndex).toBe(-1)
+    fireEvent.keyDown(bar, { key: 'ArrowLeft' })
+    expect(document.activeElement).toBe(buttons[0])
+    fireEvent.keyDown(bar, { key: 'End' })
+    expect(document.activeElement).toBe(buttons[buttons.length - 1])
+    fireEvent.keyDown(bar, { key: 'Escape' })
+    expect(focusSpy).toHaveBeenCalled()
+    focusSpy.mockRestore()
+  })
+
+  test('点击按钮后焦点回编辑器（§5.3）', async () => {
+    const { root, handle } = await renderMdEditor({ defaultValue: 'hello' })
+    const focusSpy = vi.spyOn(handle, 'focus')
+    fireEvent.click(root.querySelector('[data-command="bold"]')!)
+    expect(focusSpy).toHaveBeenCalled()
+    focusSpy.mockRestore()
+  })
 })
