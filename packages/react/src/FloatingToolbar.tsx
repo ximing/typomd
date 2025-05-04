@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { commandRegistry, type CommandSpec, type EditorHandle } from '@mdeditor/core'
 import { icons } from './icons'
+import { SHORTCUTS } from './command-meta'
 import { useFloating, virtualRefFromRect } from './useFloating'
 
 // core 的 isActive 对 feature-gated 命令（math/mermaid）在 feature 未启用时抛
@@ -39,21 +40,34 @@ export function FloatingToolbar({ handle }: { handle: EditorHandle }) {
   const specs = [...commandRegistry.values()].filter((s) => s.showIn.includes('floating'))
 
   return (
-    <div ref={ref} className="mdeditor-floating" style={style} data-testid="floating-toolbar">
-      {specs.map((spec) => (
-        <button
-          key={spec.id}
-          type="button"
-          className="mdeditor-floating-button"
-          data-command={spec.id}
-          data-active={safeActive(spec, handle) || undefined}
-          title={spec.label}
-          onMouseDown={(e) => e.preventDefault() /* 保住选区 */}
-          onClick={() => spec.exec(handle)}
-        >
-          {icons[spec.icon] ?? spec.label}
-        </button>
-      ))}
+    <div
+      ref={ref}
+      className="mdeditor-floating"
+      style={style}
+      data-testid="floating-toolbar"
+      role="toolbar"
+      aria-label="悬浮格式工具栏"
+      aria-orientation="horizontal"
+    >
+      {specs.map((spec) => {
+        const active = safeActive(spec, handle)
+        return (
+          <button
+            key={spec.id}
+            type="button"
+            className="mdeditor-floating-button"
+            data-command={spec.id}
+            data-active={active || undefined}
+            aria-label={spec.label}
+            aria-pressed={active}
+            data-tooltip={SHORTCUTS[spec.id] ? `${spec.label} ${SHORTCUTS[spec.id]}` : spec.label}
+            onMouseDown={(e) => e.preventDefault() /* 保住选区 */}
+            onClick={() => spec.exec(handle)}
+          >
+            {icons[spec.icon] ?? spec.label}
+          </button>
+        )
+      })}
     </div>
   )
 }
