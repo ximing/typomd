@@ -73,4 +73,36 @@ describe('Slash 菜单', () => {
     const menu = await screen.findByTestId('slash-menu')
     expect(menu.querySelector('[data-command="image"]')).toBeNull()
   })
+
+  test('条目为 div[role=option] 带稳定 id；打开期间 ProseMirror 带 aria-activedescendant（§5.5）', async () => {
+    const { handle } = await renderMdEditor({ defaultValue: '' })
+    act(() => { handle.insert('/') })
+    const menu = await screen.findByTestId('slash-menu')
+    const opt = menu.querySelector('[data-command="heading"]')!
+    expect(opt.tagName).toBe('DIV')
+    expect(opt.getAttribute('role')).toBe('option')
+    expect(opt.id).toBe('mdeditor-slash-opt-heading')
+    const pm = document.querySelector('.ProseMirror')!
+    expect(pm.getAttribute('aria-activedescendant')).toBe('mdeditor-slash-opt-heading')
+    fireEvent.keyDown(document, { key: 'Escape' })
+    expect(pm.getAttribute('aria-activedescendant')).toBeNull()
+  })
+
+  test('分组标题渲染（§5.5），aria-label=插入命令', async () => {
+    const { handle } = await renderMdEditor({ defaultValue: '' })
+    act(() => { handle.insert('/') })
+    const menu = await screen.findByTestId('slash-menu')
+    expect(menu.getAttribute('aria-label')).toBe('插入命令')
+    const groups = [...menu.querySelectorAll('.mdeditor-slash-group')].map((g) => g.textContent)
+    expect(groups).toEqual(['基础', '列表', '媒体'])
+  })
+
+  test('ArrowDown 后 aria-activedescendant 跟随高亮项', async () => {
+    const { handle } = await renderMdEditor({ defaultValue: '' })
+    act(() => { handle.insert('/') })
+    await screen.findByTestId('slash-menu')
+    fireEvent.keyDown(document, { key: 'ArrowDown' })
+    const pm = document.querySelector('.ProseMirror')!
+    expect(pm.getAttribute('aria-activedescendant')).toBe('mdeditor-slash-opt-bold')
+  })
 })

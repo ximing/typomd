@@ -6,6 +6,7 @@ import {
   type SlashTriggerPayload,
 } from '@mdeditor/core'
 import { icons } from './icons'
+import { SHORTCUTS, SLASH_GROUPS, SLASH_GROUP_ORDER } from './command-meta'
 import { slashQueryFromDiff } from './slash-query'
 import { useFloating, virtualRefFromPoint } from './useFloating'
 
@@ -23,7 +24,7 @@ export function SlashMenu({ handle, hasUpload }: Props) {
   const [open, setOpen] = useState<OpenState | null>(null)
   const [query, setQuery] = useState('')
   const [active, setActive] = useState(0)
-  const listRef = useRef<HTMLDivElement>(null)
+  const menuEl = useRef<HTMLDivElement | null>(null)
 
   // 打开/关闭：slashTrigger 打开；change 更新查询词（查询词非法或 '/' 被删 → 关闭）
   useEffect(() => {
@@ -53,12 +54,26 @@ export function SlashMenu({ handle, hasUpload }: Props) {
     return q ? all.filter((s) => s.id.toLowerCase().includes(q) || s.label.includes(query)) : all
   }, [query, hasUpload])
 
+  const grouped = useMemo(() => {
+    const groups = new Map<string, typeof items>()
+    for (const spec of items) {
+      const g = SLASH_GROUPS[spec.id] ?? '其他' // §5.5：未入表命令归入默认分组
+      if (!groups.has(g)) groups.set(g, [])
+      groups.get(g)!.push(spec)
+    }
+    return SLASH_GROUP_ORDER.filter((g) => groups.has(g)).map((g) => [g, groups.get(g)!] as const)
+  }, [items])
+
   // useMemo：reference 对象身份必须稳定（open 期间坐标不变）
   const reference = useMemo(
     () => (open ? virtualRefFromPoint(open.payload.top, open.payload.left) : null),
     [open],
   )
   const { ref, style } = useFloating(reference, 'bottom')
+  const setRefs = (el: HTMLDivElement | null) => {
+    menuEl.current = el
+    ref(el)
+  }
 
   // 键盘导航：菜单打开期间从编辑器根捕获
   useEffect(() => {
@@ -78,6 +93,18 @@ export function SlashMenu({ handle, hasUpload }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, items, active])
 
+  // aria-activedescendant（§5.5）：焦点始终在编辑器内，用 aria 指向高亮项；
+  // 取编辑器元素限定在自身 .mdeditor-root 内，多实例共存不会取错
+  useEffect(() => {
+    if (!open) return
+    const root = menuEl.current?.closest('.mdeditor-root')
+    const pm = root?.querySelector('.ProseMirror') as HTMLElement | null
+    if (!pm) return
+    const current = items[active]
+    if (current) pm.setAttribute('aria-activedescendant', `mdeditor-slash-opt-${current.id}`)
+    return () => { pm.removeAttribute('aria-activedescendant') }
+  }, [open, active, items])
+
   if (!open) return null
 
   const execAndClose = (id: string) => {
@@ -90,23 +117,32 @@ export function SlashMenu({ handle, hasUpload }: Props) {
   }
 
   return (
-    <div ref={ref} className="mdeditor-slash" style={style} data-testid="slash-menu" role="listbox">
-      {items.length === 0 && <div className="mdeditor-slash-item" aria-disabled>无匹配命令</div>}
-      {items.map((spec, i) => (
-        <button
-          key={spec.id}
-          type="button"
-          role="option"
-          aria-selected={i === active}
-          data-selected={i === active || undefined}
-          data-command={spec.id}
-          className="mdeditor-slash-item"
-          onMouseDown={(e) => e.preventDefault()}
-          onClick={() => execAndClose(spec.id)}
-        >
-          <span>{icons[spec.icon] ?? ''}</span>
-          <span>{spec.label}</span>
-        </button>
+    <div ref={setRefs} className="mdeditor-slash" style={style} data-testid="slash-menu" role="listbox" aria-label="插入命令">
+      {items.length === 0 && <div className="mdeditor-slash-item" aria-disabled="true">无匹配命令</div>}
+      {grouped.map(([group, specs]) => (
+        <div key={group} role="group" aria-label={group}>
+          <div className="mdeditor-slash-group">{group}</div>
+          {specs.map((spec) => {
+            const i = items.indexOf(spec)
+            return (
+              <div
+                key={spec.id}
+                id={`mdeditor-slash-opt-${spec.id}`}
+                role="option"
+                aria-selected={i === active}
+                data-selected={i === active || undefined}
+                data-command={spec.id}
+                className="mdeditor-slash-item"
+                onMouseDown={(e) => e.preventDefault()}
+                onClick={() => execAndClose(spec.id)}
+              >
+                <span className="mdeditor-slash-item-icon">{icons[spec.icon] ?? ''}</span>
+                <span className="mdeditor-slash-item-label">{spec.label}</span>
+                {SHORTCUTS[spec.id] && <kbd className="mdeditor-slash-item-kbd">{SHORTCUTS[spec.id]}</kbd>}
+              </div>
+            )
+          })}
+        </div>
       ))}
     </div>
   )

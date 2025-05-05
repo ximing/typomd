@@ -1,33 +1,64 @@
-/* slash.css — 斜杠命令菜单（Task 5 迁移壳，Task 9 重写） */
+/* slash.css — 斜杠命令菜单（§5.5：288px 宽 / 瓷贴 / 分组标题；滚动条不定制） */
 .mdeditor-slash {
   position: absolute;
+  z-index: var(--mdeditor-z-slash);
   display: flex;
   flex-direction: column;
-  min-width: 180px;
-  max-height: 260px;
+  width: 288px;
+  max-height: 336px;
   overflow-y: auto;
-  padding: var(--mdeditor-space-1);
-  background: var(--mdeditor-color-bg);
-  border: 1px solid var(--mdeditor-color-border);
-  border-radius: var(--mdeditor-radius-md);
-  z-index: 20;
+  padding: var(--mdeditor-space-1_5);
+  background: var(--mdeditor-color-bg-elevated);
+  border-radius: var(--mdeditor-radius-lg);
+  box-shadow: var(--mdeditor-shadow-popover); /* shadow 环代替 border（§2.2） */
+  animation: mdeditor-pop var(--mdeditor-duration-base) var(--mdeditor-ease-out);
 }
-
+.mdeditor-slash-group {
+  padding: var(--mdeditor-space-1_5) var(--mdeditor-space-2) var(--mdeditor-space-0_5);
+  font-size: var(--mdeditor-font-size-ui-sm);
+  color: var(--mdeditor-color-text-muted);
+  user-select: none;
+}
 .mdeditor-slash-item {
   display: flex;
   align-items: center;
-  gap: var(--mdeditor-space-2);
-  text-align: left;
-  border: none;
-  background: transparent;
-  color: var(--mdeditor-color-text);
+  gap: 10px;
+  padding: var(--mdeditor-space-1_5) var(--mdeditor-space-2);
   border-radius: var(--mdeditor-radius-md);
-  padding: var(--mdeditor-space-1) var(--mdeditor-space-2);
-  font: inherit;
+  font-size: var(--mdeditor-font-size-ui);
+  color: var(--mdeditor-color-text);
+  text-align: left;
   cursor: pointer;
 }
-
-.mdeditor-slash-item:hover,
-.mdeditor-slash-item[data-selected='true'] {
-  background: var(--mdeditor-color-accent-subtle);
+.mdeditor-slash-item[data-selected='true'] { background: var(--mdeditor-color-hover); }
+/* 空结果态：沿用现有文案，muted 居中（§5.5） */
+.mdeditor-slash-item[aria-disabled='true'] {
+  justify-content: center;
+  color: var(--mdeditor-color-text-muted);
+  cursor: default;
+}
+/* 图标瓷贴（§5.5：Notion 标志性样式 22×22，内嵌 14px 图标） */
+.mdeditor-slash-item-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  flex: none;
+  border: 1px solid var(--mdeditor-color-border);
+  border-radius: var(--mdeditor-radius-sm);
+  background: var(--mdeditor-color-bg);
+  color: var(--mdeditor-color-text-secondary);
+}
+.mdeditor-slash-item-icon svg { width: 14px; height: 14px; }
+.mdeditor-slash-item-label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mdeditor-slash-item-kbd {
+  font-family: inherit;
+  font-size: var(--mdeditor-font-size-ui-sm);
+  color: var(--mdeditor-color-text-muted);
 }
