@@ -45,11 +45,11 @@ describe('theme tokens', () => {
     expect(tokens.shared['font-mono']).toContain('SF Mono')
   })
 
-  test('构建层别名：旧令牌以 var() 引用生成（§12 阶段 1，过渡期）', () => {
+  test('旧令牌别名已删除（§12 阶段 4 收尾）', () => {
     const css = buildCss(tokens)
-    expect(css).toContain('--mdeditor-radius: var(--mdeditor-radius-md);')
-    expect(css).toContain('--mdeditor-color-error: var(--mdeditor-color-danger);')
-    expect(css).toContain('--mdeditor-color-quote-border: var(--mdeditor-color-text);')
+    expect(css).not.toContain('--mdeditor-radius: ')
+    expect(css).not.toContain('--mdeditor-color-error')
+    expect(css).not.toContain('--mdeditor-color-quote-border')
   })
 
   test('暗色覆写包含 shiki 双主题规则', () => {

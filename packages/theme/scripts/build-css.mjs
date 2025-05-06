@@ -7,13 +7,6 @@ const pkgRoot = join(here, '..')
 
 const PREFIX = '--mdeditor-'
 
-/** 旧令牌 → 新令牌 构建层别名（§12：只存在于生成层，过渡一个阶段后由 Task 10 删除；任何源码不得引用旧令牌名） */
-const ALIASES = {
-  'radius': `var(${PREFIX}radius-md)`,
-  'color-error': `var(${PREFIX}color-danger)`,
-  'color-quote-border': `var(${PREFIX}color-text)`,
-}
-
 const HEADER = '/* 由 scripts/build-css.mjs 生成，请勿手改 */'
 
 function tokenLines(obj, indent = '  ') {
@@ -25,7 +18,6 @@ function lightBlock(tokens) {
     ':root, .mdeditor {',
     ...tokenLines(tokens.shared),
     ...tokenLines(tokens.light),
-    ...Object.entries(ALIASES).map(([k, v]) => `  ${PREFIX}${k}: ${v};`),
     '}',
   ].join('\n')
 }

@@ -49,9 +49,6 @@ exports[`theme tokens > buildCss/buildAutoCss 输出快照（§11：含 content.
   --mdeditor-color-danger: #eb5757;
   --mdeditor-color-code-bg: #f7f6f3;
   --mdeditor-shadow-popover: 0 0 0 1px rgba(15,15,15,0.05), 0 3px 6px rgba(15,15,15,0.1), 0 9px 24px rgba(15,15,15,0.2);
-  --mdeditor-radius: var(--mdeditor-radius-md);
-  --mdeditor-color-error: var(--mdeditor-color-danger);
-  --mdeditor-color-quote-border: var(--mdeditor-color-text);
 }
 
 .mdeditor-dark {
@@ -282,9 +279,6 @@ exports[`theme tokens > buildCss/buildAutoCss 输出快照（§11：含 content.
   --mdeditor-color-danger: #eb5757;
   --mdeditor-color-code-bg: #f7f6f3;
   --mdeditor-shadow-popover: 0 0 0 1px rgba(15,15,15,0.05), 0 3px 6px rgba(15,15,15,0.1), 0 9px 24px rgba(15,15,15,0.2);
-  --mdeditor-radius: var(--mdeditor-radius-md);
-  --mdeditor-color-error: var(--mdeditor-color-danger);
-  --mdeditor-color-quote-border: var(--mdeditor-color-text);
 }
 
 @media (prefers-color-scheme: dark) {
