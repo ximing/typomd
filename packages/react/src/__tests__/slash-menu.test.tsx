@@ -105,4 +105,16 @@ describe('Slash 菜单', () => {
     const pm = document.querySelector('.ProseMirror')!
     expect(pm.getAttribute('aria-activedescendant')).toBe('mdeditor-slash-opt-bold')
   })
+
+  test('方向键高亮跟随分组 DOM 顺序（基础组末项 quote，而非注册表中夹在中间的 table）', async () => {
+    const { handle } = await renderMdEditor({ defaultValue: '' })
+    act(() => { handle.insert('/') })
+    const menu = await screen.findByTestId('slash-menu')
+    const basic = [...menu.querySelectorAll('[role="group"][aria-label="基础"] [data-command]')]
+      .map((el) => el.getAttribute('data-command'))
+    expect(basic.at(-1)).toBe('quote')
+    for (let n = 0; n < basic.length - 1; n++) fireEvent.keyDown(document, { key: 'ArrowDown' })
+    const pm = document.querySelector('.ProseMirror')!
+    expect(pm.getAttribute('aria-activedescendant')).toBe('mdeditor-slash-opt-quote')
+  })
 })

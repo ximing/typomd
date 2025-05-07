@@ -63,6 +63,8 @@ export function SlashMenu({ handle, hasUpload }: Props) {
     }
     return SLASH_GROUP_ORDER.filter((g) => groups.has(g)).map((g) => [g, groups.get(g)!] as const)
   }, [items])
+  // 键盘/高亮索引必须与分组后的 DOM 顺序一致，否则 ArrowDown 会跳组
+  const flat = useMemo(() => grouped.flatMap(([, specs]) => specs), [grouped])
 
   // useMemo：reference 对象身份必须稳定（open 期间坐标不变）
   const reference = useMemo(
@@ -80,18 +82,18 @@ export function SlashMenu({ handle, hasUpload }: Props) {
     if (!open) return
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') { e.preventDefault(); setOpen(null); return }
-      if (e.key === 'ArrowDown') { e.preventDefault(); setActive((a) => Math.min(a + 1, items.length - 1)); return }
+      if (e.key === 'ArrowDown') { e.preventDefault(); setActive((a) => Math.min(a + 1, flat.length - 1)); return }
       if (e.key === 'ArrowUp') { e.preventDefault(); setActive((a) => Math.max(a - 1, 0)); return }
       if (e.key === 'Enter') {
         e.preventDefault()
-        const spec = items[active]
+        const spec = flat[active]
         if (spec) execAndClose(spec.id)
       }
     }
     document.addEventListener('keydown', onKeyDown, true)
     return () => document.removeEventListener('keydown', onKeyDown, true)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, items, active])
+  }, [open, flat, active])
 
   // aria-activedescendant（§5.5）：焦点始终在编辑器内，用 aria 指向高亮项；
   // 取编辑器元素限定在自身 .mdeditor-root 内，多实例共存不会取错
@@ -100,10 +102,10 @@ export function SlashMenu({ handle, hasUpload }: Props) {
     const root = menuEl.current?.closest('.mdeditor-root')
     const pm = root?.querySelector('.ProseMirror') as HTMLElement | null
     if (!pm) return
-    const current = items[active]
+    const current = flat[active]
     if (current) pm.setAttribute('aria-activedescendant', `mdeditor-slash-opt-${current.id}`)
     return () => { pm.removeAttribute('aria-activedescendant') }
-  }, [open, active, items])
+  }, [open, active, flat])
 
   if (!open) return null
 
@@ -123,7 +125,7 @@ export function SlashMenu({ handle, hasUpload }: Props) {
         <div key={group} role="group" aria-label={group}>
           <div className="mdeditor-slash-group">{group}</div>
           {specs.map((spec) => {
-            const i = items.indexOf(spec)
+            const i = flat.indexOf(spec)
             return (
               <div
                 key={spec.id}
