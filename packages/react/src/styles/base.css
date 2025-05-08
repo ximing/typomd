@@ -8,6 +8,7 @@
 }
 /* 悬浮工具栏 / SlashMenu 绝对定位的定位上下文 */
 .mdeditor-body { position: relative; }
+/* 编辑器焦点由光标表达：.ProseMirror { outline: none } 在 theme content.css，此处不补环 */
 
 /* 库内按钮清零（宿主页面 reset 差异防御） */
 .mdeditor-root button {
@@ -39,5 +40,6 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
   }
 }

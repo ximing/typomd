@@ -113,7 +113,7 @@ function ToolbarInner({ handle, config, hasUpload }: Props) {
         data-tooltip={tooltip}
         tabIndex={commandIds.indexOf(entry.id) === focusIdx ? 0 : -1}
         onMouseDown={(e) => e.preventDefault() /* 鼠标点击不夺编辑器焦点（§5.3） */}
-        onClick={() => { spec.exec(handle); handle.focus() /* 点击后焦点回编辑器（§5.3） */ }}
+        onClick={() => { handle.focus(); spec.exec(handle) /* 先回焦再执行，否则键盘 Enter 时 PM 无选区 */ }}
       >
         {icons[spec.icon] ?? spec.label}
       </button>
