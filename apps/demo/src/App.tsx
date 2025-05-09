@@ -23,67 +23,95 @@ export function App() {
   }
 
   return (
-    <div className={dark ? 'mdeditor-dark' : undefined} style={{ maxWidth: 860, margin: '2rem auto' }}>
-      <h1>mdeditor demo</h1>
-      <fieldset>
-        <legend>features</legend>
-        {FEATURE_KEYS.map((key) => (
-          <label key={key} style={{ marginRight: 12 }}>
-            <input
-              type="checkbox"
-              data-testid={`feature-${key}`}
-              checked={!!enabled[key]}
-              onChange={() => toggleFeature(key)}
-            />
-            {key}
-          </label>
-        ))}
-        <label style={{ marginRight: 12 }}>
-          <input
-            type="checkbox"
-            data-testid="toolbar-visible"
-            checked={toolbarVisible}
-            onChange={() => setToolbarVisible((v) => !v)}
+    <div className={`demo-page${dark ? ' mdeditor-dark' : ''}`}>
+      <header className="demo-header">
+        <div className="demo-brand">
+          <h1 className="demo-title">mdeditor</h1>
+          <p className="demo-tagline">Milkdown 驱动的 Markdown 编辑器组件库</p>
+        </div>
+        <nav className="demo-header-actions">
+          <a className="demo-link" href="https://github.com/ximing/mdeditor" target="_blank" rel="noreferrer">
+            GitHub
+          </a>
+          <button className="demo-btn" data-testid="theme-toggle" onClick={() => setDark((v) => !v)}>
+            {dark ? '切到亮色' : '切到暗色'}
+          </button>
+        </nav>
+      </header>
+
+      <main className="demo-main">
+        <section className="demo-editor-card" data-testid="demo-editor">
+          <MdEditor
+            key={editorKey}
+            ref={handleRef}
+            defaultValue={DEMO_MARKDOWN}
+            features={features}
+            toolbar={{ visible: toolbarVisible }}
+            placeholder="输入 / 唤起命令..."
+            onChange={(md) => setOutput(md)}
+            onChangeDebounce={300}
+            onError={(e) => console.error('[demo]', e)}
+            onUploadImage={async (file) => ({ src: URL.createObjectURL(file), alt: file.name })}
           />
-          toolbar
-        </label>
-        <button data-testid="theme-toggle" onClick={() => setDark((v) => !v)}>
-          {dark ? '切到亮色' : '切到暗色'}
-        </button>
-      </fieldset>
+        </section>
 
-      <div data-testid="demo-editor">
-        <MdEditor
-          key={editorKey}
-          ref={handleRef}
-          defaultValue={DEMO_MARKDOWN}
-          features={features}
-          toolbar={{ visible: toolbarVisible }}
-          placeholder="输入 / 唤起命令..."
-          onChange={(md) => setOutput(md)}
-          onChangeDebounce={300}
-          onError={(e) => console.error('[demo]', e)}
-          onUploadImage={async (file) => ({ src: URL.createObjectURL(file), alt: file.name })}
-        />
-      </div>
+        <section className="demo-section">
+          <h2 className="demo-section-title">功能开关</h2>
+          <div className="demo-switches">
+            {FEATURE_KEYS.map((key) => (
+              <label key={key} className="demo-switch">
+                <input
+                  type="checkbox"
+                  data-testid={`feature-${key}`}
+                  checked={!!enabled[key]}
+                  onChange={() => toggleFeature(key)}
+                />
+                <span className="demo-switch-track" />
+                <span className="demo-switch-label">{key}</span>
+              </label>
+            ))}
+            <label className="demo-switch">
+              <input
+                type="checkbox"
+                data-testid="toolbar-visible"
+                checked={toolbarVisible}
+                onChange={() => setToolbarVisible((v) => !v)}
+              />
+              <span className="demo-switch-track" />
+              <span className="demo-switch-label">toolbar</span>
+            </label>
+          </div>
+        </section>
 
-      {/* e2e 调试入口：math/mermaid 节点只经 remark parse 产生、无 input rule，
-          键盘键入 $$/``` 无法构造对应节点，降级用例必须经 setMarkdown 注入 */}
-      <button
-        data-testid="doc-bad-math"
-        onClick={() => handleRef.current?.setMarkdown('# T\n\n$\\frac{$\n')}
-      >
-        注入非法公式
-      </button>
-      <button
-        data-testid="doc-bad-mermaid"
-        onClick={() => handleRef.current?.setMarkdown('# T\n\n```mermaid\nINVALID SYNTAX ===\n```\n')}
-      >
-        注入非法 mermaid
-      </button>
+        <section className="demo-section">
+          <h2 className="demo-section-title">示例文档</h2>
+          <div className="demo-controls">
+            {/* e2e 调试入口：math/mermaid 节点只经 remark parse 产生、无 input rule，
+                键盘键入 $$/``` 无法构造对应节点，降级用例必须经 setMarkdown 注入 */}
+            <button
+              className="demo-btn"
+              data-testid="doc-bad-math"
+              onClick={() => handleRef.current?.setMarkdown('# T\n\n$\\frac{$\n')}
+            >
+              注入非法公式
+            </button>
+            <button
+              className="demo-btn"
+              data-testid="doc-bad-mermaid"
+              onClick={() => handleRef.current?.setMarkdown('# T\n\n```mermaid\nINVALID SYNTAX ===\n```\n')}
+            >
+              注入非法 mermaid
+            </button>
+          </div>
+        </section>
 
-      <h2>onChange 输出</h2>
-      <pre data-testid="markdown-output">{output}</pre>
+        <section className="demo-section">
+          <div className="demo-output-card">
+            <h2 className="demo-output-title">onChange 输出</h2>
+            <pre className="demo-output-pre" data-testid="markdown-output">{output}</pre>
+          </div>
+        </section>
+      </main>
     </div>
   )
 }
