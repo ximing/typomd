@@ -1,0 +1,29 @@
+name: ci
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          standalone: true # 读 package.json 的 packageManager 字段（pnpm@9.15.4）
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: pnpm test
+      - run: pnpm typecheck
+      - run: pnpm --filter demo exec playwright install chromium --with-deps # 锁文件版本，非 latest
+      - run: pnpm e2e # 含 visual.spec.ts（CI 环境不跳过，校验基线）
+      - uses: actions/upload-artifact@v4
+        if: failure() # 基线回退路径：失败时下载 actual 截图（见 Step 3）
+        with:
+          name: playwright-test-results
+          path: apps/demo/test-results/
