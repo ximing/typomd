@@ -30,3 +30,13 @@ v1 仅交付契约（本文档 + `src/index.ts` 类型），不实现。协议�
 
 - **路径 A（默认预期）**：`react-native-webview` 内嵌 `@mdeditor/core` + 精简 UI，协议跑在 `postMessage` 上，复用率最高
 - **路径 B（远期）**：core 的 schema/markdown IO 层平台无关，理论可接原生渲染层；但 Milkdown view 层绑 DOM，真实工作量 v2 再评估
+
+## 令牌映射规则（v2，spec §8）
+
+`@mdeditor/theme/tokens.json` 语义层即 RN v2 契约：
+
+- **px → dp**：RN 端按数值直读（`space-4: "16px"` → `16`），不做缩放。
+- **rgba 字符串**：RN 原生支持，直接传入 StyleSheet 颜色值。
+- **阴影刻度**：`shadow-popover` 需拆解映射为 RN shadow 属性——iOS `shadowColor/shadowOffset/shadowOpacity/shadowRadius`（取两段投影中视觉主导的一段），Android `elevation`（建议 8）；精确映射在 v2 实现时标定。
+- **亮/暗两组颜色键完全对齐**：RN 侧按主题切换同一组常量，键集合差异会在 theme 构建期直接失败。
+- v2 breaking：`color-error` → `color-danger`；`color-quote-border` 删除（引用块并入 `color-text`）；`radius` → `radius-sm/md/lg/full`。
