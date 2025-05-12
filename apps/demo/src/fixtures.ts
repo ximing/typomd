@@ -1,5 +1,5 @@
 // src/fixtures.ts
-export const DEMO_MARKDOWN = `# mdeditor demo
+export const DEMO_MARKDOWN = `# typomd demo
 
 Typora 式 **WYSIWYG** markdown 编辑器。
 

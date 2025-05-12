@@ -1,5 +1,5 @@
 {
-  "name": "@mdeditor/react",
+  "name": "@typomd/react",
   "version": "0.1.0",
   "type": "module",
   "exports": {
@@ -15,8 +15,8 @@
   },
   "dependencies": {
     "@floating-ui/dom": "catalog:",
-    "@mdeditor/core": "workspace:*",
-    "@mdeditor/theme": "workspace:*"
+    "@typomd/core": "workspace:*",
+    "@typomd/theme": "workspace:*"
   },
   "peerDependencies": {
     "react": "^18.3.0 || ^19.0.0",

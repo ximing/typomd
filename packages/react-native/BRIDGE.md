@@ -1,4 +1,4 @@
-# @mdeditor/react-native 桥接协议
+# @typomd/react-native 桥接协议
 
 v1 仅交付契约（本文档 + `src/index.ts` 类型），不实现。协议与传输层无关。
 
@@ -28,12 +28,12 @@ v1 仅交付契约（本文档 + `src/index.ts` 类型），不实现。协议�
 
 ## v2 候选路径（记录备查）
 
-- **路径 A（默认预期）**：`react-native-webview` 内嵌 `@mdeditor/core` + 精简 UI，协议跑在 `postMessage` 上，复用率最高
+- **路径 A（默认预期）**：`react-native-webview` 内嵌 `@typomd/core` + 精简 UI，协议跑在 `postMessage` 上，复用率最高
 - **路径 B（远期）**：core 的 schema/markdown IO 层平台无关，理论可接原生渲染层；但 Milkdown view 层绑 DOM，真实工作量 v2 再评估
 
 ## 令牌映射规则（v2，spec §8）
 
-`@mdeditor/theme/tokens.json` 语义层即 RN v2 契约：
+`@typomd/theme/tokens.json` 语义层即 RN v2 契约：
 
 - **px → dp**：RN 端按数值直读（`space-4: "16px"` → `16`），不做缩放。
 - **rgba 字符串**：RN 原生支持，直接传入 StyleSheet 颜色值。

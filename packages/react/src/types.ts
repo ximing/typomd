@@ -4,7 +4,7 @@ import type {
   EditorError,
   EditorHandle,
   FeatureFlags,
-} from '@mdeditor/core'
+} from '@typomd/core'
 
 export type { EditorError, EditorHandle, FeatureFlags }
 
@@ -23,7 +23,7 @@ export interface ToolbarConfig {
   items?: ToolbarItem[]
 }
 
-export interface MdEditorProps {
+export interface TypomdProps {
   defaultValue?: string
   features?: FeatureFlags
   toolbar?: ToolbarConfig

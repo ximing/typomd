@@ -1,6 +1,6 @@
-// MdEditorInner.tsx
+// TypomdInner.tsx
 import { useLayoutEffect, useRef, useState } from 'react'
-import { createEditor, type CreateEditorOptions, type EditorHandle } from '@mdeditor/core'
+import { createEditor, type CreateEditorOptions, type EditorHandle } from '@typomd/core'
 
 interface Props {
   options: Omit<CreateEditorOptions, 'root'>
@@ -13,7 +13,7 @@ interface Props {
  * 为什么不用 @milkdown/react：它的 useEditor 接收 Editor.make() 工厂，
  * 与 core 的 createEditor(root) → Promise<EditorHandle> 模型不兼容（见 Global Constraints）。
  */
-export function MdEditorInner({ options, placeholder, onReady }: Props) {
+export function TypomdInner({ options, placeholder, onReady }: Props) {
   const hostRef = useRef<HTMLDivElement>(null)
   const [ready, setReady] = useState(false)
 
@@ -47,7 +47,7 @@ export function MdEditorInner({ options, placeholder, onReady }: Props) {
   return (
     <div
       ref={hostRef}
-      data-testid="mdeditor"
+      data-testid="typomd"
       data-ready={ready ? 'true' : undefined}
     />
   )

@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest'
 import { renderToStaticMarkup } from 'react-dom/server'
-import { commandRegistry } from '@mdeditor/core'
+import { commandRegistry } from '@typomd/core'
 import { icons } from '../icons'
 import { SLASH_GROUPS, SLASH_GROUP_ORDER } from '../command-meta'
 

@@ -16,7 +16,7 @@ interface MdastCode extends Node {
  * priority 方案下 mermaid 节点永远不会被 parse 出来（官方 deprecated plugin-diagram@7.7.0
  * 正是用本改写方案）。
  */
-export const remarkMermaidPlugin = $remark('mdeditorRemarkMermaid', () => {
+export const remarkMermaidPlugin = $remark('typomdRemarkMermaid', () => {
   return function remarkMermaid() {
     return (tree: Node) => {
       visit(tree, 'code', (node) => {

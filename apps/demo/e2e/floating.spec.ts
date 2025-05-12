@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test'
 
 test('选中文字 → 悬浮工具栏 → 加粗', async ({ page }) => {
   await page.goto('/')
-  const editor = page.locator('[data-testid="mdeditor"] .ProseMirror')
+  const editor = page.locator('[data-testid="typomd"] .ProseMirror')
   await editor.click()
   await page.keyboard.press('ControlOrMeta+a')
   await page.keyboard.press('Backspace')

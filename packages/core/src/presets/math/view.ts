@@ -9,19 +9,19 @@ import type { EditorError } from '../../types'
 function createMathView(displayMode: boolean, onError: (e: EditorError) => void): NodeViewConstructor {
   return (node, view, getPos) => {
     const dom = document.createElement(displayMode ? 'div' : 'span')
-    dom.classList.add('mdeditor-math')
+    dom.classList.add('typomd-math')
     const preview = document.createElement(displayMode ? 'div' : 'span')
     dom.appendChild(preview)
 
     const render = (value: string) => {
       try {
         katex.render(value, preview, { displayMode, throwOnError: true })
-        dom.classList.remove('mdeditor-node-error')
+        dom.classList.remove('typomd-node-error')
         dom.removeAttribute('data-error')
       } catch (cause) {
         // spec §8：渲染失败 → 显示源码 + 红色错误角标，不阻断编辑
         preview.textContent = value
-        dom.classList.add('mdeditor-node-error')
+        dom.classList.add('typomd-node-error')
         dom.setAttribute('data-error', 'math')
         onError({ source: 'math:render', cause })
       }

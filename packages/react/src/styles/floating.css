@@ -1,59 +1,59 @@
 /* floating.css — 悬浮工具栏（§5.4：color-bg-elevated + shadow-popover 无 border + radius-lg） */
-.mdeditor-floating {
-  position: absolute; /* 定位上下文 .mdeditor-body，沿用现有（§5.4 定位逻辑不动） */
-  z-index: var(--mdeditor-z-floating);
+.typomd-floating {
+  position: fixed; /* 与 useFloating strategy:fixed 对齐；选区 getBoundingClientRect 是视口坐标 */
+  z-index: var(--typomd-z-floating);
   display: flex;
   align-items: center;
-  gap: var(--mdeditor-space-0_5);
-  padding: var(--mdeditor-space-1);
-  background: var(--mdeditor-color-bg-elevated);
-  border-radius: var(--mdeditor-radius-lg);
-  box-shadow: var(--mdeditor-shadow-popover); /* shadow 环代替 border（§2.2） */
-  animation: mdeditor-pop var(--mdeditor-duration-base) var(--mdeditor-ease-out); /* 关键帧在 base.css */
+  gap: var(--typomd-space-0_5);
+  padding: var(--typomd-space-1);
+  background: var(--typomd-color-bg-elevated);
+  border-radius: var(--typomd-radius-lg);
+  box-shadow: var(--typomd-shadow-popover); /* shadow 环代替 border（§2.2） */
+  animation: typomd-pop var(--typomd-duration-base) var(--typomd-ease-out); /* 关键帧在 base.css */
 }
-.mdeditor-floating-button {
+.typomd-floating-button {
   position: relative; /* tooltip ::after 定位上下文 */
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 28px;
   height: 28px;
-  border-radius: var(--mdeditor-radius-md);
-  color: var(--mdeditor-color-text-secondary);
+  border-radius: var(--typomd-radius-md);
+  color: var(--typomd-color-text-secondary);
   cursor: pointer;
-  transition: background-color var(--mdeditor-duration-fast) var(--mdeditor-ease-standard),
-              color var(--mdeditor-duration-fast) var(--mdeditor-ease-standard);
+  transition: background-color var(--typomd-duration-fast) var(--typomd-ease-standard),
+              color var(--typomd-duration-fast) var(--typomd-ease-standard);
 }
-.mdeditor-floating-button:hover {
-  background: var(--mdeditor-color-hover);
-  color: var(--mdeditor-color-text);
+.typomd-floating-button:hover {
+  background: var(--typomd-color-hover);
+  color: var(--typomd-color-text);
 }
-.mdeditor-floating-button[aria-pressed='true'],
-.mdeditor-floating-button[data-active='true'] {
-  background: var(--mdeditor-color-accent-subtle);
-  color: var(--mdeditor-color-accent);
+.typomd-floating-button[aria-pressed='true'],
+.typomd-floating-button[data-active='true'] {
+  background: var(--typomd-color-accent-subtle);
+  color: var(--typomd-color-accent);
 }
 
 /* 纯 CSS tooltip（§5.3 同制）：悬浮条在选区上方，tooltip 再向上 */
-.mdeditor-floating [data-tooltip]::after {
+.typomd-floating [data-tooltip]::after {
   content: attr(data-tooltip);
   position: absolute;
-  bottom: calc(100% + var(--mdeditor-space-1_5));
+  bottom: calc(100% + var(--typomd-space-1_5));
   left: 50%;
   transform: translateX(-50%);
-  z-index: var(--mdeditor-z-tooltip);
-  padding: var(--mdeditor-space-1) var(--mdeditor-space-2);
-  border-radius: var(--mdeditor-radius-md);
-  background: var(--mdeditor-color-accent);
-  color: var(--mdeditor-color-accent-contrast);
-  font-size: var(--mdeditor-font-size-ui-sm);
+  z-index: var(--typomd-z-tooltip);
+  padding: var(--typomd-space-1) var(--typomd-space-2);
+  border-radius: var(--typomd-radius-md);
+  background: var(--typomd-color-accent);
+  color: var(--typomd-color-accent-contrast);
+  font-size: var(--typomd-font-size-ui-sm);
   white-space: nowrap;
   pointer-events: none;
   opacity: 0;
-  transition: opacity var(--mdeditor-duration-fast) var(--mdeditor-ease-standard);
+  transition: opacity var(--typomd-duration-fast) var(--typomd-ease-standard);
 }
-.mdeditor-floating [data-tooltip]:hover::after,
-.mdeditor-floating [data-tooltip]:focus-visible::after {
+.typomd-floating [data-tooltip]:hover::after,
+.typomd-floating [data-tooltip]:focus-visible::after {
   opacity: 1;
   transition-delay: 400ms;
 }

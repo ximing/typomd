@@ -4,7 +4,7 @@ import {
   commandRegistry,
   type EditorHandle,
   type SlashTriggerPayload,
-} from '@mdeditor/core'
+} from '@typomd/core'
 import { icons } from './icons'
 import { SHORTCUTS, SLASH_GROUPS, SLASH_GROUP_ORDER } from './command-meta'
 import { slashQueryFromDiff } from './slash-query'
@@ -29,7 +29,15 @@ export function SlashMenu({ handle, hasUpload }: Props) {
   // 打开/关闭：slashTrigger 打开；change 更新查询词（查询词非法或 '/' 被删 → 关闭）
   useEffect(() => {
     const offTrigger = handle.on('slashTrigger', (payload) => {
-      setOpen({ payload, baseMarkdown: handle.getMarkdown() })
+      // 强制同步布局：setMarkdown 后立刻 insert 时 coordsAtPos 可能仍是旧文档的。
+      void document.body.offsetHeight
+      const sel = window.getSelection()
+      let p = payload
+      if (sel && sel.rangeCount > 0) {
+        const r = sel.getRangeAt(0).getBoundingClientRect()
+        if (r.left !== 0 || r.top !== 0) p = { top: r.bottom, left: r.left, pos: payload.pos }
+      }
+      setOpen({ payload: p, baseMarkdown: handle.getMarkdown() })
       setQuery('')
       setActive(0)
     })
@@ -66,12 +74,22 @@ export function SlashMenu({ handle, hasUpload }: Props) {
   // 键盘/高亮索引必须与分组后的 DOM 顺序一致，否则 ArrowDown 会跳组
   const flat = useMemo(() => grouped.flatMap(([, specs]) => specs), [grouped])
 
-  // useMemo：reference 对象身份必须稳定（open 期间坐标不变）
-  const reference = useMemo(
-    () => (open ? virtualRefFromPoint(open.payload.top, open.payload.left) : null),
-    [open],
-  )
-  const { ref, style } = useFloating(reference, 'bottom')
+  // 优先用当前选区矩形：slashTrigger 的 coordsAtPos 在 setMarkdown 后立刻 insert
+  // 时可能读到旧布局。getBoundingClientRect 由 autoUpdate 每次读取，跟随光标。
+  const reference = useMemo(() => {
+    if (!open) return null
+    return {
+      getBoundingClientRect: () => {
+        const sel = window.getSelection()
+        if (sel && sel.rangeCount > 0) {
+          const r = sel.getRangeAt(0).getBoundingClientRect()
+          if (r.left !== 0 || r.top !== 0 || r.height !== 0) return r
+        }
+        return virtualRefFromPoint(open.payload.top, open.payload.left).getBoundingClientRect()
+      },
+    }
+  }, [open])
+  const { ref, style } = useFloating(reference, 'bottom-start')
   const setRefs = (el: HTMLDivElement | null) => {
     menuEl.current = el
     ref(el)
@@ -96,14 +114,14 @@ export function SlashMenu({ handle, hasUpload }: Props) {
   }, [open, flat, active])
 
   // aria-activedescendant（§5.5）：焦点始终在编辑器内，用 aria 指向高亮项；
-  // 取编辑器元素限定在自身 .mdeditor-root 内，多实例共存不会取错
+  // 取编辑器元素限定在自身 .typomd-root 内，多实例共存不会取错
   useEffect(() => {
     if (!open) return
-    const root = menuEl.current?.closest('.mdeditor-root')
+    const root = menuEl.current?.closest('.typomd-root')
     const pm = root?.querySelector('.ProseMirror') as HTMLElement | null
     if (!pm) return
     const current = flat[active]
-    if (current) pm.setAttribute('aria-activedescendant', `mdeditor-slash-opt-${current.id}`)
+    if (current) pm.setAttribute('aria-activedescendant', `typomd-slash-opt-${current.id}`)
     return () => { pm.removeAttribute('aria-activedescendant') }
   }, [open, active, flat])
 
@@ -119,28 +137,28 @@ export function SlashMenu({ handle, hasUpload }: Props) {
   }
 
   return (
-    <div ref={setRefs} className="mdeditor-slash" style={style} data-testid="slash-menu" role="listbox" aria-label="插入命令">
-      {items.length === 0 && <div className="mdeditor-slash-item" aria-disabled="true">无匹配命令</div>}
+    <div ref={setRefs} className="typomd-slash" style={style} data-testid="slash-menu" role="listbox" aria-label="插入命令">
+      {items.length === 0 && <div className="typomd-slash-item" aria-disabled="true">无匹配命令</div>}
       {grouped.map(([group, specs]) => (
         <div key={group} role="group" aria-label={group}>
-          <div className="mdeditor-slash-group">{group}</div>
+          <div className="typomd-slash-group">{group}</div>
           {specs.map((spec) => {
             const i = flat.indexOf(spec)
             return (
               <div
                 key={spec.id}
-                id={`mdeditor-slash-opt-${spec.id}`}
+                id={`typomd-slash-opt-${spec.id}`}
                 role="option"
                 aria-selected={i === active}
                 data-selected={i === active || undefined}
                 data-command={spec.id}
-                className="mdeditor-slash-item"
+                className="typomd-slash-item"
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => execAndClose(spec.id)}
               >
-                <span className="mdeditor-slash-item-icon">{icons[spec.icon] ?? ''}</span>
-                <span className="mdeditor-slash-item-label">{spec.label}</span>
-                {SHORTCUTS[spec.id] && <kbd className="mdeditor-slash-item-kbd">{SHORTCUTS[spec.id]}</kbd>}
+                <span className="typomd-slash-item-icon">{icons[spec.icon] ?? ''}</span>
+                <span className="typomd-slash-item-label">{spec.label}</span>
+                {SHORTCUTS[spec.id] && <kbd className="typomd-slash-item-kbd">{SHORTCUTS[spec.id]}</kbd>}
               </div>
             )
           })}

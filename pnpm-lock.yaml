@@ -113,13 +113,13 @@ importers:
 
   apps/demo:
     dependencies:
-      '@mdeditor/core':
+      '@typomd/core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@mdeditor/react':
+      '@typomd/react':
         specifier: workspace:*
         version: link:../../packages/react
-      '@mdeditor/theme':
+      '@typomd/theme':
         specifier: workspace:*
         version: link:../../packages/theme
       react:
@@ -220,10 +220,10 @@ importers:
       '@floating-ui/dom':
         specifier: 'catalog:'
         version: 1.8.0
-      '@mdeditor/core':
+      '@typomd/core':
         specifier: workspace:*
         version: link:../core
-      '@mdeditor/theme':
+      '@typomd/theme':
         specifier: workspace:*
         version: link:../theme
     devDependencies:

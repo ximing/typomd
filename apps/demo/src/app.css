@@ -1,55 +1,68 @@
 /* app.css — demo 自身门面样式，全部复用库令牌（dogfooding，§7） */
 .demo-page {
   min-height: 100vh;
-  background: var(--mdeditor-color-bg);
-  color: var(--mdeditor-color-text);
-  font-family: var(--mdeditor-font-text);
+  background: var(--typomd-color-bg);
+  color: var(--typomd-color-text);
+  font-family: var(--typomd-font-text);
 }
 .demo-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--typomd-space-3);
   max-width: 780px;
   margin: 0 auto;
-  padding: var(--mdeditor-space-5) var(--mdeditor-space-6) var(--mdeditor-space-3);
+  padding: var(--typomd-space-5) var(--typomd-space-6) var(--typomd-space-3);
 }
-.demo-brand { display: flex; align-items: baseline; gap: var(--mdeditor-space-3); }
+.demo-brand {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--typomd-space-3);
+  min-width: 0;
+  flex: 1;
+}
 .demo-title { font-size: 20px; font-weight: 700; margin: 0; }
-.demo-tagline { margin: 0; font-size: var(--mdeditor-font-size-ui); color: var(--mdeditor-color-text-muted); }
-.demo-header-actions { display: flex; align-items: center; gap: var(--mdeditor-space-3); }
-.demo-link { color: var(--mdeditor-color-text-secondary); font-size: var(--mdeditor-font-size-ui); text-decoration: none; }
-.demo-link:hover { color: var(--mdeditor-color-text); }
+.demo-tagline { margin: 0; font-size: var(--typomd-font-size-ui); color: var(--typomd-color-text-muted); }
+.demo-header-actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: var(--typomd-space-3);
+}
+.demo-link { color: var(--typomd-color-text-secondary); font-size: var(--typomd-font-size-ui); text-decoration: none; }
+.demo-link:hover { color: var(--typomd-color-text); }
 .demo-main {
   max-width: 780px;
   margin: 0 auto;
-  padding: 0 var(--mdeditor-space-6) var(--mdeditor-space-8);
+  padding: 0 var(--typomd-space-6) var(--typomd-space-8);
   display: flex;
   flex-direction: column;
-  gap: var(--mdeditor-space-5);
+  gap: var(--typomd-space-5);
 }
 .demo-editor-card {
-  background: var(--mdeditor-color-bg);
-  border: 1px solid var(--mdeditor-color-border);
-  border-radius: var(--mdeditor-radius-lg);
-  box-shadow: var(--mdeditor-shadow-popover);
-  /* 故意无 overflow：浮层（floating/slash）绝对定位于 .mdeditor-body，
+  background: var(--typomd-color-bg);
+  border-radius: var(--typomd-radius-lg);
+  box-shadow: var(--typomd-shadow-popover); /* 含 1px 环，不再叠 border */
+  /* 故意无 overflow：浮层（floating/slash）绝对定位于 .typomd-body，
      任何 overflow 裁剪都会切浮层（§9 已知限制——demo 自己不制造该限制） */
 }
 .demo-section-title {
-  margin: 0 0 var(--mdeditor-space-2);
-  font-size: var(--mdeditor-font-size-ui);
+  margin: 0 0 var(--typomd-space-2);
+  font-size: var(--typomd-font-size-ui);
   font-weight: 600;
-  color: var(--mdeditor-color-text-muted);
+  color: var(--typomd-color-text-muted);
 }
-.demo-switches { display: flex; flex-wrap: wrap; gap: var(--mdeditor-space-4); }
+.demo-switches { display: flex; flex-wrap: wrap; gap: var(--typomd-space-4); }
 .demo-switch {
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: var(--mdeditor-space-2);
+  gap: var(--typomd-space-2);
   cursor: pointer;
-  font-size: var(--mdeditor-font-size-ui);
-  color: var(--mdeditor-color-text-secondary);
+  font-size: var(--typomd-font-size-ui);
+  color: var(--typomd-color-text-secondary);
 }
 /* switch 控件：input 铺满 label 且 opacity:0——e2e 的 .click() 仍命中真实 checkbox，
    Playwright 可见性判定不含 opacity */
@@ -65,9 +78,9 @@
   width: 32px;
   height: 18px;
   flex: none;
-  border-radius: var(--mdeditor-radius-full);
-  background: var(--mdeditor-color-border-strong);
-  transition: background-color var(--mdeditor-duration-fast) var(--mdeditor-ease-standard);
+  border-radius: var(--typomd-radius-full);
+  background: var(--typomd-color-border-strong);
+  transition: background-color var(--typomd-duration-fast) var(--typomd-ease-standard);
 }
 .demo-switch-track::after {
   content: '';
@@ -76,44 +89,45 @@
   left: 2px;
   width: 14px;
   height: 14px;
-  border-radius: var(--mdeditor-radius-full);
-  background: var(--mdeditor-color-bg);
-  transition: transform var(--mdeditor-duration-fast) var(--mdeditor-ease-standard);
+  border-radius: var(--typomd-radius-full);
+  background: var(--typomd-color-bg);
+  transition: transform var(--typomd-duration-fast) var(--typomd-ease-standard);
 }
-.demo-switch input:checked + .demo-switch-track { background: var(--mdeditor-color-accent); }
+.demo-switch input:checked + .demo-switch-track { background: var(--typomd-color-accent); }
 .demo-switch input:checked + .demo-switch-track::after { transform: translateX(14px); }
 .demo-switch input:focus-visible + .demo-switch-track {
-  box-shadow: 0 0 0 2px var(--mdeditor-color-bg), 0 0 0 4px var(--mdeditor-color-focus-ring);
+  box-shadow: 0 0 0 2px var(--typomd-color-bg), 0 0 0 4px var(--typomd-color-focus-ring);
 }
-.demo-controls { display: flex; flex-wrap: wrap; gap: var(--mdeditor-space-3); }
+.demo-controls { display: flex; flex-wrap: wrap; gap: var(--typomd-space-3); }
 .demo-btn {
-  padding: var(--mdeditor-space-1_5) var(--mdeditor-space-3);
-  border: 1px solid var(--mdeditor-color-border-strong);
-  border-radius: var(--mdeditor-radius-md);
-  background: var(--mdeditor-color-bg-elevated);
-  color: var(--mdeditor-color-text);
-  font-size: var(--mdeditor-font-size-ui);
+  padding: var(--typomd-space-1_5) var(--typomd-space-3);
+  border: 1px solid var(--typomd-color-border-strong);
+  border-radius: var(--typomd-radius-md);
+  background: var(--typomd-color-bg-elevated);
+  color: var(--typomd-color-text);
+  font-size: var(--typomd-font-size-ui);
+  white-space: nowrap;
   cursor: pointer;
 }
-.demo-btn:hover { background: var(--mdeditor-color-hover); }
+.demo-btn:hover { background: var(--typomd-color-hover); }
 .demo-output-card {
-  background: var(--mdeditor-color-bg-secondary);
-  border: 1px solid var(--mdeditor-color-border);
-  border-radius: var(--mdeditor-radius-lg);
+  background: var(--typomd-color-bg-secondary);
+  border: 1px solid var(--typomd-color-border);
+  border-radius: var(--typomd-radius-lg);
   overflow: hidden;
 }
 .demo-output-title {
   margin: 0;
-  padding: var(--mdeditor-space-2) var(--mdeditor-space-3);
-  border-bottom: 1px solid var(--mdeditor-color-border);
-  font-size: var(--mdeditor-font-size-ui-sm);
+  padding: var(--typomd-space-2) var(--typomd-space-3);
+  border-bottom: 1px solid var(--typomd-color-border);
+  font-size: var(--typomd-font-size-ui-sm);
   font-weight: 600;
-  color: var(--mdeditor-color-text-muted);
+  color: var(--typomd-color-text-muted);
 }
 .demo-output-pre {
   margin: 0;
-  padding: var(--mdeditor-space-3);
-  font-family: var(--mdeditor-font-mono);
-  font-size: var(--mdeditor-font-size-ui-sm);
+  padding: var(--typomd-space-3);
+  font-family: var(--typomd-font-mono);
+  font-size: var(--typomd-font-size-ui-sm);
   white-space: pre-wrap;
 }

@@ -11,9 +11,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@mdeditor/core": "workspace:*",
-    "@mdeditor/react": "workspace:*",
-    "@mdeditor/theme": "workspace:*",
+    "@typomd/core": "workspace:*",
+    "@typomd/react": "workspace:*",
+    "@typomd/theme": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:"
   },

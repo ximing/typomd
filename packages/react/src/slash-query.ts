@@ -13,7 +13,9 @@ export function slashQueryFromDiff(base: string, curr: string): string | null {
   const c = curr.trimEnd()
   let i = 0
   while (i < b.length && i < c.length && b[i] === c[i]) i++
-  if (i === c.length) return null // 查询词被删光（连同 '/'）→ 关闭菜单
+  // curr 严格短于 base 且为前缀：用户删掉了 '/' → 关闭。
+  // curr === base：debounce 把打开那次 '/' 再交付一遍 → 空查询，菜单保持打开。
+  if (i === c.length && c.length < b.length) return null
   const inserted = c.slice(i)
   // 只允许连续非空白查询词；出现空白/换行说明用户已离开 slash 上下文
   const m = /^[^\s]*$/.exec(inserted)

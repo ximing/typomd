@@ -1,10 +1,10 @@
 // index.ts
-export { MdEditor } from './MdEditor'
+export { Typomd } from './Typomd'
 export type {
   EditorError,
   EditorHandle,
   FeatureFlags,
-  MdEditorProps,
+  TypomdProps,
   ToolbarConfig,
   ToolbarItem,
   ToolbarRenderCtx,

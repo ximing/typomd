@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest'
 import { act, fireEvent, screen } from '@testing-library/react'
-import { renderMdEditor } from './helpers'
+import { renderTypomd } from './helpers'
 import { slashQueryFromDiff } from '../slash-query'
 
 // jsdom 不实现 Range.prototype.getClientRects/getBoundingClientRect，
@@ -32,11 +32,17 @@ describe('slashQueryFromDiff 纯函数', () => {
   test("'/' 被删除 → null", () => {
     expect(slashQueryFromDiff('abc /\n', 'abc \n')).toBeNull()
   })
+  test('change 与打开快照相同（仅 /）→ 空查询，不关菜单', () => {
+    // 打开时 base 已含 '/'；debounce 的 change 会再交付同一份 markdown。
+    // 若把 curr===base 当成「删光」返回 null，菜单会在 300ms 后闪关。
+    expect(slashQueryFromDiff('/\n', '/\n')).toBe('')
+    expect(slashQueryFromDiff('abc /\n', 'abc /\n')).toBe('')
+  })
 })
 
 describe('Slash 菜单', () => {
   test('插入 / 触发 slashTrigger 后菜单出现，含 showIn=slash 的命令', async () => {
-    const { handle } = await renderMdEditor({ defaultValue: '' })
+    const { handle } = await renderTypomd({ defaultValue: '' })
     act(() => { handle.insert('/') })
     const menu = await screen.findByTestId('slash-menu')
     expect(menu.querySelector('[data-command="heading"]')).not.toBeNull()
@@ -44,13 +50,13 @@ describe('Slash 菜单', () => {
   })
 
   test('features.slash=false 时插入 / 不出现菜单（core 不发事件）', async () => {
-    const { handle } = await renderMdEditor({ defaultValue: '', features: { slash: false } })
+    const { handle } = await renderTypomd({ defaultValue: '', features: { slash: false } })
     act(() => { handle.insert('/') })
     expect(screen.queryByTestId('slash-menu')).toBeNull()
   })
 
   test('Esc 关闭菜单', async () => {
-    const { handle } = await renderMdEditor({ defaultValue: '' })
+    const { handle } = await renderTypomd({ defaultValue: '' })
     act(() => { handle.insert('/') })
     await screen.findByTestId('slash-menu')
     fireEvent.keyDown(document, { key: 'Escape' })
@@ -58,7 +64,7 @@ describe('Slash 菜单', () => {
   })
 
   test('点击命令执行并清理 / 残留文本', async () => {
-    const { handle } = await renderMdEditor({ defaultValue: '' })
+    const { handle } = await renderTypomd({ defaultValue: '' })
     act(() => { handle.insert('/') })
     const menu = await screen.findByTestId('slash-menu')
     fireEvent.click(menu.querySelector('[data-command="heading"]')!)
@@ -68,46 +74,46 @@ describe('Slash 菜单', () => {
   })
 
   test('未提供 onUploadImage 时 slash 菜单隐藏 image 项', async () => {
-    const { handle } = await renderMdEditor({ defaultValue: '' })
+    const { handle } = await renderTypomd({ defaultValue: '' })
     act(() => { handle.insert('/') })
     const menu = await screen.findByTestId('slash-menu')
     expect(menu.querySelector('[data-command="image"]')).toBeNull()
   })
 
   test('条目为 div[role=option] 带稳定 id；打开期间 ProseMirror 带 aria-activedescendant（§5.5）', async () => {
-    const { handle } = await renderMdEditor({ defaultValue: '' })
+    const { handle } = await renderTypomd({ defaultValue: '' })
     act(() => { handle.insert('/') })
     const menu = await screen.findByTestId('slash-menu')
     const opt = menu.querySelector('[data-command="heading"]')!
     expect(opt.tagName).toBe('DIV')
     expect(opt.getAttribute('role')).toBe('option')
-    expect(opt.id).toBe('mdeditor-slash-opt-heading')
+    expect(opt.id).toBe('typomd-slash-opt-heading')
     const pm = document.querySelector('.ProseMirror')!
-    expect(pm.getAttribute('aria-activedescendant')).toBe('mdeditor-slash-opt-heading')
+    expect(pm.getAttribute('aria-activedescendant')).toBe('typomd-slash-opt-heading')
     fireEvent.keyDown(document, { key: 'Escape' })
     expect(pm.getAttribute('aria-activedescendant')).toBeNull()
   })
 
   test('分组标题渲染（§5.5），aria-label=插入命令', async () => {
-    const { handle } = await renderMdEditor({ defaultValue: '' })
+    const { handle } = await renderTypomd({ defaultValue: '' })
     act(() => { handle.insert('/') })
     const menu = await screen.findByTestId('slash-menu')
     expect(menu.getAttribute('aria-label')).toBe('插入命令')
-    const groups = [...menu.querySelectorAll('.mdeditor-slash-group')].map((g) => g.textContent)
+    const groups = [...menu.querySelectorAll('.typomd-slash-group')].map((g) => g.textContent)
     expect(groups).toEqual(['基础', '列表', '媒体'])
   })
 
   test('ArrowDown 后 aria-activedescendant 跟随高亮项', async () => {
-    const { handle } = await renderMdEditor({ defaultValue: '' })
+    const { handle } = await renderTypomd({ defaultValue: '' })
     act(() => { handle.insert('/') })
     await screen.findByTestId('slash-menu')
     fireEvent.keyDown(document, { key: 'ArrowDown' })
     const pm = document.querySelector('.ProseMirror')!
-    expect(pm.getAttribute('aria-activedescendant')).toBe('mdeditor-slash-opt-bold')
+    expect(pm.getAttribute('aria-activedescendant')).toBe('typomd-slash-opt-bold')
   })
 
   test('方向键高亮跟随分组 DOM 顺序（基础组末项 quote，而非注册表中夹在中间的 table）', async () => {
-    const { handle } = await renderMdEditor({ defaultValue: '' })
+    const { handle } = await renderTypomd({ defaultValue: '' })
     act(() => { handle.insert('/') })
     const menu = await screen.findByTestId('slash-menu')
     const basic = [...menu.querySelectorAll('[role="group"][aria-label="基础"] [data-command]')]
@@ -115,6 +121,6 @@ describe('Slash 菜单', () => {
     expect(basic.at(-1)).toBe('quote')
     for (let n = 0; n < basic.length - 1; n++) fireEvent.keyDown(document, { key: 'ArrowDown' })
     const pm = document.querySelector('.ProseMirror')!
-    expect(pm.getAttribute('aria-activedescendant')).toBe('mdeditor-slash-opt-quote')
+    expect(pm.getAttribute('aria-activedescendant')).toBe('typomd-slash-opt-quote')
   })
 })

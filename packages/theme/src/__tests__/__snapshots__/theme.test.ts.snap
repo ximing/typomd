@@ -3,115 +3,115 @@
 exports[`theme tokens > buildCss/buildAutoCss 输出快照（§11：含 content.css 拼接） 1`] = `
 "/* 由 scripts/build-css.mjs 生成，请勿手改 */
 
-:root, .mdeditor {
-  --mdeditor-font-text: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-  --mdeditor-font-mono: 'SF Mono', 'JetBrains Mono', Menlo, Consolas, 'Courier New', monospace;
-  --mdeditor-space-0_5: 2px;
-  --mdeditor-space-1: 4px;
-  --mdeditor-space-1_5: 6px;
-  --mdeditor-space-2: 8px;
-  --mdeditor-space-3: 12px;
-  --mdeditor-space-4: 16px;
-  --mdeditor-space-5: 20px;
-  --mdeditor-space-6: 24px;
-  --mdeditor-space-8: 32px;
-  --mdeditor-radius-sm: 4px;
-  --mdeditor-radius-md: 6px;
-  --mdeditor-radius-lg: 10px;
-  --mdeditor-radius-full: 999px;
-  --mdeditor-font-size: 16px;
-  --mdeditor-font-size-ui: 13px;
-  --mdeditor-font-size-ui-sm: 12px;
-  --mdeditor-line-height: 1.6;
-  --mdeditor-duration-fast: 100ms;
-  --mdeditor-duration-base: 160ms;
-  --mdeditor-ease-standard: cubic-bezier(0.2,0,0,1);
-  --mdeditor-ease-out: cubic-bezier(0.16,1,0.3,1);
-  --mdeditor-z-sticky: 10;
-  --mdeditor-z-floating: 20;
-  --mdeditor-z-slash: 30;
-  --mdeditor-z-tooltip: 40;
-  --mdeditor-color-bg: #ffffff;
-  --mdeditor-color-bg-secondary: #f7f7f5;
-  --mdeditor-color-bg-elevated: #ffffff;
-  --mdeditor-color-text: #37352f;
-  --mdeditor-color-text-secondary: rgba(55,53,47,0.70);
-  --mdeditor-color-text-muted: rgba(55,53,47,0.45);
-  --mdeditor-color-border: rgba(55,53,47,0.09);
-  --mdeditor-color-border-strong: rgba(55,53,47,0.16);
-  --mdeditor-color-hover: rgba(55,53,47,0.06);
-  --mdeditor-color-active: rgba(55,53,47,0.10);
-  --mdeditor-color-accent: #37352f;
-  --mdeditor-color-accent-contrast: #ffffff;
-  --mdeditor-color-accent-subtle: rgba(55,53,47,0.08);
-  --mdeditor-color-focus-ring: rgba(55,53,47,0.60);
-  --mdeditor-color-selection: rgba(55,53,47,0.14);
-  --mdeditor-color-danger: #eb5757;
-  --mdeditor-color-code-bg: #f7f6f3;
-  --mdeditor-shadow-popover: 0 0 0 1px rgba(15,15,15,0.05), 0 3px 6px rgba(15,15,15,0.1), 0 9px 24px rgba(15,15,15,0.2);
+:root, .typomd {
+  --typomd-font-text: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --typomd-font-mono: 'SF Mono', 'JetBrains Mono', Menlo, Consolas, 'Courier New', monospace;
+  --typomd-space-0_5: 2px;
+  --typomd-space-1: 4px;
+  --typomd-space-1_5: 6px;
+  --typomd-space-2: 8px;
+  --typomd-space-3: 12px;
+  --typomd-space-4: 16px;
+  --typomd-space-5: 20px;
+  --typomd-space-6: 24px;
+  --typomd-space-8: 32px;
+  --typomd-radius-sm: 4px;
+  --typomd-radius-md: 6px;
+  --typomd-radius-lg: 10px;
+  --typomd-radius-full: 999px;
+  --typomd-font-size: 16px;
+  --typomd-font-size-ui: 13px;
+  --typomd-font-size-ui-sm: 12px;
+  --typomd-line-height: 1.6;
+  --typomd-duration-fast: 100ms;
+  --typomd-duration-base: 160ms;
+  --typomd-ease-standard: cubic-bezier(0.2,0,0,1);
+  --typomd-ease-out: cubic-bezier(0.16,1,0.3,1);
+  --typomd-z-sticky: 10;
+  --typomd-z-floating: 20;
+  --typomd-z-slash: 30;
+  --typomd-z-tooltip: 40;
+  --typomd-color-bg: #ffffff;
+  --typomd-color-bg-secondary: #f7f7f5;
+  --typomd-color-bg-elevated: #ffffff;
+  --typomd-color-text: #37352f;
+  --typomd-color-text-secondary: rgba(55,53,47,0.70);
+  --typomd-color-text-muted: rgba(55,53,47,0.45);
+  --typomd-color-border: rgba(55,53,47,0.09);
+  --typomd-color-border-strong: rgba(55,53,47,0.16);
+  --typomd-color-hover: rgba(55,53,47,0.06);
+  --typomd-color-active: rgba(55,53,47,0.10);
+  --typomd-color-accent: #37352f;
+  --typomd-color-accent-contrast: #ffffff;
+  --typomd-color-accent-subtle: rgba(55,53,47,0.08);
+  --typomd-color-focus-ring: rgba(55,53,47,0.60);
+  --typomd-color-selection: rgba(55,53,47,0.14);
+  --typomd-color-danger: #eb5757;
+  --typomd-color-code-bg: #f7f6f3;
+  --typomd-shadow-popover: 0 0 0 1px rgba(15,15,15,0.05), 0 3px 6px rgba(15,15,15,0.1), 0 9px 24px rgba(15,15,15,0.2);
 }
 
-.mdeditor-dark {
-  --mdeditor-color-bg: #191919;
-  --mdeditor-color-bg-secondary: #202020;
-  --mdeditor-color-bg-elevated: #252525;
-  --mdeditor-color-text: rgba(255,255,255,0.81);
-  --mdeditor-color-text-secondary: rgba(255,255,255,0.46);
-  --mdeditor-color-text-muted: rgba(255,255,255,0.32);
-  --mdeditor-color-border: rgba(255,255,255,0.09);
-  --mdeditor-color-border-strong: rgba(255,255,255,0.16);
-  --mdeditor-color-hover: rgba(255,255,255,0.055);
-  --mdeditor-color-active: rgba(255,255,255,0.10);
-  --mdeditor-color-accent: #d4d4d2;
-  --mdeditor-color-accent-contrast: #191919;
-  --mdeditor-color-accent-subtle: rgba(255,255,255,0.10);
-  --mdeditor-color-focus-ring: rgba(255,255,255,0.45);
-  --mdeditor-color-selection: rgba(255,255,255,0.16);
-  --mdeditor-color-danger: #eb5757;
-  --mdeditor-color-code-bg: #202020;
-  --mdeditor-shadow-popover: 0 0 0 1px rgba(255,255,255,0.06), 0 3px 6px rgba(0,0,0,0.4), 0 9px 24px rgba(0,0,0,0.5);
+.typomd-dark, .typomd-dark .typomd {
+  --typomd-color-bg: #191919;
+  --typomd-color-bg-secondary: #202020;
+  --typomd-color-bg-elevated: #252525;
+  --typomd-color-text: rgba(255,255,255,0.81);
+  --typomd-color-text-secondary: rgba(255,255,255,0.46);
+  --typomd-color-text-muted: rgba(255,255,255,0.32);
+  --typomd-color-border: rgba(255,255,255,0.09);
+  --typomd-color-border-strong: rgba(255,255,255,0.16);
+  --typomd-color-hover: rgba(255,255,255,0.055);
+  --typomd-color-active: rgba(255,255,255,0.10);
+  --typomd-color-accent: #d4d4d2;
+  --typomd-color-accent-contrast: #191919;
+  --typomd-color-accent-subtle: rgba(255,255,255,0.10);
+  --typomd-color-focus-ring: rgba(255,255,255,0.45);
+  --typomd-color-selection: rgba(255,255,255,0.16);
+  --typomd-color-danger: #eb5757;
+  --typomd-color-code-bg: #202020;
+  --typomd-shadow-popover: 0 0 0 1px rgba(255,255,255,0.06), 0 3px 6px rgba(0,0,0,0.4), 0 9px 24px rgba(0,0,0,0.5);
 }
 
-/* content.css — 文档排版（.mdeditor .ProseMirror 内），由 build-css.mjs 拼进 default.css/auto.css，请勿直接改 dist */
+/* content.css — 文档排版（.typomd .ProseMirror 内），由 build-css.mjs 拼进 default.css/auto.css，请勿直接改 dist */
 
 /* ---- 容器（§4：声明一项不落；outline:none 必须保留——丢失会让 contenteditable 聚焦出现浏览器默认蓝环） ---- */
-.mdeditor .ProseMirror {
-  background: var(--mdeditor-color-bg);
-  color: var(--mdeditor-color-text);
-  font-family: var(--mdeditor-font-text);
-  font-size: var(--mdeditor-font-size);
-  line-height: var(--mdeditor-line-height);
+.typomd .ProseMirror {
+  background: var(--typomd-color-bg);
+  color: var(--typomd-color-text);
+  font-family: var(--typomd-font-text);
+  font-size: var(--typomd-font-size);
+  line-height: var(--typomd-line-height);
   outline: none;
-  padding: var(--mdeditor-space-6) var(--mdeditor-space-8);
+  padding: var(--typomd-space-6) var(--typomd-space-8);
 }
 /* 不设 max-width：嵌入方自行约束（§4） */
 
 /* ---- 块节奏（§4） ---- */
-.mdeditor .ProseMirror > * + * { margin-top: var(--mdeditor-block-gap, 6px); }
-.mdeditor .ProseMirror h1,
-.mdeditor .ProseMirror h2,
-.mdeditor .ProseMirror h3 { font-weight: 600; letter-spacing: -0.01em; }
-.mdeditor .ProseMirror h1 { font-size: 1.875em; margin-top: 1.2em; margin-bottom: 0; }
-.mdeditor .ProseMirror h2 { font-size: 1.5em; margin-top: 1.1em; margin-bottom: 0; }
-.mdeditor .ProseMirror h3 { font-size: 1.25em; margin-top: 1em; margin-bottom: 0; }
-.mdeditor .ProseMirror > h1:first-child,
-.mdeditor .ProseMirror > h2:first-child,
-.mdeditor .ProseMirror > h3:first-child { margin-top: 0; }
+.typomd .ProseMirror > * + * { margin-top: var(--typomd-block-gap, 6px); }
+.typomd .ProseMirror h1,
+.typomd .ProseMirror h2,
+.typomd .ProseMirror h3 { font-weight: 600; letter-spacing: -0.01em; }
+.typomd .ProseMirror h1 { font-size: 1.875em; margin-top: 1.2em; margin-bottom: 0; }
+.typomd .ProseMirror h2 { font-size: 1.5em; margin-top: 1.1em; margin-bottom: 0; }
+.typomd .ProseMirror h3 { font-size: 1.25em; margin-top: 1em; margin-bottom: 0; }
+.typomd .ProseMirror > h1:first-child,
+.typomd .ProseMirror > h2:first-child,
+.typomd .ProseMirror > h3:first-child { margin-top: 0; }
 
 /* ---- 列表（§4） ---- */
-.mdeditor .ProseMirror ul,
-.mdeditor .ProseMirror ol { padding-left: 1.5em; margin: 0; }
-.mdeditor .ProseMirror li { margin-top: 2px; }
-.mdeditor .ProseMirror li > p { margin: 0; }
+.typomd .ProseMirror ul,
+.typomd .ProseMirror ol { padding-left: 1.5em; margin: 0; }
+.typomd .ProseMirror li { margin-top: 2px; }
+.typomd .ProseMirror li > p { margin: 0; }
 
 /* 任务列表（GFM；DOM 侦查为 li[data-checked] 无原生 checkbox，用 ::before 画勾选框 + accent 色） */
-.mdeditor .ProseMirror li[data-checked='true'],
-.mdeditor .ProseMirror li[data-checked='false'] {
+.typomd .ProseMirror li[data-checked='true'],
+.typomd .ProseMirror li[data-checked='false'] {
   list-style: none;
   position: relative;
-  padding-left: var(--mdeditor-space-6);
+  padding-left: var(--typomd-space-6);
 }
-.mdeditor .ProseMirror li[data-checked]::before {
+.typomd .ProseMirror li[data-checked]::before {
   content: '';
   position: absolute;
   left: 0;
@@ -119,44 +119,59 @@ exports[`theme tokens > buildCss/buildAutoCss 输出快照（§11：含 content.
   width: 0.85em;
   height: 0.85em;
   box-sizing: border-box;
-  border: 1px solid var(--mdeditor-color-accent);
-  border-radius: var(--mdeditor-radius-sm);
-  background: var(--mdeditor-color-bg);
+  border: 1px solid var(--typomd-color-accent);
+  border-radius: var(--typomd-radius-sm);
+  background: var(--typomd-color-bg);
 }
-.mdeditor .ProseMirror li[data-checked='true']::before {
-  background: var(--mdeditor-color-accent);
+.typomd .ProseMirror li[data-checked='true']::before {
+  background: var(--typomd-color-accent);
 }
-.mdeditor .ProseMirror li[data-checked='true'] { color: var(--mdeditor-color-text-secondary); }
-.mdeditor .ProseMirror li[data-checked='true'] > p { text-decoration: line-through; }
+/* 勾：accent 底上用 contrast 色画对钩（无原生 checkbox） */
+.typomd .ProseMirror li[data-checked='true']::after {
+  content: '';
+  position: absolute;
+  left: 0.16em;
+  top: 0.5em;
+  width: 0.38em;
+  height: 0.2em;
+  box-sizing: border-box;
+  border: 1.5px solid var(--typomd-color-accent-contrast);
+  border-top: none;
+  border-right: none;
+  transform: rotate(-45deg);
+  pointer-events: none;
+}
+.typomd .ProseMirror li[data-checked='true'] { color: var(--typomd-color-text-secondary); }
+.typomd .ProseMirror li[data-checked='true'] > p { text-decoration: line-through; }
 
 /* ---- 引用（§4：Notion 引用不是灰色——边框与文字都用 color-text） ---- */
-.mdeditor .ProseMirror blockquote {
-  border-left: 3px solid var(--mdeditor-color-text);
-  color: var(--mdeditor-color-text);
+.typomd .ProseMirror blockquote {
+  border-left: 3px solid var(--typomd-color-text);
+  color: var(--typomd-color-text);
   margin: 0;
-  padding: 0 var(--mdeditor-space-3);
+  padding: 0 var(--typomd-space-3);
 }
 
 /* ---- 行内代码（§4） ---- */
-.mdeditor .ProseMirror code {
-  font-family: var(--mdeditor-font-mono);
+.typomd .ProseMirror code {
+  font-family: var(--typomd-font-mono);
   font-size: 0.85em;
-  background: var(--mdeditor-color-code-bg);
-  border-radius: var(--mdeditor-radius-sm);
+  background: var(--typomd-color-code-bg);
+  border-radius: var(--typomd-radius-sm);
   padding: 0.15em 0.35em;
 }
 
 /* ---- 代码块（§4：卡片化） ---- */
-.mdeditor .ProseMirror pre {
-  font-family: var(--mdeditor-font-mono);
+.typomd .ProseMirror pre {
+  font-family: var(--typomd-font-mono);
   font-size: 0.85em;
-  background: var(--mdeditor-color-code-bg);
-  border: 1px solid var(--mdeditor-color-border);
-  border-radius: var(--mdeditor-radius-lg);
-  padding: var(--mdeditor-space-3) var(--mdeditor-space-4);
+  background: var(--typomd-color-code-bg);
+  border: 1px solid var(--typomd-color-border);
+  border-radius: var(--typomd-radius-lg);
+  padding: var(--typomd-space-3) var(--typomd-space-4);
   overflow-x: auto;
 }
-.mdeditor .ProseMirror pre code {
+.typomd .ProseMirror pre code {
   background: none;
   padding: 0;
   border-radius: 0;
@@ -164,55 +179,58 @@ exports[`theme tokens > buildCss/buildAutoCss 输出快照（§11：含 content.
 }
 
 /* ---- 表格（§4） ---- */
-.mdeditor .ProseMirror table { border-collapse: collapse; width: 100%; }
-.mdeditor .ProseMirror th,
-.mdeditor .ProseMirror td {
-  border: 1px solid var(--mdeditor-color-border);
+.typomd .ProseMirror table { border-collapse: collapse; width: 100%; }
+.typomd .ProseMirror th,
+.typomd .ProseMirror td {
+  border: 1px solid var(--typomd-color-border);
   padding: 6px 10px;
   text-align: left;
 }
-.mdeditor .ProseMirror th { background: var(--mdeditor-color-bg-secondary); font-weight: 600; }
+.typomd .ProseMirror th { background: var(--typomd-color-bg-secondary); font-weight: 600; }
 
 /* ---- 分割线（§4） ---- */
-.mdeditor .ProseMirror hr {
+.typomd .ProseMirror hr {
   border: none;
-  border-top: 1px solid var(--mdeditor-color-border);
-  margin: var(--mdeditor-space-5) 0;
+  border-top: 1px solid var(--typomd-color-border);
+  margin: var(--typomd-space-5) 0;
 }
 
 /* ---- 链接（§4） ---- */
-.mdeditor .ProseMirror a {
+.typomd .ProseMirror a {
   color: inherit;
   text-decoration: underline;
-  text-decoration-color: var(--mdeditor-color-text-muted);
+  text-decoration-color: var(--typomd-color-text-muted);
   text-underline-offset: 2px;
 }
-.mdeditor .ProseMirror a:hover { text-decoration-color: var(--mdeditor-color-text); }
+.typomd .ProseMirror a:hover { text-decoration-color: var(--typomd-color-text); }
 
 /* ---- 图片（§4） ---- */
-.mdeditor .ProseMirror img { max-width: 100%; border-radius: var(--mdeditor-radius-md); }
+.typomd .ProseMirror img { max-width: 100%; border-radius: var(--typomd-radius-md); }
 
 /* ---- 选区 ---- */
-.mdeditor .ProseMirror ::selection { background: var(--mdeditor-color-selection); }
+.typomd .ProseMirror ::selection { background: var(--typomd-color-selection); }
 
 /* ---- math/mermaid 失败降级角标 ---- */
-.mdeditor-node-error {
-  color: var(--mdeditor-color-danger);
-  border: 1px dashed var(--mdeditor-color-danger);
-  border-radius: var(--mdeditor-radius-md);
-  padding: var(--mdeditor-space-1) var(--mdeditor-space-2);
+.typomd-node-error {
+  color: var(--typomd-color-danger);
+  border: 1px dashed var(--typomd-color-danger);
+  border-radius: var(--typomd-radius-md);
+  padding: var(--typomd-space-1) var(--typomd-space-2);
 }
 
+/* KaTeX 官方样式由 build-css.mjs 内联（katex.min.css + dist/fonts/*.woff2）。
+   不要在此藏 .katex-html——官方 CSS 才是跨浏览器公式层。 */
+
 /* placeholder：react 层把 data-placeholder 直接挂在 .ProseMirror 上
-   （MdEditorInner 在 ready 后执行 setAttribute——::before 的 attr() 只能读
-   伪元素所在元素自身的属性，挂祖先 .mdeditor 上 content: attr() 会读空串）。
+   （TypomdInner 在 ready 后执行 setAttribute——::before 的 attr() 只能读
+   伪元素所在元素自身的属性，挂祖先 .typomd 上 content: attr() 会读空串）。
    空文档判定不能用 p:empty——已核实 prosemirror-view 会给空 textblock 插入
    <br class="ProseMirror-trailingBreak">，空段落实为 <p><br ...></p>，:empty 永不匹配。
    改为匹配 trailing break：有文本时 PM 不再插入该 br，条件自然失效；
    段落末尾硬换行也会加 trailingBreak，但那时 br 不是 only-child，不误判。 */
-.mdeditor .ProseMirror[data-placeholder]:has(> p:first-child:last-child > br.ProseMirror-trailingBreak:only-child)::before {
+.typomd .ProseMirror[data-placeholder]:has(> p:first-child:last-child > br.ProseMirror-trailingBreak:only-child)::before {
   content: attr(data-placeholder);
-  color: var(--mdeditor-color-text-muted);
+  color: var(--typomd-color-text-muted);
   /* 备查：::before 用 position: absolute 但未给 .ProseMirror 加 position: relative；
      当前无偏移量时按静态位置放置表现正确，若未来给 ::before 加 top/left 偏移，
      需补 .ProseMirror { position: relative } */
@@ -221,129 +239,133 @@ exports[`theme tokens > buildCss/buildAutoCss 输出快照（§11：含 content.
 }
 
 /* content-dark.css — 类限定的暗色内容规则。
-   硬约束（§3.2）：每条规则选择器必须以 ".mdeditor-dark " 开头，
-   build-css.mjs 靠 ".mdeditor-dark " → ".mdeditor " 机械替换生成 auto.css。 */
+   硬约束（§3.2）：每条规则选择器必须以 ".typomd-dark " 开头，
+   build-css.mjs 靠 ".typomd-dark " → ".typomd " 机械替换生成 auto.css。 */
 /* Shiki 双主题（core codeHighlight preset 输出 --shiki-light/--shiki-dark 变量） */
-.mdeditor-dark .ProseMirror pre span {
+.typomd-dark .ProseMirror pre span {
   color: var(--shiki-dark) !important;
 }
+
+/* katex.min.css（构建期内联，woff2 见 dist/fonts） */
+@font-face{font-display:block;font-family:KaTeX_AMS;font-style:normal;font-weight:400;src:url(./fonts/KaTeX_AMS-Regular.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Caligraphic;font-style:normal;font-weight:700;src:url(./fonts/KaTeX_Caligraphic-Bold.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Caligraphic;font-style:normal;font-weight:400;src:url(./fonts/KaTeX_Caligraphic-Regular.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Fraktur;font-style:normal;font-weight:700;src:url(./fonts/KaTeX_Fraktur-Bold.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Fraktur;font-style:normal;font-weight:400;src:url(./fonts/KaTeX_Fraktur-Regular.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Main;font-style:normal;font-weight:700;src:url(./fonts/KaTeX_Main-Bold.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Main;font-style:italic;font-weight:700;src:url(./fonts/KaTeX_Main-BoldItalic.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Main;font-style:italic;font-weight:400;src:url(./fonts/KaTeX_Main-Italic.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Main;font-style:normal;font-weight:400;src:url(./fonts/KaTeX_Main-Regular.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Math;font-style:italic;font-weight:700;src:url(./fonts/KaTeX_Math-BoldItalic.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Math;font-style:italic;font-weight:400;src:url(./fonts/KaTeX_Math-Italic.woff2) format("woff2")}@font-face{font-display:block;font-family:"KaTeX_SansSerif";font-style:normal;font-weight:700;src:url(./fonts/KaTeX_SansSerif-Bold.woff2) format("woff2")}@font-face{font-display:block;font-family:"KaTeX_SansSerif";font-style:italic;font-weight:400;src:url(./fonts/KaTeX_SansSerif-Italic.woff2) format("woff2")}@font-face{font-display:block;font-family:"KaTeX_SansSerif";font-style:normal;font-weight:400;src:url(./fonts/KaTeX_SansSerif-Regular.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Script;font-style:normal;font-weight:400;src:url(./fonts/KaTeX_Script-Regular.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Size1;font-style:normal;font-weight:400;src:url(./fonts/KaTeX_Size1-Regular.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Size2;font-style:normal;font-weight:400;src:url(./fonts/KaTeX_Size2-Regular.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Size3;font-style:normal;font-weight:400;src:url(./fonts/KaTeX_Size3-Regular.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Size4;font-style:normal;font-weight:400;src:url(./fonts/KaTeX_Size4-Regular.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Typewriter;font-style:normal;font-weight:400;src:url(./fonts/KaTeX_Typewriter-Regular.woff2) format("woff2")}.katex{font:normal 1.21em KaTeX_Main,Times New Roman,serif;line-height:1.2;position:relative;text-indent:0;text-rendering:auto}.katex *{-ms-high-contrast-adjust:none!important;border-color:currentColor}.katex .katex-version:after{content:"0.16.47"}.katex .katex-mathml{border:0;-webkit-clip-path:inset(50%);clip-path:inset(50%);height:1px;overflow:hidden;padding:0;position:absolute;width:1px}.katex .katex-html>.newline{display:block}.katex .base{position:relative;white-space:nowrap;width:-webkit-min-content;width:-moz-min-content;width:min-content}.katex .base,.katex .strut{display:inline-block}.katex .textbf{font-weight:700}.katex .textit{font-style:italic}.katex .textrm{font-family:KaTeX_Main}.katex .textsf{font-family:KaTeX_SansSerif}.katex .texttt{font-family:KaTeX_Typewriter}.katex .mathnormal{font-family:KaTeX_Math;font-style:italic}.katex .mathit{font-family:KaTeX_Main;font-style:italic}.katex .mathrm{font-style:normal}.katex .mathbf{font-family:KaTeX_Main;font-weight:700}.katex .boldsymbol{font-family:KaTeX_Math;font-style:italic;font-weight:700}.katex .amsrm,.katex .mathbb,.katex .textbb{font-family:KaTeX_AMS}.katex .mathcal{font-family:KaTeX_Caligraphic}.katex .mathfrak,.katex .textfrak{font-family:KaTeX_Fraktur}.katex .mathboldfrak,.katex .textboldfrak{font-family:KaTeX_Fraktur;font-weight:700}.katex .mathtt{font-family:KaTeX_Typewriter}.katex .mathscr,.katex .textscr{font-family:KaTeX_Script}.katex .mathsf,.katex .textsf{font-family:KaTeX_SansSerif}.katex .mathboldsf,.katex .textboldsf{font-family:KaTeX_SansSerif;font-weight:700}.katex .mathitsf,.katex .mathsfit,.katex .textitsf{font-family:KaTeX_SansSerif;font-style:italic}.katex .mainrm{font-family:KaTeX_Main;font-style:normal}.katex .vlist-t{border-collapse:collapse;display:inline-table;table-layout:fixed}.katex .vlist-r{display:table-row}.katex .vlist{display:table-cell;position:relative;vertical-align:bottom}.katex .vlist>span{display:block;height:0;position:relative}.katex .vlist>span>span{display:inline-block}.katex .vlist>span>.pstrut{overflow:hidden;width:0}.katex .vlist-t2{margin-right:-2px}.katex .vlist-s{display:table-cell;font-size:1px;min-width:2px;vertical-align:bottom;width:2px}.katex .vbox{align-items:baseline;display:inline-flex;flex-direction:column}.katex .hbox{width:100%}.katex .hbox,.katex .thinbox{display:inline-flex;flex-direction:row}.katex .thinbox{max-width:0;width:0}.katex .msupsub{text-align:left}.katex .mfrac>span>span{text-align:center}.katex .mfrac .frac-line{border-bottom-style:solid;display:inline-block;width:100%}.katex .hdashline,.katex .hline,.katex .mfrac .frac-line,.katex .overline .overline-line,.katex .rule,.katex .underline .underline-line{min-height:1px}.katex .mspace{display:inline-block}.katex .smash{display:inline;line-height:0}.katex .clap,.katex .llap,.katex .rlap{position:relative;width:0}.katex .clap>.inner,.katex .llap>.inner,.katex .rlap>.inner{position:absolute}.katex .clap>.fix,.katex .llap>.fix,.katex .rlap>.fix{display:inline-block}.katex .llap>.inner{right:0}.katex .clap>.inner,.katex .rlap>.inner{left:0}.katex .clap>.inner>span{margin-left:-50%;margin-right:50%}.katex .rule{border:0 solid;display:inline-block;position:relative}.katex .hline,.katex .overline .overline-line,.katex .underline .underline-line{border-bottom-style:solid;display:inline-block;width:100%}.katex .hdashline{border-bottom-style:dashed;display:inline-block;width:100%}.katex .sqrt>.root{margin-left:.2777777778em;margin-right:-.5555555556em}.katex .fontsize-ensurer.reset-size1.size1,.katex .sizing.reset-size1.size1{font-size:1em}.katex .fontsize-ensurer.reset-size1.size2,.katex .sizing.reset-size1.size2{font-size:1.2em}.katex .fontsize-ensurer.reset-size1.size3,.katex .sizing.reset-size1.size3{font-size:1.4em}.katex .fontsize-ensurer.reset-size1.size4,.katex .sizing.reset-size1.size4{font-size:1.6em}.katex .fontsize-ensurer.reset-size1.size5,.katex .sizing.reset-size1.size5{font-size:1.8em}.katex .fontsize-ensurer.reset-size1.size6,.katex .sizing.reset-size1.size6{font-size:2em}.katex .fontsize-ensurer.reset-size1.size7,.katex .sizing.reset-size1.size7{font-size:2.4em}.katex .fontsize-ensurer.reset-size1.size8,.katex .sizing.reset-size1.size8{font-size:2.88em}.katex .fontsize-ensurer.reset-size1.size9,.katex .sizing.reset-size1.size9{font-size:3.456em}.katex .fontsize-ensurer.reset-size1.size10,.katex .sizing.reset-size1.size10{font-size:4.148em}.katex .fontsize-ensurer.reset-size1.size11,.katex .sizing.reset-size1.size11{font-size:4.976em}.katex .fontsize-ensurer.reset-size2.size1,.katex .sizing.reset-size2.size1{font-size:.8333333333em}.katex .fontsize-ensurer.reset-size2.size2,.katex .sizing.reset-size2.size2{font-size:1em}.katex .fontsize-ensurer.reset-size2.size3,.katex .sizing.reset-size2.size3{font-size:1.1666666667em}.katex .fontsize-ensurer.reset-size2.size4,.katex .sizing.reset-size2.size4{font-size:1.3333333333em}.katex .fontsize-ensurer.reset-size2.size5,.katex .sizing.reset-size2.size5{font-size:1.5em}.katex .fontsize-ensurer.reset-size2.size6,.katex .sizing.reset-size2.size6{font-size:1.6666666667em}.katex .fontsize-ensurer.reset-size2.size7,.katex .sizing.reset-size2.size7{font-size:2em}.katex .fontsize-ensurer.reset-size2.size8,.katex .sizing.reset-size2.size8{font-size:2.4em}.katex .fontsize-ensurer.reset-size2.size9,.katex .sizing.reset-size2.size9{font-size:2.88em}.katex .fontsize-ensurer.reset-size2.size10,.katex .sizing.reset-size2.size10{font-size:3.4566666667em}.katex .fontsize-ensurer.reset-size2.size11,.katex .sizing.reset-size2.size11{font-size:4.1466666667em}.katex .fontsize-ensurer.reset-size3.size1,.katex .sizing.reset-size3.size1{font-size:.7142857143em}.katex .fontsize-ensurer.reset-size3.size2,.katex .sizing.reset-size3.size2{font-size:.8571428571em}.katex .fontsize-ensurer.reset-size3.size3,.katex .sizing.reset-size3.size3{font-size:1em}.katex .fontsize-ensurer.reset-size3.size4,.katex .sizing.reset-size3.size4{font-size:1.1428571429em}.katex .fontsize-ensurer.reset-size3.size5,.katex .sizing.reset-size3.size5{font-size:1.2857142857em}.katex .fontsize-ensurer.reset-size3.size6,.katex .sizing.reset-size3.size6{font-size:1.4285714286em}.katex .fontsize-ensurer.reset-size3.size7,.katex .sizing.reset-size3.size7{font-size:1.7142857143em}.katex .fontsize-ensurer.reset-size3.size8,.katex .sizing.reset-size3.size8{font-size:2.0571428571em}.katex .fontsize-ensurer.reset-size3.size9,.katex .sizing.reset-size3.size9{font-size:2.4685714286em}.katex .fontsize-ensurer.reset-size3.size10,.katex .sizing.reset-size3.size10{font-size:2.9628571429em}.katex .fontsize-ensurer.reset-size3.size11,.katex .sizing.reset-size3.size11{font-size:3.5542857143em}.katex .fontsize-ensurer.reset-size4.size1,.katex .sizing.reset-size4.size1{font-size:.625em}.katex .fontsize-ensurer.reset-size4.size2,.katex .sizing.reset-size4.size2{font-size:.75em}.katex .fontsize-ensurer.reset-size4.size3,.katex .sizing.reset-size4.size3{font-size:.875em}.katex .fontsize-ensurer.reset-size4.size4,.katex .sizing.reset-size4.size4{font-size:1em}.katex .fontsize-ensurer.reset-size4.size5,.katex .sizing.reset-size4.size5{font-size:1.125em}.katex .fontsize-ensurer.reset-size4.size6,.katex .sizing.reset-size4.size6{font-size:1.25em}.katex .fontsize-ensurer.reset-size4.size7,.katex .sizing.reset-size4.size7{font-size:1.5em}.katex .fontsize-ensurer.reset-size4.size8,.katex .sizing.reset-size4.size8{font-size:1.8em}.katex .fontsize-ensurer.reset-size4.size9,.katex .sizing.reset-size4.size9{font-size:2.16em}.katex .fontsize-ensurer.reset-size4.size10,.katex .sizing.reset-size4.size10{font-size:2.5925em}.katex .fontsize-ensurer.reset-size4.size11,.katex .sizing.reset-size4.size11{font-size:3.11em}.katex .fontsize-ensurer.reset-size5.size1,.katex .sizing.reset-size5.size1{font-size:.5555555556em}.katex .fontsize-ensurer.reset-size5.size2,.katex .sizing.reset-size5.size2{font-size:.6666666667em}.katex .fontsize-ensurer.reset-size5.size3,.katex .sizing.reset-size5.size3{font-size:.7777777778em}.katex .fontsize-ensurer.reset-size5.size4,.katex .sizing.reset-size5.size4{font-size:.8888888889em}.katex .fontsize-ensurer.reset-size5.size5,.katex .sizing.reset-size5.size5{font-size:1em}.katex .fontsize-ensurer.reset-size5.size6,.katex .sizing.reset-size5.size6{font-size:1.1111111111em}.katex .fontsize-ensurer.reset-size5.size7,.katex .sizing.reset-size5.size7{font-size:1.3333333333em}.katex .fontsize-ensurer.reset-size5.size8,.katex .sizing.reset-size5.size8{font-size:1.6em}.katex .fontsize-ensurer.reset-size5.size9,.katex .sizing.reset-size5.size9{font-size:1.92em}.katex .fontsize-ensurer.reset-size5.size10,.katex .sizing.reset-size5.size10{font-size:2.3044444444em}.katex .fontsize-ensurer.reset-size5.size11,.katex .sizing.reset-size5.size11{font-size:2.7644444444em}.katex .fontsize-ensurer.reset-size6.size1,.katex .sizing.reset-size6.size1{font-size:.5em}.katex .fontsize-ensurer.reset-size6.size2,.katex .sizing.reset-size6.size2{font-size:.6em}.katex .fontsize-ensurer.reset-size6.size3,.katex .sizing.reset-size6.size3{font-size:.7em}.katex .fontsize-ensurer.reset-size6.size4,.katex .sizing.reset-size6.size4{font-size:.8em}.katex .fontsize-ensurer.reset-size6.size5,.katex .sizing.reset-size6.size5{font-size:.9em}.katex .fontsize-ensurer.reset-size6.size6,.katex .sizing.reset-size6.size6{font-size:1em}.katex .fontsize-ensurer.reset-size6.size7,.katex .sizing.reset-size6.size7{font-size:1.2em}.katex .fontsize-ensurer.reset-size6.size8,.katex .sizing.reset-size6.size8{font-size:1.44em}.katex .fontsize-ensurer.reset-size6.size9,.katex .sizing.reset-size6.size9{font-size:1.728em}.katex .fontsize-ensurer.reset-size6.size10,.katex .sizing.reset-size6.size10{font-size:2.074em}.katex .fontsize-ensurer.reset-size6.size11,.katex .sizing.reset-size6.size11{font-size:2.488em}.katex .fontsize-ensurer.reset-size7.size1,.katex .sizing.reset-size7.size1{font-size:.4166666667em}.katex .fontsize-ensurer.reset-size7.size2,.katex .sizing.reset-size7.size2{font-size:.5em}.katex .fontsize-ensurer.reset-size7.size3,.katex .sizing.reset-size7.size3{font-size:.5833333333em}.katex .fontsize-ensurer.reset-size7.size4,.katex .sizing.reset-size7.size4{font-size:.6666666667em}.katex .fontsize-ensurer.reset-size7.size5,.katex .sizing.reset-size7.size5{font-size:.75em}.katex .fontsize-ensurer.reset-size7.size6,.katex .sizing.reset-size7.size6{font-size:.8333333333em}.katex .fontsize-ensurer.reset-size7.size7,.katex .sizing.reset-size7.size7{font-size:1em}.katex .fontsize-ensurer.reset-size7.size8,.katex .sizing.reset-size7.size8{font-size:1.2em}.katex .fontsize-ensurer.reset-size7.size9,.katex .sizing.reset-size7.size9{font-size:1.44em}.katex .fontsize-ensurer.reset-size7.size10,.katex .sizing.reset-size7.size10{font-size:1.7283333333em}.katex .fontsize-ensurer.reset-size7.size11,.katex .sizing.reset-size7.size11{font-size:2.0733333333em}.katex .fontsize-ensurer.reset-size8.size1,.katex .sizing.reset-size8.size1{font-size:.3472222222em}.katex .fontsize-ensurer.reset-size8.size2,.katex .sizing.reset-size8.size2{font-size:.4166666667em}.katex .fontsize-ensurer.reset-size8.size3,.katex .sizing.reset-size8.size3{font-size:.4861111111em}.katex .fontsize-ensurer.reset-size8.size4,.katex .sizing.reset-size8.size4{font-size:.5555555556em}.katex .fontsize-ensurer.reset-size8.size5,.katex .sizing.reset-size8.size5{font-size:.625em}.katex .fontsize-ensurer.reset-size8.size6,.katex .sizing.reset-size8.size6{font-size:.6944444444em}.katex .fontsize-ensurer.reset-size8.size7,.katex .sizing.reset-size8.size7{font-size:.8333333333em}.katex .fontsize-ensurer.reset-size8.size8,.katex .sizing.reset-size8.size8{font-size:1em}.katex .fontsize-ensurer.reset-size8.size9,.katex .sizing.reset-size8.size9{font-size:1.2em}.katex .fontsize-ensurer.reset-size8.size10,.katex .sizing.reset-size8.size10{font-size:1.4402777778em}.katex .fontsize-ensurer.reset-size8.size11,.katex .sizing.reset-size8.size11{font-size:1.7277777778em}.katex .fontsize-ensurer.reset-size9.size1,.katex .sizing.reset-size9.size1{font-size:.2893518519em}.katex .fontsize-ensurer.reset-size9.size2,.katex .sizing.reset-size9.size2{font-size:.3472222222em}.katex .fontsize-ensurer.reset-size9.size3,.katex .sizing.reset-size9.size3{font-size:.4050925926em}.katex .fontsize-ensurer.reset-size9.size4,.katex .sizing.reset-size9.size4{font-size:.462962963em}.katex .fontsize-ensurer.reset-size9.size5,.katex .sizing.reset-size9.size5{font-size:.5208333333em}.katex .fontsize-ensurer.reset-size9.size6,.katex .sizing.reset-size9.size6{font-size:.5787037037em}.katex .fontsize-ensurer.reset-size9.size7,.katex .sizing.reset-size9.size7{font-size:.6944444444em}.katex .fontsize-ensurer.reset-size9.size8,.katex .sizing.reset-size9.size8{font-size:.8333333333em}.katex .fontsize-ensurer.reset-size9.size9,.katex .sizing.reset-size9.size9{font-size:1em}.katex .fontsize-ensurer.reset-size9.size10,.katex .sizing.reset-size9.size10{font-size:1.2002314815em}.katex .fontsize-ensurer.reset-size9.size11,.katex .sizing.reset-size9.size11{font-size:1.4398148148em}.katex .fontsize-ensurer.reset-size10.size1,.katex .sizing.reset-size10.size1{font-size:.2410800386em}.katex .fontsize-ensurer.reset-size10.size2,.katex .sizing.reset-size10.size2{font-size:.2892960463em}.katex .fontsize-ensurer.reset-size10.size3,.katex .sizing.reset-size10.size3{font-size:.337512054em}.katex .fontsize-ensurer.reset-size10.size4,.katex .sizing.reset-size10.size4{font-size:.3857280617em}.katex .fontsize-ensurer.reset-size10.size5,.katex .sizing.reset-size10.size5{font-size:.4339440694em}.katex .fontsize-ensurer.reset-size10.size6,.katex .sizing.reset-size10.size6{font-size:.4821600771em}.katex .fontsize-ensurer.reset-size10.size7,.katex .sizing.reset-size10.size7{font-size:.5785920926em}.katex .fontsize-ensurer.reset-size10.size8,.katex .sizing.reset-size10.size8{font-size:.6943105111em}.katex .fontsize-ensurer.reset-size10.size9,.katex .sizing.reset-size10.size9{font-size:.8331726133em}.katex .fontsize-ensurer.reset-size10.size10,.katex .sizing.reset-size10.size10{font-size:1em}.katex .fontsize-ensurer.reset-size10.size11,.katex .sizing.reset-size10.size11{font-size:1.1996142719em}.katex .fontsize-ensurer.reset-size11.size1,.katex .sizing.reset-size11.size1{font-size:.2009646302em}.katex .fontsize-ensurer.reset-size11.size2,.katex .sizing.reset-size11.size2{font-size:.2411575563em}.katex .fontsize-ensurer.reset-size11.size3,.katex .sizing.reset-size11.size3{font-size:.2813504823em}.katex .fontsize-ensurer.reset-size11.size4,.katex .sizing.reset-size11.size4{font-size:.3215434084em}.katex .fontsize-ensurer.reset-size11.size5,.katex .sizing.reset-size11.size5{font-size:.3617363344em}.katex .fontsize-ensurer.reset-size11.size6,.katex .sizing.reset-size11.size6{font-size:.4019292605em}.katex .fontsize-ensurer.reset-size11.size7,.katex .sizing.reset-size11.size7{font-size:.4823151125em}.katex .fontsize-ensurer.reset-size11.size8,.katex .sizing.reset-size11.size8{font-size:.578778135em}.katex .fontsize-ensurer.reset-size11.size9,.katex .sizing.reset-size11.size9{font-size:.6945337621em}.katex .fontsize-ensurer.reset-size11.size10,.katex .sizing.reset-size11.size10{font-size:.8336012862em}.katex .fontsize-ensurer.reset-size11.size11,.katex .sizing.reset-size11.size11{font-size:1em}.katex .delimsizing.size1{font-family:KaTeX_Size1}.katex .delimsizing.size2{font-family:KaTeX_Size2}.katex .delimsizing.size3{font-family:KaTeX_Size3}.katex .delimsizing.size4{font-family:KaTeX_Size4}.katex .delimsizing.mult .delim-size1>span{font-family:KaTeX_Size1}.katex .delimsizing.mult .delim-size4>span{font-family:KaTeX_Size4}.katex .nulldelimiter{display:inline-block;width:.12em}.katex .delimcenter,.katex .op-symbol{position:relative}.katex .op-symbol.small-op{font-family:KaTeX_Size1}.katex .op-symbol.large-op{font-family:KaTeX_Size2}.katex .accent>.vlist-t,.katex .op-limits>.vlist-t{text-align:center}.katex .accent .accent-body{position:relative}.katex .accent .accent-body:not(.accent-full){width:0}.katex .overlay{display:block}.katex .mtable .vertical-separator{display:inline-block;min-width:1px}.katex .mtable .arraycolsep{display:inline-block}.katex .mtable .col-align-c>.vlist-t{text-align:center}.katex .mtable .col-align-l>.vlist-t{text-align:left}.katex .mtable .col-align-r>.vlist-t{text-align:right}.katex .svg-align{text-align:left}.katex svg{fill:currentColor;stroke:currentColor;display:block;height:inherit;position:absolute;width:100%}.katex svg path{stroke:none}.katex svg{fill-rule:nonzero;fill-opacity:1;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1}.katex img{border-style:none;max-height:none;max-width:none;min-height:0;min-width:0}.katex .stretchy{display:block;overflow:hidden;position:relative;width:100%}.katex .stretchy:after,.katex .stretchy:before{content:""}.katex .hide-tail{overflow:hidden;position:relative;width:100%}.katex .halfarrow-left{left:0;overflow:hidden;position:absolute;width:50.2%}.katex .halfarrow-right{overflow:hidden;position:absolute;right:0;width:50.2%}.katex .brace-left{left:0;overflow:hidden;position:absolute;width:25.1%}.katex .brace-center{left:25%;overflow:hidden;position:absolute;width:50%}.katex .brace-right{overflow:hidden;position:absolute;right:0;width:25.1%}.katex .x-arrow-pad{padding:0 .5em}.katex .cd-arrow-pad{padding:0 .55556em 0 .27778em}.katex .mover,.katex .munder,.katex .x-arrow{text-align:center}.katex .boxpad{padding:0 .3em}.katex .fbox,.katex .fcolorbox{border:.04em solid;box-sizing:border-box}.katex .cancel-pad{padding:0 .2em}.katex .cancel-lap{margin-left:-.2em;margin-right:-.2em}.katex .sout{border-bottom-style:solid;border-bottom-width:.08em}.katex .angl{border-right:.049em solid;border-top:.049em solid;box-sizing:border-box;margin-right:.03889em}.katex .anglpad{padding:0 .03889em}.katex .eqn-num:before{content:"(" counter(katexEqnNo) ")";counter-increment:katexEqnNo}.katex .mml-eqn-num:before{content:"(" counter(mmlEqnNo) ")";counter-increment:mmlEqnNo}.katex .mtr-glue{width:50%}.katex .cd-vert-arrow{display:inline-block;position:relative}.katex .cd-label-left{display:inline-block;position:absolute;right:calc(50% + .3em);text-align:left}.katex .cd-label-right{display:inline-block;left:calc(50% + .3em);position:absolute;text-align:right}.katex-display{display:block;margin:1em 0;text-align:center}.katex-display>.katex{display:block;text-align:center;white-space:nowrap}.katex-display>.katex>.katex-html{display:block;position:relative}.katex-display>.katex>.katex-html>.tag{position:absolute;right:0}.katex-display.leqno>.katex>.katex-html>.tag{left:0;right:auto}.katex-display.fleqn>.katex{padding-left:2em;text-align:left}body{counter-reset:katexEqnNo mmlEqnNo}
+
 "
 `;
 
 exports[`theme tokens > buildCss/buildAutoCss 输出快照（§11：含 content.css 拼接） 2`] = `
 "/* 由 scripts/build-css.mjs 生成，请勿手改 */
 
-:root, .mdeditor {
-  --mdeditor-font-text: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-  --mdeditor-font-mono: 'SF Mono', 'JetBrains Mono', Menlo, Consolas, 'Courier New', monospace;
-  --mdeditor-space-0_5: 2px;
-  --mdeditor-space-1: 4px;
-  --mdeditor-space-1_5: 6px;
-  --mdeditor-space-2: 8px;
-  --mdeditor-space-3: 12px;
-  --mdeditor-space-4: 16px;
-  --mdeditor-space-5: 20px;
-  --mdeditor-space-6: 24px;
-  --mdeditor-space-8: 32px;
-  --mdeditor-radius-sm: 4px;
-  --mdeditor-radius-md: 6px;
-  --mdeditor-radius-lg: 10px;
-  --mdeditor-radius-full: 999px;
-  --mdeditor-font-size: 16px;
-  --mdeditor-font-size-ui: 13px;
-  --mdeditor-font-size-ui-sm: 12px;
-  --mdeditor-line-height: 1.6;
-  --mdeditor-duration-fast: 100ms;
-  --mdeditor-duration-base: 160ms;
-  --mdeditor-ease-standard: cubic-bezier(0.2,0,0,1);
-  --mdeditor-ease-out: cubic-bezier(0.16,1,0.3,1);
-  --mdeditor-z-sticky: 10;
-  --mdeditor-z-floating: 20;
-  --mdeditor-z-slash: 30;
-  --mdeditor-z-tooltip: 40;
-  --mdeditor-color-bg: #ffffff;
-  --mdeditor-color-bg-secondary: #f7f7f5;
-  --mdeditor-color-bg-elevated: #ffffff;
-  --mdeditor-color-text: #37352f;
-  --mdeditor-color-text-secondary: rgba(55,53,47,0.70);
-  --mdeditor-color-text-muted: rgba(55,53,47,0.45);
-  --mdeditor-color-border: rgba(55,53,47,0.09);
-  --mdeditor-color-border-strong: rgba(55,53,47,0.16);
-  --mdeditor-color-hover: rgba(55,53,47,0.06);
-  --mdeditor-color-active: rgba(55,53,47,0.10);
-  --mdeditor-color-accent: #37352f;
-  --mdeditor-color-accent-contrast: #ffffff;
-  --mdeditor-color-accent-subtle: rgba(55,53,47,0.08);
-  --mdeditor-color-focus-ring: rgba(55,53,47,0.60);
-  --mdeditor-color-selection: rgba(55,53,47,0.14);
-  --mdeditor-color-danger: #eb5757;
-  --mdeditor-color-code-bg: #f7f6f3;
-  --mdeditor-shadow-popover: 0 0 0 1px rgba(15,15,15,0.05), 0 3px 6px rgba(15,15,15,0.1), 0 9px 24px rgba(15,15,15,0.2);
+:root, .typomd {
+  --typomd-font-text: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --typomd-font-mono: 'SF Mono', 'JetBrains Mono', Menlo, Consolas, 'Courier New', monospace;
+  --typomd-space-0_5: 2px;
+  --typomd-space-1: 4px;
+  --typomd-space-1_5: 6px;
+  --typomd-space-2: 8px;
+  --typomd-space-3: 12px;
+  --typomd-space-4: 16px;
+  --typomd-space-5: 20px;
+  --typomd-space-6: 24px;
+  --typomd-space-8: 32px;
+  --typomd-radius-sm: 4px;
+  --typomd-radius-md: 6px;
+  --typomd-radius-lg: 10px;
+  --typomd-radius-full: 999px;
+  --typomd-font-size: 16px;
+  --typomd-font-size-ui: 13px;
+  --typomd-font-size-ui-sm: 12px;
+  --typomd-line-height: 1.6;
+  --typomd-duration-fast: 100ms;
+  --typomd-duration-base: 160ms;
+  --typomd-ease-standard: cubic-bezier(0.2,0,0,1);
+  --typomd-ease-out: cubic-bezier(0.16,1,0.3,1);
+  --typomd-z-sticky: 10;
+  --typomd-z-floating: 20;
+  --typomd-z-slash: 30;
+  --typomd-z-tooltip: 40;
+  --typomd-color-bg: #ffffff;
+  --typomd-color-bg-secondary: #f7f7f5;
+  --typomd-color-bg-elevated: #ffffff;
+  --typomd-color-text: #37352f;
+  --typomd-color-text-secondary: rgba(55,53,47,0.70);
+  --typomd-color-text-muted: rgba(55,53,47,0.45);
+  --typomd-color-border: rgba(55,53,47,0.09);
+  --typomd-color-border-strong: rgba(55,53,47,0.16);
+  --typomd-color-hover: rgba(55,53,47,0.06);
+  --typomd-color-active: rgba(55,53,47,0.10);
+  --typomd-color-accent: #37352f;
+  --typomd-color-accent-contrast: #ffffff;
+  --typomd-color-accent-subtle: rgba(55,53,47,0.08);
+  --typomd-color-focus-ring: rgba(55,53,47,0.60);
+  --typomd-color-selection: rgba(55,53,47,0.14);
+  --typomd-color-danger: #eb5757;
+  --typomd-color-code-bg: #f7f6f3;
+  --typomd-shadow-popover: 0 0 0 1px rgba(15,15,15,0.05), 0 3px 6px rgba(15,15,15,0.1), 0 9px 24px rgba(15,15,15,0.2);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root, .mdeditor {
-    --mdeditor-color-bg: #191919;
-    --mdeditor-color-bg-secondary: #202020;
-    --mdeditor-color-bg-elevated: #252525;
-    --mdeditor-color-text: rgba(255,255,255,0.81);
-    --mdeditor-color-text-secondary: rgba(255,255,255,0.46);
-    --mdeditor-color-text-muted: rgba(255,255,255,0.32);
-    --mdeditor-color-border: rgba(255,255,255,0.09);
-    --mdeditor-color-border-strong: rgba(255,255,255,0.16);
-    --mdeditor-color-hover: rgba(255,255,255,0.055);
-    --mdeditor-color-active: rgba(255,255,255,0.10);
-    --mdeditor-color-accent: #d4d4d2;
-    --mdeditor-color-accent-contrast: #191919;
-    --mdeditor-color-accent-subtle: rgba(255,255,255,0.10);
-    --mdeditor-color-focus-ring: rgba(255,255,255,0.45);
-    --mdeditor-color-selection: rgba(255,255,255,0.16);
-    --mdeditor-color-danger: #eb5757;
-    --mdeditor-color-code-bg: #202020;
-    --mdeditor-shadow-popover: 0 0 0 1px rgba(255,255,255,0.06), 0 3px 6px rgba(0,0,0,0.4), 0 9px 24px rgba(0,0,0,0.5);
+  :root, .typomd {
+    --typomd-color-bg: #191919;
+    --typomd-color-bg-secondary: #202020;
+    --typomd-color-bg-elevated: #252525;
+    --typomd-color-text: rgba(255,255,255,0.81);
+    --typomd-color-text-secondary: rgba(255,255,255,0.46);
+    --typomd-color-text-muted: rgba(255,255,255,0.32);
+    --typomd-color-border: rgba(255,255,255,0.09);
+    --typomd-color-border-strong: rgba(255,255,255,0.16);
+    --typomd-color-hover: rgba(255,255,255,0.055);
+    --typomd-color-active: rgba(255,255,255,0.10);
+    --typomd-color-accent: #d4d4d2;
+    --typomd-color-accent-contrast: #191919;
+    --typomd-color-accent-subtle: rgba(255,255,255,0.10);
+    --typomd-color-focus-ring: rgba(255,255,255,0.45);
+    --typomd-color-selection: rgba(255,255,255,0.16);
+    --typomd-color-danger: #eb5757;
+    --typomd-color-code-bg: #202020;
+    --typomd-shadow-popover: 0 0 0 1px rgba(255,255,255,0.06), 0 3px 6px rgba(0,0,0,0.4), 0 9px 24px rgba(0,0,0,0.5);
   }
 }
 
-/* content.css — 文档排版（.mdeditor .ProseMirror 内），由 build-css.mjs 拼进 default.css/auto.css，请勿直接改 dist */
+/* content.css — 文档排版（.typomd .ProseMirror 内），由 build-css.mjs 拼进 default.css/auto.css，请勿直接改 dist */
 
 /* ---- 容器（§4：声明一项不落；outline:none 必须保留——丢失会让 contenteditable 聚焦出现浏览器默认蓝环） ---- */
-.mdeditor .ProseMirror {
-  background: var(--mdeditor-color-bg);
-  color: var(--mdeditor-color-text);
-  font-family: var(--mdeditor-font-text);
-  font-size: var(--mdeditor-font-size);
-  line-height: var(--mdeditor-line-height);
+.typomd .ProseMirror {
+  background: var(--typomd-color-bg);
+  color: var(--typomd-color-text);
+  font-family: var(--typomd-font-text);
+  font-size: var(--typomd-font-size);
+  line-height: var(--typomd-line-height);
   outline: none;
-  padding: var(--mdeditor-space-6) var(--mdeditor-space-8);
+  padding: var(--typomd-space-6) var(--typomd-space-8);
 }
 /* 不设 max-width：嵌入方自行约束（§4） */
 
 /* ---- 块节奏（§4） ---- */
-.mdeditor .ProseMirror > * + * { margin-top: var(--mdeditor-block-gap, 6px); }
-.mdeditor .ProseMirror h1,
-.mdeditor .ProseMirror h2,
-.mdeditor .ProseMirror h3 { font-weight: 600; letter-spacing: -0.01em; }
-.mdeditor .ProseMirror h1 { font-size: 1.875em; margin-top: 1.2em; margin-bottom: 0; }
-.mdeditor .ProseMirror h2 { font-size: 1.5em; margin-top: 1.1em; margin-bottom: 0; }
-.mdeditor .ProseMirror h3 { font-size: 1.25em; margin-top: 1em; margin-bottom: 0; }
-.mdeditor .ProseMirror > h1:first-child,
-.mdeditor .ProseMirror > h2:first-child,
-.mdeditor .ProseMirror > h3:first-child { margin-top: 0; }
+.typomd .ProseMirror > * + * { margin-top: var(--typomd-block-gap, 6px); }
+.typomd .ProseMirror h1,
+.typomd .ProseMirror h2,
+.typomd .ProseMirror h3 { font-weight: 600; letter-spacing: -0.01em; }
+.typomd .ProseMirror h1 { font-size: 1.875em; margin-top: 1.2em; margin-bottom: 0; }
+.typomd .ProseMirror h2 { font-size: 1.5em; margin-top: 1.1em; margin-bottom: 0; }
+.typomd .ProseMirror h3 { font-size: 1.25em; margin-top: 1em; margin-bottom: 0; }
+.typomd .ProseMirror > h1:first-child,
+.typomd .ProseMirror > h2:first-child,
+.typomd .ProseMirror > h3:first-child { margin-top: 0; }
 
 /* ---- 列表（§4） ---- */
-.mdeditor .ProseMirror ul,
-.mdeditor .ProseMirror ol { padding-left: 1.5em; margin: 0; }
-.mdeditor .ProseMirror li { margin-top: 2px; }
-.mdeditor .ProseMirror li > p { margin: 0; }
+.typomd .ProseMirror ul,
+.typomd .ProseMirror ol { padding-left: 1.5em; margin: 0; }
+.typomd .ProseMirror li { margin-top: 2px; }
+.typomd .ProseMirror li > p { margin: 0; }
 
 /* 任务列表（GFM；DOM 侦查为 li[data-checked] 无原生 checkbox，用 ::before 画勾选框 + accent 色） */
-.mdeditor .ProseMirror li[data-checked='true'],
-.mdeditor .ProseMirror li[data-checked='false'] {
+.typomd .ProseMirror li[data-checked='true'],
+.typomd .ProseMirror li[data-checked='false'] {
   list-style: none;
   position: relative;
-  padding-left: var(--mdeditor-space-6);
+  padding-left: var(--typomd-space-6);
 }
-.mdeditor .ProseMirror li[data-checked]::before {
+.typomd .ProseMirror li[data-checked]::before {
   content: '';
   position: absolute;
   left: 0;
@@ -351,44 +373,59 @@ exports[`theme tokens > buildCss/buildAutoCss 输出快照（§11：含 content.
   width: 0.85em;
   height: 0.85em;
   box-sizing: border-box;
-  border: 1px solid var(--mdeditor-color-accent);
-  border-radius: var(--mdeditor-radius-sm);
-  background: var(--mdeditor-color-bg);
+  border: 1px solid var(--typomd-color-accent);
+  border-radius: var(--typomd-radius-sm);
+  background: var(--typomd-color-bg);
 }
-.mdeditor .ProseMirror li[data-checked='true']::before {
-  background: var(--mdeditor-color-accent);
+.typomd .ProseMirror li[data-checked='true']::before {
+  background: var(--typomd-color-accent);
 }
-.mdeditor .ProseMirror li[data-checked='true'] { color: var(--mdeditor-color-text-secondary); }
-.mdeditor .ProseMirror li[data-checked='true'] > p { text-decoration: line-through; }
+/* 勾：accent 底上用 contrast 色画对钩（无原生 checkbox） */
+.typomd .ProseMirror li[data-checked='true']::after {
+  content: '';
+  position: absolute;
+  left: 0.16em;
+  top: 0.5em;
+  width: 0.38em;
+  height: 0.2em;
+  box-sizing: border-box;
+  border: 1.5px solid var(--typomd-color-accent-contrast);
+  border-top: none;
+  border-right: none;
+  transform: rotate(-45deg);
+  pointer-events: none;
+}
+.typomd .ProseMirror li[data-checked='true'] { color: var(--typomd-color-text-secondary); }
+.typomd .ProseMirror li[data-checked='true'] > p { text-decoration: line-through; }
 
 /* ---- 引用（§4：Notion 引用不是灰色——边框与文字都用 color-text） ---- */
-.mdeditor .ProseMirror blockquote {
-  border-left: 3px solid var(--mdeditor-color-text);
-  color: var(--mdeditor-color-text);
+.typomd .ProseMirror blockquote {
+  border-left: 3px solid var(--typomd-color-text);
+  color: var(--typomd-color-text);
   margin: 0;
-  padding: 0 var(--mdeditor-space-3);
+  padding: 0 var(--typomd-space-3);
 }
 
 /* ---- 行内代码（§4） ---- */
-.mdeditor .ProseMirror code {
-  font-family: var(--mdeditor-font-mono);
+.typomd .ProseMirror code {
+  font-family: var(--typomd-font-mono);
   font-size: 0.85em;
-  background: var(--mdeditor-color-code-bg);
-  border-radius: var(--mdeditor-radius-sm);
+  background: var(--typomd-color-code-bg);
+  border-radius: var(--typomd-radius-sm);
   padding: 0.15em 0.35em;
 }
 
 /* ---- 代码块（§4：卡片化） ---- */
-.mdeditor .ProseMirror pre {
-  font-family: var(--mdeditor-font-mono);
+.typomd .ProseMirror pre {
+  font-family: var(--typomd-font-mono);
   font-size: 0.85em;
-  background: var(--mdeditor-color-code-bg);
-  border: 1px solid var(--mdeditor-color-border);
-  border-radius: var(--mdeditor-radius-lg);
-  padding: var(--mdeditor-space-3) var(--mdeditor-space-4);
+  background: var(--typomd-color-code-bg);
+  border: 1px solid var(--typomd-color-border);
+  border-radius: var(--typomd-radius-lg);
+  padding: var(--typomd-space-3) var(--typomd-space-4);
   overflow-x: auto;
 }
-.mdeditor .ProseMirror pre code {
+.typomd .ProseMirror pre code {
   background: none;
   padding: 0;
   border-radius: 0;
@@ -396,55 +433,58 @@ exports[`theme tokens > buildCss/buildAutoCss 输出快照（§11：含 content.
 }
 
 /* ---- 表格（§4） ---- */
-.mdeditor .ProseMirror table { border-collapse: collapse; width: 100%; }
-.mdeditor .ProseMirror th,
-.mdeditor .ProseMirror td {
-  border: 1px solid var(--mdeditor-color-border);
+.typomd .ProseMirror table { border-collapse: collapse; width: 100%; }
+.typomd .ProseMirror th,
+.typomd .ProseMirror td {
+  border: 1px solid var(--typomd-color-border);
   padding: 6px 10px;
   text-align: left;
 }
-.mdeditor .ProseMirror th { background: var(--mdeditor-color-bg-secondary); font-weight: 600; }
+.typomd .ProseMirror th { background: var(--typomd-color-bg-secondary); font-weight: 600; }
 
 /* ---- 分割线（§4） ---- */
-.mdeditor .ProseMirror hr {
+.typomd .ProseMirror hr {
   border: none;
-  border-top: 1px solid var(--mdeditor-color-border);
-  margin: var(--mdeditor-space-5) 0;
+  border-top: 1px solid var(--typomd-color-border);
+  margin: var(--typomd-space-5) 0;
 }
 
 /* ---- 链接（§4） ---- */
-.mdeditor .ProseMirror a {
+.typomd .ProseMirror a {
   color: inherit;
   text-decoration: underline;
-  text-decoration-color: var(--mdeditor-color-text-muted);
+  text-decoration-color: var(--typomd-color-text-muted);
   text-underline-offset: 2px;
 }
-.mdeditor .ProseMirror a:hover { text-decoration-color: var(--mdeditor-color-text); }
+.typomd .ProseMirror a:hover { text-decoration-color: var(--typomd-color-text); }
 
 /* ---- 图片（§4） ---- */
-.mdeditor .ProseMirror img { max-width: 100%; border-radius: var(--mdeditor-radius-md); }
+.typomd .ProseMirror img { max-width: 100%; border-radius: var(--typomd-radius-md); }
 
 /* ---- 选区 ---- */
-.mdeditor .ProseMirror ::selection { background: var(--mdeditor-color-selection); }
+.typomd .ProseMirror ::selection { background: var(--typomd-color-selection); }
 
 /* ---- math/mermaid 失败降级角标 ---- */
-.mdeditor-node-error {
-  color: var(--mdeditor-color-danger);
-  border: 1px dashed var(--mdeditor-color-danger);
-  border-radius: var(--mdeditor-radius-md);
-  padding: var(--mdeditor-space-1) var(--mdeditor-space-2);
+.typomd-node-error {
+  color: var(--typomd-color-danger);
+  border: 1px dashed var(--typomd-color-danger);
+  border-radius: var(--typomd-radius-md);
+  padding: var(--typomd-space-1) var(--typomd-space-2);
 }
 
+/* KaTeX 官方样式由 build-css.mjs 内联（katex.min.css + dist/fonts/*.woff2）。
+   不要在此藏 .katex-html——官方 CSS 才是跨浏览器公式层。 */
+
 /* placeholder：react 层把 data-placeholder 直接挂在 .ProseMirror 上
-   （MdEditorInner 在 ready 后执行 setAttribute——::before 的 attr() 只能读
-   伪元素所在元素自身的属性，挂祖先 .mdeditor 上 content: attr() 会读空串）。
+   （TypomdInner 在 ready 后执行 setAttribute——::before 的 attr() 只能读
+   伪元素所在元素自身的属性，挂祖先 .typomd 上 content: attr() 会读空串）。
    空文档判定不能用 p:empty——已核实 prosemirror-view 会给空 textblock 插入
    <br class="ProseMirror-trailingBreak">，空段落实为 <p><br ...></p>，:empty 永不匹配。
    改为匹配 trailing break：有文本时 PM 不再插入该 br，条件自然失效；
    段落末尾硬换行也会加 trailingBreak，但那时 br 不是 only-child，不误判。 */
-.mdeditor .ProseMirror[data-placeholder]:has(> p:first-child:last-child > br.ProseMirror-trailingBreak:only-child)::before {
+.typomd .ProseMirror[data-placeholder]:has(> p:first-child:last-child > br.ProseMirror-trailingBreak:only-child)::before {
   content: attr(data-placeholder);
-  color: var(--mdeditor-color-text-muted);
+  color: var(--typomd-color-text-muted);
   /* 备查：::before 用 position: absolute 但未给 .ProseMirror 加 position: relative；
      当前无偏移量时按静态位置放置表现正确，若未来给 ::before 加 top/left 偏移，
      需补 .ProseMirror { position: relative } */
@@ -454,12 +494,16 @@ exports[`theme tokens > buildCss/buildAutoCss 输出快照（§11：含 content.
 
 @media (prefers-color-scheme: dark) {
   /* content-dark.css — 类限定的暗色内容规则。
-     硬约束（§3.2）：每条规则选择器必须以 ".mdeditor " 开头，
-     build-css.mjs 靠 ".mdeditor " → ".mdeditor " 机械替换生成 auto.css。 */
+     硬约束（§3.2）：每条规则选择器必须以 ".typomd " 开头，
+     build-css.mjs 靠 ".typomd " → ".typomd " 机械替换生成 auto.css。 */
   /* Shiki 双主题（core codeHighlight preset 输出 --shiki-light/--shiki-dark 变量） */
-  .mdeditor .ProseMirror pre span {
+  .typomd .ProseMirror pre span {
     color: var(--shiki-dark) !important;
   }
 }
+
+/* katex.min.css（构建期内联，woff2 见 dist/fonts） */
+@font-face{font-display:block;font-family:KaTeX_AMS;font-style:normal;font-weight:400;src:url(./fonts/KaTeX_AMS-Regular.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Caligraphic;font-style:normal;font-weight:700;src:url(./fonts/KaTeX_Caligraphic-Bold.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Caligraphic;font-style:normal;font-weight:400;src:url(./fonts/KaTeX_Caligraphic-Regular.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Fraktur;font-style:normal;font-weight:700;src:url(./fonts/KaTeX_Fraktur-Bold.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Fraktur;font-style:normal;font-weight:400;src:url(./fonts/KaTeX_Fraktur-Regular.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Main;font-style:normal;font-weight:700;src:url(./fonts/KaTeX_Main-Bold.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Main;font-style:italic;font-weight:700;src:url(./fonts/KaTeX_Main-BoldItalic.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Main;font-style:italic;font-weight:400;src:url(./fonts/KaTeX_Main-Italic.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Main;font-style:normal;font-weight:400;src:url(./fonts/KaTeX_Main-Regular.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Math;font-style:italic;font-weight:700;src:url(./fonts/KaTeX_Math-BoldItalic.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Math;font-style:italic;font-weight:400;src:url(./fonts/KaTeX_Math-Italic.woff2) format("woff2")}@font-face{font-display:block;font-family:"KaTeX_SansSerif";font-style:normal;font-weight:700;src:url(./fonts/KaTeX_SansSerif-Bold.woff2) format("woff2")}@font-face{font-display:block;font-family:"KaTeX_SansSerif";font-style:italic;font-weight:400;src:url(./fonts/KaTeX_SansSerif-Italic.woff2) format("woff2")}@font-face{font-display:block;font-family:"KaTeX_SansSerif";font-style:normal;font-weight:400;src:url(./fonts/KaTeX_SansSerif-Regular.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Script;font-style:normal;font-weight:400;src:url(./fonts/KaTeX_Script-Regular.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Size1;font-style:normal;font-weight:400;src:url(./fonts/KaTeX_Size1-Regular.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Size2;font-style:normal;font-weight:400;src:url(./fonts/KaTeX_Size2-Regular.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Size3;font-style:normal;font-weight:400;src:url(./fonts/KaTeX_Size3-Regular.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Size4;font-style:normal;font-weight:400;src:url(./fonts/KaTeX_Size4-Regular.woff2) format("woff2")}@font-face{font-display:block;font-family:KaTeX_Typewriter;font-style:normal;font-weight:400;src:url(./fonts/KaTeX_Typewriter-Regular.woff2) format("woff2")}.katex{font:normal 1.21em KaTeX_Main,Times New Roman,serif;line-height:1.2;position:relative;text-indent:0;text-rendering:auto}.katex *{-ms-high-contrast-adjust:none!important;border-color:currentColor}.katex .katex-version:after{content:"0.16.47"}.katex .katex-mathml{border:0;-webkit-clip-path:inset(50%);clip-path:inset(50%);height:1px;overflow:hidden;padding:0;position:absolute;width:1px}.katex .katex-html>.newline{display:block}.katex .base{position:relative;white-space:nowrap;width:-webkit-min-content;width:-moz-min-content;width:min-content}.katex .base,.katex .strut{display:inline-block}.katex .textbf{font-weight:700}.katex .textit{font-style:italic}.katex .textrm{font-family:KaTeX_Main}.katex .textsf{font-family:KaTeX_SansSerif}.katex .texttt{font-family:KaTeX_Typewriter}.katex .mathnormal{font-family:KaTeX_Math;font-style:italic}.katex .mathit{font-family:KaTeX_Main;font-style:italic}.katex .mathrm{font-style:normal}.katex .mathbf{font-family:KaTeX_Main;font-weight:700}.katex .boldsymbol{font-family:KaTeX_Math;font-style:italic;font-weight:700}.katex .amsrm,.katex .mathbb,.katex .textbb{font-family:KaTeX_AMS}.katex .mathcal{font-family:KaTeX_Caligraphic}.katex .mathfrak,.katex .textfrak{font-family:KaTeX_Fraktur}.katex .mathboldfrak,.katex .textboldfrak{font-family:KaTeX_Fraktur;font-weight:700}.katex .mathtt{font-family:KaTeX_Typewriter}.katex .mathscr,.katex .textscr{font-family:KaTeX_Script}.katex .mathsf,.katex .textsf{font-family:KaTeX_SansSerif}.katex .mathboldsf,.katex .textboldsf{font-family:KaTeX_SansSerif;font-weight:700}.katex .mathitsf,.katex .mathsfit,.katex .textitsf{font-family:KaTeX_SansSerif;font-style:italic}.katex .mainrm{font-family:KaTeX_Main;font-style:normal}.katex .vlist-t{border-collapse:collapse;display:inline-table;table-layout:fixed}.katex .vlist-r{display:table-row}.katex .vlist{display:table-cell;position:relative;vertical-align:bottom}.katex .vlist>span{display:block;height:0;position:relative}.katex .vlist>span>span{display:inline-block}.katex .vlist>span>.pstrut{overflow:hidden;width:0}.katex .vlist-t2{margin-right:-2px}.katex .vlist-s{display:table-cell;font-size:1px;min-width:2px;vertical-align:bottom;width:2px}.katex .vbox{align-items:baseline;display:inline-flex;flex-direction:column}.katex .hbox{width:100%}.katex .hbox,.katex .thinbox{display:inline-flex;flex-direction:row}.katex .thinbox{max-width:0;width:0}.katex .msupsub{text-align:left}.katex .mfrac>span>span{text-align:center}.katex .mfrac .frac-line{border-bottom-style:solid;display:inline-block;width:100%}.katex .hdashline,.katex .hline,.katex .mfrac .frac-line,.katex .overline .overline-line,.katex .rule,.katex .underline .underline-line{min-height:1px}.katex .mspace{display:inline-block}.katex .smash{display:inline;line-height:0}.katex .clap,.katex .llap,.katex .rlap{position:relative;width:0}.katex .clap>.inner,.katex .llap>.inner,.katex .rlap>.inner{position:absolute}.katex .clap>.fix,.katex .llap>.fix,.katex .rlap>.fix{display:inline-block}.katex .llap>.inner{right:0}.katex .clap>.inner,.katex .rlap>.inner{left:0}.katex .clap>.inner>span{margin-left:-50%;margin-right:50%}.katex .rule{border:0 solid;display:inline-block;position:relative}.katex .hline,.katex .overline .overline-line,.katex .underline .underline-line{border-bottom-style:solid;display:inline-block;width:100%}.katex .hdashline{border-bottom-style:dashed;display:inline-block;width:100%}.katex .sqrt>.root{margin-left:.2777777778em;margin-right:-.5555555556em}.katex .fontsize-ensurer.reset-size1.size1,.katex .sizing.reset-size1.size1{font-size:1em}.katex .fontsize-ensurer.reset-size1.size2,.katex .sizing.reset-size1.size2{font-size:1.2em}.katex .fontsize-ensurer.reset-size1.size3,.katex .sizing.reset-size1.size3{font-size:1.4em}.katex .fontsize-ensurer.reset-size1.size4,.katex .sizing.reset-size1.size4{font-size:1.6em}.katex .fontsize-ensurer.reset-size1.size5,.katex .sizing.reset-size1.size5{font-size:1.8em}.katex .fontsize-ensurer.reset-size1.size6,.katex .sizing.reset-size1.size6{font-size:2em}.katex .fontsize-ensurer.reset-size1.size7,.katex .sizing.reset-size1.size7{font-size:2.4em}.katex .fontsize-ensurer.reset-size1.size8,.katex .sizing.reset-size1.size8{font-size:2.88em}.katex .fontsize-ensurer.reset-size1.size9,.katex .sizing.reset-size1.size9{font-size:3.456em}.katex .fontsize-ensurer.reset-size1.size10,.katex .sizing.reset-size1.size10{font-size:4.148em}.katex .fontsize-ensurer.reset-size1.size11,.katex .sizing.reset-size1.size11{font-size:4.976em}.katex .fontsize-ensurer.reset-size2.size1,.katex .sizing.reset-size2.size1{font-size:.8333333333em}.katex .fontsize-ensurer.reset-size2.size2,.katex .sizing.reset-size2.size2{font-size:1em}.katex .fontsize-ensurer.reset-size2.size3,.katex .sizing.reset-size2.size3{font-size:1.1666666667em}.katex .fontsize-ensurer.reset-size2.size4,.katex .sizing.reset-size2.size4{font-size:1.3333333333em}.katex .fontsize-ensurer.reset-size2.size5,.katex .sizing.reset-size2.size5{font-size:1.5em}.katex .fontsize-ensurer.reset-size2.size6,.katex .sizing.reset-size2.size6{font-size:1.6666666667em}.katex .fontsize-ensurer.reset-size2.size7,.katex .sizing.reset-size2.size7{font-size:2em}.katex .fontsize-ensurer.reset-size2.size8,.katex .sizing.reset-size2.size8{font-size:2.4em}.katex .fontsize-ensurer.reset-size2.size9,.katex .sizing.reset-size2.size9{font-size:2.88em}.katex .fontsize-ensurer.reset-size2.size10,.katex .sizing.reset-size2.size10{font-size:3.4566666667em}.katex .fontsize-ensurer.reset-size2.size11,.katex .sizing.reset-size2.size11{font-size:4.1466666667em}.katex .fontsize-ensurer.reset-size3.size1,.katex .sizing.reset-size3.size1{font-size:.7142857143em}.katex .fontsize-ensurer.reset-size3.size2,.katex .sizing.reset-size3.size2{font-size:.8571428571em}.katex .fontsize-ensurer.reset-size3.size3,.katex .sizing.reset-size3.size3{font-size:1em}.katex .fontsize-ensurer.reset-size3.size4,.katex .sizing.reset-size3.size4{font-size:1.1428571429em}.katex .fontsize-ensurer.reset-size3.size5,.katex .sizing.reset-size3.size5{font-size:1.2857142857em}.katex .fontsize-ensurer.reset-size3.size6,.katex .sizing.reset-size3.size6{font-size:1.4285714286em}.katex .fontsize-ensurer.reset-size3.size7,.katex .sizing.reset-size3.size7{font-size:1.7142857143em}.katex .fontsize-ensurer.reset-size3.size8,.katex .sizing.reset-size3.size8{font-size:2.0571428571em}.katex .fontsize-ensurer.reset-size3.size9,.katex .sizing.reset-size3.size9{font-size:2.4685714286em}.katex .fontsize-ensurer.reset-size3.size10,.katex .sizing.reset-size3.size10{font-size:2.9628571429em}.katex .fontsize-ensurer.reset-size3.size11,.katex .sizing.reset-size3.size11{font-size:3.5542857143em}.katex .fontsize-ensurer.reset-size4.size1,.katex .sizing.reset-size4.size1{font-size:.625em}.katex .fontsize-ensurer.reset-size4.size2,.katex .sizing.reset-size4.size2{font-size:.75em}.katex .fontsize-ensurer.reset-size4.size3,.katex .sizing.reset-size4.size3{font-size:.875em}.katex .fontsize-ensurer.reset-size4.size4,.katex .sizing.reset-size4.size4{font-size:1em}.katex .fontsize-ensurer.reset-size4.size5,.katex .sizing.reset-size4.size5{font-size:1.125em}.katex .fontsize-ensurer.reset-size4.size6,.katex .sizing.reset-size4.size6{font-size:1.25em}.katex .fontsize-ensurer.reset-size4.size7,.katex .sizing.reset-size4.size7{font-size:1.5em}.katex .fontsize-ensurer.reset-size4.size8,.katex .sizing.reset-size4.size8{font-size:1.8em}.katex .fontsize-ensurer.reset-size4.size9,.katex .sizing.reset-size4.size9{font-size:2.16em}.katex .fontsize-ensurer.reset-size4.size10,.katex .sizing.reset-size4.size10{font-size:2.5925em}.katex .fontsize-ensurer.reset-size4.size11,.katex .sizing.reset-size4.size11{font-size:3.11em}.katex .fontsize-ensurer.reset-size5.size1,.katex .sizing.reset-size5.size1{font-size:.5555555556em}.katex .fontsize-ensurer.reset-size5.size2,.katex .sizing.reset-size5.size2{font-size:.6666666667em}.katex .fontsize-ensurer.reset-size5.size3,.katex .sizing.reset-size5.size3{font-size:.7777777778em}.katex .fontsize-ensurer.reset-size5.size4,.katex .sizing.reset-size5.size4{font-size:.8888888889em}.katex .fontsize-ensurer.reset-size5.size5,.katex .sizing.reset-size5.size5{font-size:1em}.katex .fontsize-ensurer.reset-size5.size6,.katex .sizing.reset-size5.size6{font-size:1.1111111111em}.katex .fontsize-ensurer.reset-size5.size7,.katex .sizing.reset-size5.size7{font-size:1.3333333333em}.katex .fontsize-ensurer.reset-size5.size8,.katex .sizing.reset-size5.size8{font-size:1.6em}.katex .fontsize-ensurer.reset-size5.size9,.katex .sizing.reset-size5.size9{font-size:1.92em}.katex .fontsize-ensurer.reset-size5.size10,.katex .sizing.reset-size5.size10{font-size:2.3044444444em}.katex .fontsize-ensurer.reset-size5.size11,.katex .sizing.reset-size5.size11{font-size:2.7644444444em}.katex .fontsize-ensurer.reset-size6.size1,.katex .sizing.reset-size6.size1{font-size:.5em}.katex .fontsize-ensurer.reset-size6.size2,.katex .sizing.reset-size6.size2{font-size:.6em}.katex .fontsize-ensurer.reset-size6.size3,.katex .sizing.reset-size6.size3{font-size:.7em}.katex .fontsize-ensurer.reset-size6.size4,.katex .sizing.reset-size6.size4{font-size:.8em}.katex .fontsize-ensurer.reset-size6.size5,.katex .sizing.reset-size6.size5{font-size:.9em}.katex .fontsize-ensurer.reset-size6.size6,.katex .sizing.reset-size6.size6{font-size:1em}.katex .fontsize-ensurer.reset-size6.size7,.katex .sizing.reset-size6.size7{font-size:1.2em}.katex .fontsize-ensurer.reset-size6.size8,.katex .sizing.reset-size6.size8{font-size:1.44em}.katex .fontsize-ensurer.reset-size6.size9,.katex .sizing.reset-size6.size9{font-size:1.728em}.katex .fontsize-ensurer.reset-size6.size10,.katex .sizing.reset-size6.size10{font-size:2.074em}.katex .fontsize-ensurer.reset-size6.size11,.katex .sizing.reset-size6.size11{font-size:2.488em}.katex .fontsize-ensurer.reset-size7.size1,.katex .sizing.reset-size7.size1{font-size:.4166666667em}.katex .fontsize-ensurer.reset-size7.size2,.katex .sizing.reset-size7.size2{font-size:.5em}.katex .fontsize-ensurer.reset-size7.size3,.katex .sizing.reset-size7.size3{font-size:.5833333333em}.katex .fontsize-ensurer.reset-size7.size4,.katex .sizing.reset-size7.size4{font-size:.6666666667em}.katex .fontsize-ensurer.reset-size7.size5,.katex .sizing.reset-size7.size5{font-size:.75em}.katex .fontsize-ensurer.reset-size7.size6,.katex .sizing.reset-size7.size6{font-size:.8333333333em}.katex .fontsize-ensurer.reset-size7.size7,.katex .sizing.reset-size7.size7{font-size:1em}.katex .fontsize-ensurer.reset-size7.size8,.katex .sizing.reset-size7.size8{font-size:1.2em}.katex .fontsize-ensurer.reset-size7.size9,.katex .sizing.reset-size7.size9{font-size:1.44em}.katex .fontsize-ensurer.reset-size7.size10,.katex .sizing.reset-size7.size10{font-size:1.7283333333em}.katex .fontsize-ensurer.reset-size7.size11,.katex .sizing.reset-size7.size11{font-size:2.0733333333em}.katex .fontsize-ensurer.reset-size8.size1,.katex .sizing.reset-size8.size1{font-size:.3472222222em}.katex .fontsize-ensurer.reset-size8.size2,.katex .sizing.reset-size8.size2{font-size:.4166666667em}.katex .fontsize-ensurer.reset-size8.size3,.katex .sizing.reset-size8.size3{font-size:.4861111111em}.katex .fontsize-ensurer.reset-size8.size4,.katex .sizing.reset-size8.size4{font-size:.5555555556em}.katex .fontsize-ensurer.reset-size8.size5,.katex .sizing.reset-size8.size5{font-size:.625em}.katex .fontsize-ensurer.reset-size8.size6,.katex .sizing.reset-size8.size6{font-size:.6944444444em}.katex .fontsize-ensurer.reset-size8.size7,.katex .sizing.reset-size8.size7{font-size:.8333333333em}.katex .fontsize-ensurer.reset-size8.size8,.katex .sizing.reset-size8.size8{font-size:1em}.katex .fontsize-ensurer.reset-size8.size9,.katex .sizing.reset-size8.size9{font-size:1.2em}.katex .fontsize-ensurer.reset-size8.size10,.katex .sizing.reset-size8.size10{font-size:1.4402777778em}.katex .fontsize-ensurer.reset-size8.size11,.katex .sizing.reset-size8.size11{font-size:1.7277777778em}.katex .fontsize-ensurer.reset-size9.size1,.katex .sizing.reset-size9.size1{font-size:.2893518519em}.katex .fontsize-ensurer.reset-size9.size2,.katex .sizing.reset-size9.size2{font-size:.3472222222em}.katex .fontsize-ensurer.reset-size9.size3,.katex .sizing.reset-size9.size3{font-size:.4050925926em}.katex .fontsize-ensurer.reset-size9.size4,.katex .sizing.reset-size9.size4{font-size:.462962963em}.katex .fontsize-ensurer.reset-size9.size5,.katex .sizing.reset-size9.size5{font-size:.5208333333em}.katex .fontsize-ensurer.reset-size9.size6,.katex .sizing.reset-size9.size6{font-size:.5787037037em}.katex .fontsize-ensurer.reset-size9.size7,.katex .sizing.reset-size9.size7{font-size:.6944444444em}.katex .fontsize-ensurer.reset-size9.size8,.katex .sizing.reset-size9.size8{font-size:.8333333333em}.katex .fontsize-ensurer.reset-size9.size9,.katex .sizing.reset-size9.size9{font-size:1em}.katex .fontsize-ensurer.reset-size9.size10,.katex .sizing.reset-size9.size10{font-size:1.2002314815em}.katex .fontsize-ensurer.reset-size9.size11,.katex .sizing.reset-size9.size11{font-size:1.4398148148em}.katex .fontsize-ensurer.reset-size10.size1,.katex .sizing.reset-size10.size1{font-size:.2410800386em}.katex .fontsize-ensurer.reset-size10.size2,.katex .sizing.reset-size10.size2{font-size:.2892960463em}.katex .fontsize-ensurer.reset-size10.size3,.katex .sizing.reset-size10.size3{font-size:.337512054em}.katex .fontsize-ensurer.reset-size10.size4,.katex .sizing.reset-size10.size4{font-size:.3857280617em}.katex .fontsize-ensurer.reset-size10.size5,.katex .sizing.reset-size10.size5{font-size:.4339440694em}.katex .fontsize-ensurer.reset-size10.size6,.katex .sizing.reset-size10.size6{font-size:.4821600771em}.katex .fontsize-ensurer.reset-size10.size7,.katex .sizing.reset-size10.size7{font-size:.5785920926em}.katex .fontsize-ensurer.reset-size10.size8,.katex .sizing.reset-size10.size8{font-size:.6943105111em}.katex .fontsize-ensurer.reset-size10.size9,.katex .sizing.reset-size10.size9{font-size:.8331726133em}.katex .fontsize-ensurer.reset-size10.size10,.katex .sizing.reset-size10.size10{font-size:1em}.katex .fontsize-ensurer.reset-size10.size11,.katex .sizing.reset-size10.size11{font-size:1.1996142719em}.katex .fontsize-ensurer.reset-size11.size1,.katex .sizing.reset-size11.size1{font-size:.2009646302em}.katex .fontsize-ensurer.reset-size11.size2,.katex .sizing.reset-size11.size2{font-size:.2411575563em}.katex .fontsize-ensurer.reset-size11.size3,.katex .sizing.reset-size11.size3{font-size:.2813504823em}.katex .fontsize-ensurer.reset-size11.size4,.katex .sizing.reset-size11.size4{font-size:.3215434084em}.katex .fontsize-ensurer.reset-size11.size5,.katex .sizing.reset-size11.size5{font-size:.3617363344em}.katex .fontsize-ensurer.reset-size11.size6,.katex .sizing.reset-size11.size6{font-size:.4019292605em}.katex .fontsize-ensurer.reset-size11.size7,.katex .sizing.reset-size11.size7{font-size:.4823151125em}.katex .fontsize-ensurer.reset-size11.size8,.katex .sizing.reset-size11.size8{font-size:.578778135em}.katex .fontsize-ensurer.reset-size11.size9,.katex .sizing.reset-size11.size9{font-size:.6945337621em}.katex .fontsize-ensurer.reset-size11.size10,.katex .sizing.reset-size11.size10{font-size:.8336012862em}.katex .fontsize-ensurer.reset-size11.size11,.katex .sizing.reset-size11.size11{font-size:1em}.katex .delimsizing.size1{font-family:KaTeX_Size1}.katex .delimsizing.size2{font-family:KaTeX_Size2}.katex .delimsizing.size3{font-family:KaTeX_Size3}.katex .delimsizing.size4{font-family:KaTeX_Size4}.katex .delimsizing.mult .delim-size1>span{font-family:KaTeX_Size1}.katex .delimsizing.mult .delim-size4>span{font-family:KaTeX_Size4}.katex .nulldelimiter{display:inline-block;width:.12em}.katex .delimcenter,.katex .op-symbol{position:relative}.katex .op-symbol.small-op{font-family:KaTeX_Size1}.katex .op-symbol.large-op{font-family:KaTeX_Size2}.katex .accent>.vlist-t,.katex .op-limits>.vlist-t{text-align:center}.katex .accent .accent-body{position:relative}.katex .accent .accent-body:not(.accent-full){width:0}.katex .overlay{display:block}.katex .mtable .vertical-separator{display:inline-block;min-width:1px}.katex .mtable .arraycolsep{display:inline-block}.katex .mtable .col-align-c>.vlist-t{text-align:center}.katex .mtable .col-align-l>.vlist-t{text-align:left}.katex .mtable .col-align-r>.vlist-t{text-align:right}.katex .svg-align{text-align:left}.katex svg{fill:currentColor;stroke:currentColor;display:block;height:inherit;position:absolute;width:100%}.katex svg path{stroke:none}.katex svg{fill-rule:nonzero;fill-opacity:1;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1}.katex img{border-style:none;max-height:none;max-width:none;min-height:0;min-width:0}.katex .stretchy{display:block;overflow:hidden;position:relative;width:100%}.katex .stretchy:after,.katex .stretchy:before{content:""}.katex .hide-tail{overflow:hidden;position:relative;width:100%}.katex .halfarrow-left{left:0;overflow:hidden;position:absolute;width:50.2%}.katex .halfarrow-right{overflow:hidden;position:absolute;right:0;width:50.2%}.katex .brace-left{left:0;overflow:hidden;position:absolute;width:25.1%}.katex .brace-center{left:25%;overflow:hidden;position:absolute;width:50%}.katex .brace-right{overflow:hidden;position:absolute;right:0;width:25.1%}.katex .x-arrow-pad{padding:0 .5em}.katex .cd-arrow-pad{padding:0 .55556em 0 .27778em}.katex .mover,.katex .munder,.katex .x-arrow{text-align:center}.katex .boxpad{padding:0 .3em}.katex .fbox,.katex .fcolorbox{border:.04em solid;box-sizing:border-box}.katex .cancel-pad{padding:0 .2em}.katex .cancel-lap{margin-left:-.2em;margin-right:-.2em}.katex .sout{border-bottom-style:solid;border-bottom-width:.08em}.katex .angl{border-right:.049em solid;border-top:.049em solid;box-sizing:border-box;margin-right:.03889em}.katex .anglpad{padding:0 .03889em}.katex .eqn-num:before{content:"(" counter(katexEqnNo) ")";counter-increment:katexEqnNo}.katex .mml-eqn-num:before{content:"(" counter(mmlEqnNo) ")";counter-increment:mmlEqnNo}.katex .mtr-glue{width:50%}.katex .cd-vert-arrow{display:inline-block;position:relative}.katex .cd-label-left{display:inline-block;position:absolute;right:calc(50% + .3em);text-align:left}.katex .cd-label-right{display:inline-block;left:calc(50% + .3em);position:absolute;text-align:right}.katex-display{display:block;margin:1em 0;text-align:center}.katex-display>.katex{display:block;text-align:center;white-space:nowrap}.katex-display>.katex>.katex-html{display:block;position:relative}.katex-display>.katex>.katex-html>.tag{position:absolute;right:0}.katex-display.leqno>.katex>.katex-html>.tag{left:0;right:auto}.katex-display.fleqn>.katex{padding-left:2em;text-align:left}body{counter-reset:katexEqnNo mmlEqnNo}
+
 "
 `;

@@ -1,6 +1,6 @@
 // Toolbar.tsx
 import { useEffect, useReducer, useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
-import { commandRegistry, type CommandSpec, type EditorHandle } from '@mdeditor/core'
+import { commandRegistry, type CommandSpec, type EditorHandle } from '@typomd/core'
 import { icons, DEFAULT_ITEMS } from './icons'
 import { SHORTCUTS } from './command-meta'
 import type { ToolbarConfig, ToolbarEntry, ToolbarRenderCtx } from './types'
@@ -33,7 +33,7 @@ function normalize(config: ToolbarConfig | undefined, hasUpload: boolean): Toolb
     }
     const spec = commandRegistry.get(item)
     if (!spec || !spec.showIn.includes('toolbar')) {
-      console.warn(`[mdeditor] 工具栏项 "${item}" 不是已注册的工具栏命令，已跳过`)
+      console.warn(`[typomd] 工具栏项 "${item}" 不是已注册的工具栏命令，已跳过`)
       continue
     }
     if (item === 'image' && !hasUpload) continue // 前序 spec §6.1：未提供上传钩子时入口隐藏
@@ -89,7 +89,7 @@ function ToolbarInner({ handle, config, hasUpload }: Props) {
 
   const children: ReactNode[] = entries.map((entry, i) => {
     if (entry.kind === 'separator') {
-      return <span key={`sep-${i}`} className="mdeditor-toolbar-separator" />
+      return <span key={`sep-${i}`} className="typomd-toolbar-separator" />
     }
     if (entry.kind === 'custom') {
       return <span key={`custom-${i}`}>{entry.render(ctx)}</span>
@@ -105,7 +105,7 @@ function ToolbarInner({ handle, config, hasUpload }: Props) {
           if (el) btnRefs.current.set(entry.id, el)
           else btnRefs.current.delete(entry.id)
         }}
-        className="mdeditor-toolbar-button"
+        className="typomd-toolbar-button"
         data-command={entry.id}
         data-active={active || undefined}
         aria-label={spec.label}
@@ -122,7 +122,7 @@ function ToolbarInner({ handle, config, hasUpload }: Props) {
 
   return (
     <div
-      className="mdeditor-toolbar"
+      className="typomd-toolbar"
       role="toolbar"
       aria-label="格式工具栏"
       aria-orientation="horizontal"

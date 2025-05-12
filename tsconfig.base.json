@@ -15,6 +15,6 @@
     "verbatimModuleSyntax": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "jsx": "react-jsx" // 计划一无 JSX 消费者，为计划二 @mdeditor/react 预留，避免届时改 base
+    "jsx": "react-jsx" // 计划一无 JSX 消费者，为计划二 @typomd/react 预留，避免届时改 base
   }
 }

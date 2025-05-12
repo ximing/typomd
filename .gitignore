@@ -51,3 +51,5 @@ dist/
 # Playwright e2e artifacts (apps/demo)
 test-results/
 playwright-report/
+
+.pnpm-store

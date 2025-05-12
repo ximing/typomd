@@ -30,7 +30,7 @@ describe('mermaid preset', () => {
       root, defaultValue: '```mermaid\ngraph TD\n    A-->B\n```\n', features: { mermaid: true },
     })
     await vi.waitFor(() => {
-      expect(root.querySelector('.mdeditor-mermaid svg')).not.toBeNull()
+      expect(root.querySelector('.typomd-mermaid svg')).not.toBeNull()
     })
     handle.destroy()
   })
@@ -43,7 +43,7 @@ describe('mermaid preset', () => {
       root, defaultValue: '```mermaid\nINVALID\n```\n', features: { mermaid: true }, onError,
     })
     await vi.waitFor(() => {
-      expect(root.querySelector('.mdeditor-mermaid.mdeditor-node-error')).not.toBeNull()
+      expect(root.querySelector('.typomd-mermaid.typomd-node-error')).not.toBeNull()
     })
     expect(onError).toHaveBeenCalledWith(expect.objectContaining({ source: 'mermaid:render' }))
     handle.destroy()

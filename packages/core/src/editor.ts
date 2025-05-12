@@ -27,7 +27,7 @@ export async function createEditor(options: CreateEditorOptions): Promise<Editor
   const gate: ChangeGate = { silence: false, timer: undefined, pending: undefined }
 
   const onError = (error: EditorError) => {
-    console.warn(`[mdeditor:${error.source}]`, error.cause)
+    console.warn(`[typomd:${error.source}]`, error.cause)
     emitter.emit('error', error)
   }
   if (options.onChange) emitter.on('change', options.onChange)
@@ -50,7 +50,7 @@ export async function createEditor(options: CreateEditorOptions): Promise<Editor
   let prevMarkdown: string | null = null
   const changePlugin = $prose((ctx) =>
     new Plugin({
-      key: new PluginKey('mdeditor-change'),
+      key: new PluginKey('typomd-change'),
       view: () => ({
         update(view, prevState) {
           if (view.state.doc.eq(prevState.doc)) return
@@ -101,7 +101,7 @@ export async function createEditor(options: CreateEditorOptions): Promise<Editor
         ctx.set(rootCtx, root)
         ctx.set(defaultValueCtx, defaultValue)
         ctx.update(editorViewOptionsCtx, (prev) => ({ ...prev, editable: () => !readOnlyRef.current }))
-        root.classList.add('mdeditor')
+        root.classList.add('typomd')
         ctx.get(listenerCtx).selectionUpdated((_c, selection) => {
           emitter.emit('selectionChange', { from: selection.from, to: selection.to, empty: selection.empty })
         })

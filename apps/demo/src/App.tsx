@@ -1,6 +1,6 @@
 // src/App.tsx
 import { useRef, useState } from 'react'
-import { MdEditor, type EditorHandle, type FeatureFlags } from '@mdeditor/react'
+import { Typomd, type EditorHandle, type FeatureFlags } from '@typomd/react'
 import { DEMO_MARKDOWN } from './fixtures'
 
 const FEATURE_KEYS = ['math', 'mermaid', 'codeHighlight', 'slash', 'floatingToolbar'] as const
@@ -11,7 +11,7 @@ export function App() {
   })
   const [dark, setDark] = useState(false)
   const [toolbarVisible, setToolbarVisible] = useState(true)
-  const [output, setOutput] = useState('')
+  const [output, setOutput] = useState(DEMO_MARKDOWN)
   const [editorKey, setEditorKey] = useState(0)
   const handleRef = useRef<EditorHandle | null>(null)
 
@@ -23,14 +23,14 @@ export function App() {
   }
 
   return (
-    <div className={`demo-page${dark ? ' mdeditor-dark' : ''}`}>
+    <div className={`demo-page${dark ? ' typomd-dark' : ''}`}>
       <header className="demo-header">
         <div className="demo-brand">
-          <h1 className="demo-title">mdeditor</h1>
+          <h1 className="demo-title">typomd</h1>
           <p className="demo-tagline">Milkdown 驱动的 Markdown 编辑器组件库</p>
         </div>
         <nav className="demo-header-actions">
-          <a className="demo-link" href="https://github.com/ximing/mdeditor" target="_blank" rel="noreferrer">
+          <a className="demo-link" href="https://github.com/ximing/typomd" target="_blank" rel="noreferrer">
             GitHub
           </a>
           <button className="demo-btn" data-testid="theme-toggle" onClick={() => setDark((v) => !v)}>
@@ -41,7 +41,7 @@ export function App() {
 
       <main className="demo-main">
         <section className="demo-editor-card" data-testid="demo-editor">
-          <MdEditor
+          <Typomd
             key={editorKey}
             ref={handleRef}
             defaultValue={DEMO_MARKDOWN}
@@ -91,14 +91,22 @@ export function App() {
             <button
               className="demo-btn"
               data-testid="doc-bad-math"
-              onClick={() => handleRef.current?.setMarkdown('# T\n\n$\\frac{$\n')}
+              onClick={() => {
+                const md = '# T\n\n$\\frac{$\n'
+                handleRef.current?.setMarkdown(md)
+                setOutput(md)
+              }}
             >
               注入非法公式
             </button>
             <button
               className="demo-btn"
               data-testid="doc-bad-mermaid"
-              onClick={() => handleRef.current?.setMarkdown('# T\n\n```mermaid\nINVALID SYNTAX ===\n```\n')}
+              onClick={() => {
+                const md = '# T\n\n```mermaid\nINVALID SYNTAX ===\n```\n'
+                handleRef.current?.setMarkdown(md)
+                setOutput(md)
+              }}
             >
               注入非法 mermaid
             </button>

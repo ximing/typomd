@@ -41,7 +41,7 @@ export const imageUploadView = (fc: FeatureContext) =>
     return (node, view, getPos) => {
       const file = uploadFiles.get(node.attrs.uploadId as string)
       const dom = document.createElement('div')
-      dom.classList.add('mdeditor-image-upload')
+      dom.classList.add('typomd-image-upload')
       dom.textContent = `上传中：${node.attrs.name}`
       if (!file) return { dom } // 无 File（如 setMarkdown 重建出占位）→ 仅展示
 
@@ -60,7 +60,7 @@ export const imageUploadView = (fc: FeatureContext) =>
           })
           .catch((cause) => {
             // spec §8：保留占位节点（含文件名）+ onError，点击重试
-            dom.classList.add('mdeditor-node-error')
+            dom.classList.add('typomd-node-error')
             dom.textContent = `上传失败：${file.name}（点击重试）`
             fc.onError({ source: 'image:upload', cause })
           })
@@ -81,7 +81,7 @@ export const imageUploadView = (fc: FeatureContext) =>
     }
   })
 
-const imageUploadKey = new PluginKey('mdeditor-image-upload')
+const imageUploadKey = new PluginKey('typomd-image-upload')
 
 export function createImageUploadPlugins(fc: FeatureContext): MilkdownPlugin[] {
   const pasteDropPlugin = $prose((ctx) => {

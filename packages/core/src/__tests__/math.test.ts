@@ -18,7 +18,7 @@ describe('math preset', () => {
       root, defaultValue: '$\\frac{$', features: { math: true }, onError, onChangeDebounce: 0,
     })
     await new Promise((r) => setTimeout(r, 0))
-    const errorNode = root.querySelector('.mdeditor-math.mdeditor-node-error')
+    const errorNode = root.querySelector('.typomd-math.typomd-node-error')
     expect(errorNode).not.toBeNull()
     expect(errorNode!.textContent).toContain('\\frac{')
     expect(onError).toHaveBeenCalledWith(expect.objectContaining({ source: 'math:render' }))

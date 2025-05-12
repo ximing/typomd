@@ -33,7 +33,7 @@ async function renderMermaid(code: string): Promise<string> {
     mermaid.initialize({ startOnLoad: false })
     initialized = true
   }
-  const { svg } = await mermaid.render(`mdeditor-mermaid-${seq++}`, code)
+  const { svg } = await mermaid.render(`typomd-mermaid-${seq++}`, code)
   svgCache.set(code, svg)
   return svg
 }
@@ -41,7 +41,7 @@ async function renderMermaid(code: string): Promise<string> {
 function createMermaidView(onError: (e: EditorError) => void): NodeViewConstructor {
   return (node, view, getPos) => {
     const dom = document.createElement('div')
-    dom.classList.add('mdeditor-mermaid')
+    dom.classList.add('typomd-mermaid')
     const preview = document.createElement('div')
     dom.appendChild(preview)
     let observer: IntersectionObserver | undefined
@@ -50,12 +50,12 @@ function createMermaidView(onError: (e: EditorError) => void): NodeViewConstruct
     const render = async (value: string) => {
       try {
         preview.innerHTML = await renderMermaid(value)
-        dom.classList.remove('mdeditor-node-error')
+        dom.classList.remove('typomd-node-error')
         rendered = true
       } catch (cause) {
         // spec §8：保留源码可继续编辑 + 红色错误角标
         preview.textContent = value
-        dom.classList.add('mdeditor-node-error')
+        dom.classList.add('typomd-node-error')
         onError({ source: 'mermaid:render', cause })
       }
     }

@@ -22,20 +22,39 @@ export function virtualRefFromRect(rect: DOMRect): VirtualRef {
   return { getBoundingClientRect: () => rect }
 }
 
-export function useFloating(reference: VirtualRef | null, placement: 'top' | 'bottom' = 'top') {
+export function useFloating(
+  reference: VirtualRef | null,
+  placement: 'top' | 'bottom' | 'top-start' | 'bottom-start' = 'top',
+) {
   const [el, setEl] = useState<HTMLElement | null>(null)
-  const [style, setStyle] = useState<CSSProperties>({ position: 'absolute', top: 0, left: 0 })
+  const [style, setStyle] = useState<CSSProperties>({ position: 'fixed', top: 0, left: 0 })
 
   useEffect(() => {
     if (!reference || !el) return
+    let gen = 0
     const update = () => {
+      void document.body.offsetHeight
+      const g = ++gen
       void computePosition(reference as never, el, {
         placement,
+        strategy: 'fixed',
         middleware: [offset(6), flip(), shift({ padding: 8 })],
-      }).then(({ x, y }) => setStyle({ position: 'absolute', top: y, left: x }))
+      }).then(({ x, y }) => {
+        if (g !== gen) return
+        setStyle({ position: 'fixed', top: y, left: x })
+      })
     }
     update()
-    return autoUpdate(reference as never, el, update)
+    // 0ms：当前栈结束后；32ms：setMarkdown 折叠大文档后的布局再算一帧
+    const t0 = setTimeout(update, 0)
+    const t1 = setTimeout(update, 32)
+    const stop = autoUpdate(reference as never, el, update)
+    return () => {
+      gen++
+      clearTimeout(t0)
+      clearTimeout(t1)
+      stop()
+    }
   }, [reference, el, placement])
 
   return { ref: setEl, style }

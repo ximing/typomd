@@ -1,71 +1,75 @@
 /* toolbar.css — 顶部工具栏（§5.3）。无 sticky 定位（spec 无此设计）；容器无 overflow 裁剪 */
-.mdeditor-toolbar {
+.typomd-toolbar {
   display: flex;
   align-items: center;
-  gap: var(--mdeditor-space-0_5);
-  height: 40px;
+  flex-wrap: wrap;
+  gap: var(--typomd-space-0_5);
+  min-height: 40px;
+  height: auto;
   box-sizing: border-box;
-  padding: var(--mdeditor-space-1_5) var(--mdeditor-space-2);
-  border-bottom: 1px solid var(--mdeditor-color-border);
+  padding: var(--typomd-space-1_5) var(--typomd-space-2);
+  border-bottom: 1px solid var(--typomd-color-border);
 }
-.mdeditor-toolbar-button {
+.typomd-toolbar-button {
   position: relative; /* tooltip ::after 定位上下文 */
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   width: 28px;
   height: 28px;
-  border-radius: var(--mdeditor-radius-md);
-  color: var(--mdeditor-color-text-secondary);
+  border-radius: var(--typomd-radius-md);
+  color: var(--typomd-color-text-secondary);
   cursor: pointer;
-  transition: background-color var(--mdeditor-duration-fast) var(--mdeditor-ease-standard),
-              color var(--mdeditor-duration-fast) var(--mdeditor-ease-standard);
+  transition: background-color var(--typomd-duration-fast) var(--typomd-ease-standard),
+              color var(--typomd-duration-fast) var(--typomd-ease-standard);
 }
-.mdeditor-toolbar-button:hover {
-  background: var(--mdeditor-color-hover);
-  color: var(--mdeditor-color-text);
+.typomd-toolbar-button:hover {
+  background: var(--typomd-color-hover);
+  color: var(--typomd-color-text);
 }
 /* 激活态（§5.3）：accent-subtle 底 + accent 色；data-active 保留供 e2e/覆写 */
-.mdeditor-toolbar-button[aria-pressed='true'],
-.mdeditor-toolbar-button[data-active='true'] {
-  background: var(--mdeditor-color-accent-subtle);
-  color: var(--mdeditor-color-accent);
+.typomd-toolbar-button[aria-pressed='true'],
+.typomd-toolbar-button[data-active='true'] {
+  background: var(--typomd-color-accent-subtle);
+  color: var(--typomd-color-accent);
 }
 /* 禁用态（§5.3：样式备好，内置按钮暂不接线——undo/redo 数据源见 §9 不做项） */
-.mdeditor-toolbar-button:disabled,
-.mdeditor-toolbar-button[aria-disabled='true'] {
+.typomd-toolbar-button:disabled,
+.typomd-toolbar-button[aria-disabled='true'] {
   opacity: 0.4;
   cursor: default;
   background: transparent;
-  color: var(--mdeditor-color-text-secondary);
+  color: var(--typomd-color-text-secondary);
 }
-.mdeditor-toolbar-separator {
+.typomd-toolbar-separator {
+  flex-shrink: 0;
   width: 1px;
   height: 16px;
-  margin: 0 var(--mdeditor-space-1);
-  background: var(--mdeditor-color-border-strong);
+  margin: 0 var(--typomd-space-1);
+  background: var(--typomd-color-border-strong);
 }
 
 /* 纯 CSS tooltip（§5.3）：无 JS 浮层；延迟 400ms 淡入，移出即隐 */
-.mdeditor-toolbar [data-tooltip]::after {
+.typomd-toolbar [data-tooltip]::after {
   content: attr(data-tooltip);
   position: absolute;
-  top: calc(100% + var(--mdeditor-space-1_5));
+  top: calc(100% + var(--typomd-space-1_5));
   left: 50%;
   transform: translateX(-50%);
-  z-index: var(--mdeditor-z-tooltip);
-  padding: var(--mdeditor-space-1) var(--mdeditor-space-2);
-  border-radius: var(--mdeditor-radius-md);
-  background: var(--mdeditor-color-accent);
-  color: var(--mdeditor-color-accent-contrast);
-  font-size: var(--mdeditor-font-size-ui-sm);
+  z-index: var(--typomd-z-tooltip);
+  padding: var(--typomd-space-1) var(--typomd-space-2);
+  border-radius: var(--typomd-radius-md);
+  background: var(--typomd-color-accent);
+  color: var(--typomd-color-accent-contrast);
+  font-size: var(--typomd-font-size-ui-sm);
   white-space: nowrap;
   pointer-events: none;
   opacity: 0;
-  transition: opacity var(--mdeditor-duration-fast) var(--mdeditor-ease-standard);
+  transition: opacity var(--typomd-duration-fast) var(--typomd-ease-standard);
 }
-.mdeditor-toolbar [data-tooltip]:hover::after,
-.mdeditor-toolbar [data-tooltip]:focus-visible::after {
+.typomd-toolbar [data-tooltip]:hover::after,
+.typomd-toolbar [data-tooltip]:focus-visible::after {
   opacity: 1;
   transition-delay: 400ms;
 }

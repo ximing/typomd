@@ -1,64 +1,67 @@
 /* slash.css — 斜杠命令菜单（§5.5：288px 宽 / 瓷贴 / 分组标题；滚动条不定制） */
-.mdeditor-slash {
-  position: absolute;
-  z-index: var(--mdeditor-z-slash);
+.typomd-slash {
+  position: fixed; /* 与 useFloating strategy:fixed 对齐；coordsAtPos 是视口坐标 */
+  z-index: var(--typomd-z-slash);
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
   width: 288px;
+  max-width: calc(100vw - 16px); /* 窄屏：shift 只挪位置，宽度也要能进视口 */
   max-height: 336px;
   overflow-y: auto;
-  padding: var(--mdeditor-space-1_5);
-  background: var(--mdeditor-color-bg-elevated);
-  border-radius: var(--mdeditor-radius-lg);
-  box-shadow: var(--mdeditor-shadow-popover); /* shadow 环代替 border（§2.2） */
-  animation: mdeditor-pop var(--mdeditor-duration-base) var(--mdeditor-ease-out);
+  padding: var(--typomd-space-1_5);
+  background: var(--typomd-color-bg-elevated);
+  border-radius: var(--typomd-radius-lg);
+  box-shadow: var(--typomd-shadow-popover); /* shadow 环代替 border（§2.2） */
+  animation: typomd-pop var(--typomd-duration-base) var(--typomd-ease-out);
 }
-.mdeditor-slash-group {
-  padding: var(--mdeditor-space-1_5) var(--mdeditor-space-2) var(--mdeditor-space-0_5);
-  font-size: var(--mdeditor-font-size-ui-sm);
-  color: var(--mdeditor-color-text-muted);
+.typomd-slash-group {
+  padding: var(--typomd-space-1_5) var(--typomd-space-2) var(--typomd-space-0_5);
+  font-size: var(--typomd-font-size-ui-sm);
+  color: var(--typomd-color-text-muted);
   user-select: none;
 }
-.mdeditor-slash-item {
+.typomd-slash-item {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: var(--mdeditor-space-1_5) var(--mdeditor-space-2);
-  border-radius: var(--mdeditor-radius-md);
-  font-size: var(--mdeditor-font-size-ui);
-  color: var(--mdeditor-color-text);
+  padding: var(--typomd-space-1_5) var(--typomd-space-2);
+  border-radius: var(--typomd-radius-md);
+  font-size: var(--typomd-font-size-ui);
+  color: var(--typomd-color-text);
   text-align: left;
   cursor: pointer;
 }
-.mdeditor-slash-item[data-selected='true'] { background: var(--mdeditor-color-hover); }
+.typomd-slash-item[data-selected='true'] { background: var(--typomd-color-hover); }
 /* 空结果态：沿用现有文案，muted 居中（§5.5） */
-.mdeditor-slash-item[aria-disabled='true'] {
+.typomd-slash-item[aria-disabled='true'] {
   justify-content: center;
-  color: var(--mdeditor-color-text-muted);
+  color: var(--typomd-color-text-muted);
   cursor: default;
 }
 /* 图标瓷贴（§5.5：Notion 标志性样式 22×22，内嵌 14px 图标） */
-.mdeditor-slash-item-icon {
+.typomd-slash-item-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
   width: 22px;
   height: 22px;
   flex: none;
-  border: 1px solid var(--mdeditor-color-border);
-  border-radius: var(--mdeditor-radius-sm);
-  background: var(--mdeditor-color-bg);
-  color: var(--mdeditor-color-text-secondary);
+  border: 1px solid var(--typomd-color-border);
+  border-radius: var(--typomd-radius-sm);
+  background: var(--typomd-color-bg);
+  color: var(--typomd-color-text-secondary);
 }
-.mdeditor-slash-item-icon svg { width: 14px; height: 14px; }
-.mdeditor-slash-item-label {
+.typomd-slash-item-icon svg { width: 14px; height: 14px; }
+.typomd-slash-item-label {
   flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.mdeditor-slash-item-kbd {
+.typomd-slash-item-kbd {
   font-family: inherit;
-  font-size: var(--mdeditor-font-size-ui-sm);
-  color: var(--mdeditor-color-text-muted);
+  font-size: var(--typomd-font-size-ui-sm);
+  color: var(--typomd-color-text-muted);
 }

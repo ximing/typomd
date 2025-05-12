@@ -1,42 +1,43 @@
 /* base.css — root 容器 / 全局焦点环 / 进场关键帧 / reduced-motion 兜底（§5.1） */
-.mdeditor-root {
+.typomd-root {
   display: flex;
   flex-direction: column;
-  font-family: var(--mdeditor-font-text);
-  font-size: var(--mdeditor-font-size-ui);
-  color: var(--mdeditor-color-text);
+  font-family: var(--typomd-font-text);
+  font-size: var(--typomd-font-size-ui);
+  color: var(--typomd-color-text);
 }
 /* 悬浮工具栏 / SlashMenu 绝对定位的定位上下文 */
-.mdeditor-body { position: relative; }
+.typomd-body { position: relative; }
 /* 编辑器焦点由光标表达：.ProseMirror { outline: none } 在 theme content.css，此处不补环 */
 
-/* 库内按钮清零（宿主页面 reset 差异防御） */
-.mdeditor-root button {
+/* 库内按钮清零（宿主页面 reset 差异防御）。不设 color:inherit——特异度
+   `.typomd-root button`（0,1,1）会压过 `.typomd-toolbar-button`（0,1,0）
+   的 color-text-secondary，闲置图标变成正文色。 */
+.typomd-root button {
   font: inherit;
-  color: inherit;
   padding: 0;
   border: none;
   background: none;
 }
 
 /* 焦点环（§5.1/§6）：box-shadow 实现 + 2px offset；只用 :focus-visible，不用 :focus（避免点击出环） */
-.mdeditor-toolbar-button:focus-visible,
-.mdeditor-floating-button:focus-visible {
+.typomd-toolbar-button:focus-visible,
+.typomd-floating-button:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px var(--mdeditor-color-bg), 0 0 0 4px var(--mdeditor-color-focus-ring);
+  box-shadow: 0 0 0 2px var(--typomd-color-bg), 0 0 0 4px var(--typomd-color-focus-ring);
 }
 
 /* 浮层进场关键帧（§5.4/§5.5 共用）：opacity 0→1 + translateY(2px)→0 */
-@keyframes mdeditor-pop {
+@keyframes typomd-pop {
   from { opacity: 0; transform: translateY(2px); }
   to { opacity: 1; transform: none; }
 }
 
 /* reduced-motion：全部动画/过渡归零（§2.2） */
 @media (prefers-reduced-motion: reduce) {
-  .mdeditor-root *,
-  .mdeditor-root *::before,
-  .mdeditor-root *::after {
+  .typomd-root *,
+  .typomd-root *::before,
+  .typomd-root *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

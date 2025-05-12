@@ -8,19 +8,21 @@ describe('theme tokens', () => {
     expect(Object.keys(tokens.dark).sort()).toEqual(Object.keys(tokens.light).sort())
   })
 
-  test('生成的 CSS 包含每个令牌变量与 .mdeditor-dark 覆写', () => {
+  test('生成的 CSS 包含每个令牌变量与 .typomd-dark 覆写', () => {
     const css = buildCss(tokens)
     for (const [group, values] of Object.entries(tokens)) {
       for (const [name, value] of Object.entries(values as Record<string, string>)) {
-        expect(css).toContain(`--mdeditor-${name}: ${value};`)
+        expect(css).toContain(`--typomd-${name}: ${value};`)
       }
       void group
     }
-    expect(css).toContain(':root, .mdeditor {')
-    expect(css).toContain('.mdeditor-dark {')
+    expect(css).toContain(':root, .typomd {')
+    // 祖先 .typomd-dark 必须同时覆写后代 .typomd（亮色块挂在 .typomd 上，
+    // 只给祖先加类时子级会把令牌重写成亮色——demo 主题切换的 BLOCKER）
+    expect(css).toContain('.typomd-dark, .typomd-dark .typomd {')
     // 暗色覆写不得包含 shared 令牌（间距/字体不随主题变化）
-    const darkBlock = css.split('.mdeditor-dark {')[1]!.split('}')[0]!
-    expect(darkBlock).not.toContain('--mdeditor-font-mono')
+    const darkBlock = css.split('.typomd-dark, .typomd-dark .typomd {')[1]!.split('}')[0]!
+    expect(darkBlock).not.toContain('--typomd-font-mono')
   })
 
   test('JSON 导出与 CSS 数据源一致（同一份 tokens 对象）', () => {
@@ -47,14 +49,14 @@ describe('theme tokens', () => {
 
   test('旧令牌别名已删除（§12 阶段 4 收尾）', () => {
     const css = buildCss(tokens)
-    expect(css).not.toContain('--mdeditor-radius: ')
-    expect(css).not.toContain('--mdeditor-color-error')
-    expect(css).not.toContain('--mdeditor-color-quote-border')
+    expect(css).not.toContain('--typomd-radius: ')
+    expect(css).not.toContain('--typomd-color-error')
+    expect(css).not.toContain('--typomd-color-quote-border')
   })
 
   test('暗色覆写包含 shiki 双主题规则', () => {
     const css = buildCss(tokens)
-    expect(css).toContain('.mdeditor-dark .ProseMirror pre span')
+    expect(css).toContain('.typomd-dark .ProseMirror pre span')
     expect(css).toContain('var(--shiki-dark)')
   })
 
@@ -76,14 +78,14 @@ describe('theme tokens', () => {
 
   test('default.css 拼接 content.css 与 content-dark.css；auto.css 含媒体查询与机械变换', () => {
     const css = buildCss(tokens)
-    expect(css).toContain('.mdeditor .ProseMirror {')
-    expect(css).toContain('.mdeditor-dark .ProseMirror pre span')
+    expect(css).toContain('.typomd .ProseMirror {')
+    expect(css).toContain('.typomd-dark .ProseMirror pre span')
     const auto = buildAutoCss(tokens)
     expect(auto).toContain('@media (prefers-color-scheme: dark)')
-    // 类限定规则机械变换：.mdeditor-dark X → @media 内 .mdeditor X（§3.2）
-    expect(auto).toContain('.mdeditor .ProseMirror pre span')
-    // 健壮断言：不存在任何 .mdeditor-dark 选择器行（注释里出现该字符串不算）
-    expect(auto).not.toMatch(/^\s*\.mdeditor-dark /m)
+    // 类限定规则机械变换：.typomd-dark X → @media 内 .typomd X（§3.2）
+    expect(auto).toContain('.typomd .ProseMirror pre span')
+    // 健壮断言：不存在任何 .typomd-dark 选择器行（注释里出现该字符串不算）
+    expect(auto).not.toMatch(/^\s*\.typomd-dark /m)
   })
 
   test('buildCss/buildAutoCss 输出快照（§11：含 content.css 拼接）', () => {
@@ -94,16 +96,21 @@ describe('theme tokens', () => {
   test('content.css 全量排版（§4）：块级元素规则齐备', () => {
     const css = buildCss(tokens)
     for (const sel of [
-      '.mdeditor .ProseMirror h1', '.mdeditor .ProseMirror h2', '.mdeditor .ProseMirror h3',
-      '.mdeditor .ProseMirror ul', '.mdeditor .ProseMirror ol',
-      '.mdeditor .ProseMirror blockquote', '.mdeditor .ProseMirror pre',
-      '.mdeditor .ProseMirror table', '.mdeditor .ProseMirror th',
-      '.mdeditor .ProseMirror hr', '.mdeditor .ProseMirror a', '.mdeditor .ProseMirror img',
-      '--mdeditor-block-gap, 6px',
+      '.typomd .ProseMirror h1', '.typomd .ProseMirror h2', '.typomd .ProseMirror h3',
+      '.typomd .ProseMirror ul', '.typomd .ProseMirror ol',
+      '.typomd .ProseMirror blockquote', '.typomd .ProseMirror pre',
+      '.typomd .ProseMirror table', '.typomd .ProseMirror th',
+      '.typomd .ProseMirror hr', '.typomd .ProseMirror a', '.typomd .ProseMirror img',
+      '--typomd-block-gap, 6px',
     ]) {
       expect(css).toContain(sel)
     }
     // 任务列表（选择器以 Step 1 侦查到的实际 DOM 为准）
     expect(css).toContain('data-checked')
+    expect(css).toContain("li[data-checked='true']::after")
+    // 官方 katex.min.css 内联 + woff2 字体路径
+    expect(css).toContain('font-family:KaTeX_Main')
+    expect(css).toContain('url(./fonts/')
+    expect(css).toContain('.katex-mathml')
   })
 })

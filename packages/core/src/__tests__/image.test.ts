@@ -10,7 +10,7 @@ function pasteImageFiles(handle: import('../types').EditorHandle, files: File[])
     const view = ctx.get(editorViewCtx)
     // prosemirror-state@1.4.4 的 d.ts 未暴露 Plugin 实例的 .key（运行时存在，见其 dist/index.js this.key 赋值）；
     // handlePaste 声明 this: Plugin，需 .call 绑定。两者均为上游类型缺口，此处最小 cast，不改运行时语义。
-    const plugin = view.state.plugins.find((p) => (p as unknown as { key: string }).key.startsWith('mdeditor-image-upload'))
+    const plugin = view.state.plugins.find((p) => (p as unknown as { key: string }).key.startsWith('typomd-image-upload'))
     const handled = plugin!.props.handlePaste!.call(
       plugin!,
       view,
@@ -45,7 +45,7 @@ describe('image 上传钩子（spec §6.1/§8）', () => {
     const file = new File(['x'], 'fail.png', { type: 'image/png' })
     pasteImageFiles(handle, [file])
     await vi.waitFor(() => {
-      expect(root.querySelector('.mdeditor-image-upload.mdeditor-node-error')).not.toBeNull()
+      expect(root.querySelector('.typomd-image-upload.typomd-node-error')).not.toBeNull()
     })
     expect(root.textContent).toContain('fail.png')
     expect(onError).toHaveBeenCalledWith(expect.objectContaining({ source: 'image:upload' }))
@@ -57,7 +57,7 @@ describe('image 上传钩子（spec §6.1/§8）', () => {
     const handle = await createTestEditor('')
     const internal = internalHandles.get(handle)!
     const has = internal.editor.action((ctx) =>
-      ctx.get(editorViewCtx).state.plugins.some((p) => (p as unknown as { key: string }).key.startsWith('mdeditor-image-upload')),
+      ctx.get(editorViewCtx).state.plugins.some((p) => (p as unknown as { key: string }).key.startsWith('typomd-image-upload')),
     )
     expect(has).toBe(false)
     handle.destroy()

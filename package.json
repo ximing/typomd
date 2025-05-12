@@ -1,5 +1,5 @@
 {
-  "name": "mdeditor-monorepo",
+  "name": "typomd-monorepo",
   "private": true,
   "type": "module",
   "packageManager": "pnpm@9.15.4",

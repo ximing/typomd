@@ -1,13 +1,13 @@
-// MdEditor.tsx
+// Typomd.tsx
 import { forwardRef, useEffect, useImperativeHandle, useMemo, useState } from 'react'
-import type { EditorHandle } from '@mdeditor/core'
+import type { EditorHandle } from '@typomd/core'
 import { FloatingToolbar } from './FloatingToolbar'
-import { MdEditorInner } from './MdEditorInner'
+import { TypomdInner } from './TypomdInner'
 import { SlashMenu } from './SlashMenu'
 import { Toolbar } from './Toolbar'
-import type { MdEditorProps } from './types'
+import type { TypomdProps } from './types'
 
-export const MdEditor = forwardRef<EditorHandle, MdEditorProps>(function MdEditor(props, ref) {
+export const Typomd = forwardRef<EditorHandle, TypomdProps>(function Typomd(props, ref) {
   const {
     defaultValue,
     features,
@@ -43,12 +43,12 @@ export const MdEditor = forwardRef<EditorHandle, MdEditorProps>(function MdEdito
   )
 
   return (
-    <div className="mdeditor-root">
+    <div className="typomd-root">
       {handle && toolbar?.visible !== false && (
         <Toolbar handle={handle} config={toolbar} hasUpload={onUploadImage !== undefined} />
       )}
-      <div className="mdeditor-body">
-        <MdEditorInner options={options} placeholder={placeholder} onReady={setHandle} />
+      <div className="typomd-body">
+        <TypomdInner options={options} placeholder={placeholder} onReady={setHandle} />
         {handle && features?.floatingToolbar !== false && <FloatingToolbar handle={handle} />}
         {handle && <SlashMenu handle={handle} hasUpload={onUploadImage !== undefined} />}
       </div>

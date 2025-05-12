@@ -6,5 +6,5 @@ export default defineConfig({
   dts: true,
   sourcemap: true,
   clean: true,
-  external: ['react', 'react-dom', '@mdeditor/core', '@mdeditor/theme'],
+  external: ['react', 'react-dom', '@typomd/core', '@typomd/theme'],
 })

@@ -1,5 +1,5 @@
 {
-  "name": "@mdeditor/react-native",
+  "name": "@typomd/react-native",
   "version": "0.1.0",
   "type": "module",
   "exports": { ".": { "types": "./src/index.ts" } },

@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test'
 
 test('输入 markdown 语法即时渲染为富文本', async ({ page }) => {
   await page.goto('/')
-  const editor = page.locator('[data-testid="mdeditor"] .ProseMirror')
+  const editor = page.locator('[data-testid="typomd"] .ProseMirror')
   await editor.click()
   // 清空默认文档后输入
   await page.keyboard.press('ControlOrMeta+a')
@@ -12,7 +12,7 @@ test('输入 markdown 语法即时渲染为富文本', async ({ page }) => {
   // 视觉路径进 e2e：::before 的 content 必须非空（选择器命中 trailingBreak 条件才成立；
   // getComputedStyle 对未命中的伪元素返回 'none'/空串）
   const beforeContent = await page.evaluate(() => {
-    const pm = document.querySelector('[data-testid="mdeditor"] .ProseMirror')!
+    const pm = document.querySelector('[data-testid="typomd"] .ProseMirror')!
     return getComputedStyle(pm, '::before').content
   })
   expect(beforeContent).toBe('"输入 / 唤起命令..."')

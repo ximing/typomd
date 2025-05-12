@@ -12,7 +12,7 @@ export function createSlashPlugin(onTrigger: (payload: SlashTriggerPayload) => v
   return $prose(
     () =>
       new Plugin({
-        key: new PluginKey('mdeditor-slash-trigger'),
+        key: new PluginKey('typomd-slash-trigger'),
         view: (view) => ({
           update: (view, prevState) => {
             if (view.state.doc.eq(prevState.doc)) return

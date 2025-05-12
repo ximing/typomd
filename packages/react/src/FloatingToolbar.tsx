@@ -1,6 +1,6 @@
 // FloatingToolbar.tsx
 import { useEffect, useMemo, useState } from 'react'
-import { commandRegistry, type CommandSpec, type EditorHandle } from '@mdeditor/core'
+import { commandRegistry, type CommandSpec, type EditorHandle } from '@typomd/core'
 import { icons } from './icons'
 import { SHORTCUTS } from './command-meta'
 import { useFloating, virtualRefFromRect } from './useFloating'
@@ -33,7 +33,7 @@ export function FloatingToolbar({ handle }: { handle: EditorHandle }) {
 
   // useMemo：reference 对象身份必须稳定，否则 useFloating 的 effect 每次渲染都重挂 autoUpdate
   const reference = useMemo(() => (rect ? virtualRefFromRect(rect) : null), [rect])
-  const { ref, style } = useFloating(reference, 'top')
+  const { ref, style } = useFloating(reference, 'top-start')
 
   if (!rect) return null
 
@@ -42,7 +42,7 @@ export function FloatingToolbar({ handle }: { handle: EditorHandle }) {
   return (
     <div
       ref={ref}
-      className="mdeditor-floating"
+      className="typomd-floating"
       style={style}
       data-testid="floating-toolbar"
       role="toolbar"
@@ -55,7 +55,7 @@ export function FloatingToolbar({ handle }: { handle: EditorHandle }) {
           <button
             key={spec.id}
             type="button"
-            className="mdeditor-floating-button"
+            className="typomd-floating-button"
             data-command={spec.id}
             data-active={active || undefined}
             aria-label={spec.label}

@@ -11,7 +11,7 @@ const DEFAULT_LANGS = ['javascript', 'typescript', 'json', 'html', 'css', 'markd
 const LIGHT = 'github-light'
 const DARK = 'github-dark'
 
-const shikiKey = new PluginKey<DecorationSet>('mdeditor-shiki')
+const shikiKey = new PluginKey<DecorationSet>('typomd-shiki')
 
 function buildDecorations(
   doc: PMNode,
