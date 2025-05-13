@@ -27,10 +27,10 @@ describe('theme tokens', () => {
 
   test('JSON 导出与 CSS 数据源一致（同一份 tokens 对象）', () => {
     expect(tokens.light['color-bg']).toBe('#ffffff')
-    expect(tokens.dark['color-bg']).toBe('#191919')
+    expect(tokens.dark['color-bg']).toBe('#1a1a1a')
   })
 
-  test('v2 令牌集：shared 扩展键与新语义颜色键存在', () => {
+  test('v3 令牌集：shared 扩展键与新语义颜色键存在', () => {
     for (const k of ['space-0_5', 'space-1_5', 'space-5', 'space-8', 'radius-sm', 'radius-md', 'radius-lg', 'radius-full',
       'font-size-ui', 'font-size-ui-sm', 'duration-fast', 'duration-base', 'ease-standard', 'ease-out',
       'z-sticky', 'z-floating', 'z-slash', 'z-tooltip']) {
@@ -39,6 +39,18 @@ describe('theme tokens', () => {
     for (const k of ['color-bg-secondary', 'color-bg-elevated', 'color-text-secondary', 'color-border-strong',
       'color-hover', 'color-active', 'color-accent-contrast', 'color-accent-subtle', 'color-focus-ring',
       'color-danger', 'color-code-bg', 'shadow-popover']) {
+      expect(tokens.light).toHaveProperty(k)
+      expect(tokens.dark).toHaveProperty(k)
+    }
+    // shared 新增（§4.4）
+    for (const k of ['space-7', 'space-10', 'space-12', 'space-16', 'radius-xl', 'font-size-display',
+      'font-weight-regular', 'font-weight-medium', 'font-weight-semibold', 'font-weight-bold',
+      'line-height-heading', 'line-height-ui', 'letter-spacing-heading', 'duration-slow']) {
+      expect(tokens.shared).toHaveProperty(k)
+    }
+    // light/dark 新增颜色/阴影键（§4.2/§4.3）
+    for (const k of ['color-canvas', 'color-heading', 'color-border-subtle', 'color-code-text',
+      'color-mermaid-node', 'color-mermaid-edge', 'color-skeleton', 'shadow-sm', 'shadow-tooltip']) {
       expect(tokens.light).toHaveProperty(k)
       expect(tokens.dark).toHaveProperty(k)
     }
