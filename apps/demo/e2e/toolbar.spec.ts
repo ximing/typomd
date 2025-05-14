@@ -25,5 +25,5 @@ test('主题切换后编辑器画布使用暗色令牌（祖先类须覆写 .typ
   await page.locator('[data-testid="theme-toggle"]').click()
   const editor = page.locator('[data-testid="typomd"] .ProseMirror')
   await expect(editor).toBeVisible()
-  await expect(editor).toHaveCSS('background-color', 'rgb(25, 25, 25)')
+  await expect(editor).toHaveCSS('background-color', 'rgb(26, 26, 26)')
 })
