@@ -12,7 +12,8 @@
     "changeset": "changeset",
     "version": "changeset version",
     "release": "turbo run build && changeset publish",
-    "e2e": "pnpm --filter demo e2e"
+    "e2e": "pnpm --filter demo e2e",
+    "check:colors": "node scripts/check-colors.mjs"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.0",
