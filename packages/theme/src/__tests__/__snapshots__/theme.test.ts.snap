@@ -118,83 +118,87 @@ exports[`theme tokens > buildCss/buildAutoCss 输出快照（§11：含 content.
 }
 /* 不设 max-width：嵌入方自行约束（§4） */
 
-/* ---- 块节奏（§4） ---- */
-.typomd .ProseMirror > * + * { margin-top: var(--typomd-block-gap, 6px); }
+/* ---- 块节奏（§5.1：0.5em=8px，保持变量可覆写） ---- */
+.typomd .ProseMirror > * + * { margin-top: var(--typomd-block-gap, 0.5em); }
+
+/* ---- 标题（§5.1：独立色/行高/字距；margin 用 rem 锚定根字号——em 会相对标题自身字号放大；
+     字号仍用 em 相对正文缩放。前距 = 块间距 ×3（h1 24px）/ ×2.5（h2/h3 20px） ---- */
 .typomd .ProseMirror h1,
 .typomd .ProseMirror h2,
-.typomd .ProseMirror h3 { font-weight: 600; letter-spacing: -0.01em; }
-.typomd .ProseMirror h1 { font-size: 1.875em; margin-top: 1.2em; margin-bottom: 0; }
-.typomd .ProseMirror h2 { font-size: 1.5em; margin-top: 1.1em; margin-bottom: 0; }
-.typomd .ProseMirror h3 { font-size: 1.25em; margin-top: 1em; margin-bottom: 0; }
+.typomd .ProseMirror h3 {
+  color: var(--typomd-color-heading);
+  line-height: var(--typomd-line-height-heading);
+  letter-spacing: var(--typomd-letter-spacing-heading);
+}
+.typomd .ProseMirror h1 { font-size: 1.953125em; font-weight: var(--typomd-font-weight-bold); margin-top: 1.5rem; margin-bottom: 0; }
+.typomd .ProseMirror h2 { font-size: 1.5625em; font-weight: var(--typomd-font-weight-semibold); margin-top: 1.25rem; margin-bottom: 0; }
+.typomd .ProseMirror h3 { font-size: 1.25em; font-weight: var(--typomd-font-weight-semibold); margin-top: 1.25rem; margin-bottom: 0; }
+/* 首子元素 margin-top 归零（不变） */
 .typomd .ProseMirror > h1:first-child,
 .typomd .ProseMirror > h2:first-child,
 .typomd .ProseMirror > h3:first-child { margin-top: 0; }
 
-/* ---- 列表（§4） ---- */
+/* ---- 列表（§5.1：li 间距 2px → space-1） ---- */
 .typomd .ProseMirror ul,
 .typomd .ProseMirror ol { padding-left: 1.5em; margin: 0; }
-.typomd .ProseMirror li { margin-top: 2px; }
+.typomd .ProseMirror li { margin-top: var(--typomd-space-1); }
 .typomd .ProseMirror li > p { margin: 0; }
 
-/* 任务列表（GFM；DOM 侦查为 li[data-checked] 无原生 checkbox，用 ::before 画勾选框 + accent 色） */
+/* ---- 任务列表（§5.1：flex 对齐替代 magic number；::after 整套删除；
+     对钩用 ::before 背景 data-URI——隔离文档不继承 currentColor，色值写死且 %23 编码） ---- */
 .typomd .ProseMirror li[data-checked='true'],
 .typomd .ProseMirror li[data-checked='false'] {
   list-style: none;
-  position: relative;
-  padding-left: var(--typomd-space-6);
+  display: flex;
+  gap: 0.5em;
+  align-items: baseline;
 }
 .typomd .ProseMirror li[data-checked]::before {
   content: '';
-  position: absolute;
-  left: 0;
-  top: 0.35em;
-  width: 0.85em;
-  height: 0.85em;
-  box-sizing: border-box;
-  border: 1px solid var(--typomd-color-accent);
+  width: 0.8125em;
+  height: 0.8125em;
+  flex: none;
+  align-self: center;
+  border: 1px solid var(--typomd-color-border-strong);
   border-radius: var(--typomd-radius-sm);
   background: var(--typomd-color-bg);
 }
 .typomd .ProseMirror li[data-checked='true']::before {
   background: var(--typomd-color-accent);
+  border-color: var(--typomd-color-accent);
+  /* 亮色对钩：白色写死于 SVG（accent-contrast 语义），%23 编码 */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-size: 70%;
+  background-repeat: no-repeat;
+  background-position: center;
 }
-/* 勾：accent 底上用 contrast 色画对钩（无原生 checkbox） */
-.typomd .ProseMirror li[data-checked='true']::after {
-  content: '';
-  position: absolute;
-  left: 0.16em;
-  top: 0.5em;
-  width: 0.38em;
-  height: 0.2em;
-  box-sizing: border-box;
-  border: 1.5px solid var(--typomd-color-accent-contrast);
-  border-top: none;
-  border-right: none;
-  transform: rotate(-45deg);
-  pointer-events: none;
-}
-.typomd .ProseMirror li[data-checked='true'] { color: var(--typomd-color-text-secondary); }
-.typomd .ProseMirror li[data-checked='true'] > p { text-decoration: line-through; }
+/* 既有 li[data-checked] 的 position:relative/padding-left 与 ::before/::after 绝对定位规则删除
+   （flex 布局替代；完成态文字保持 text-secondary→改 text-muted + 删除线） */
+.typomd .ProseMirror li[data-checked='true'] { color: var(--typomd-color-text-muted); }
+.typomd .ProseMirror li[data-checked='true'] > p { text-decoration: line-through; margin: 0; }
 
-/* ---- 引用（§4：Notion 引用不是灰色——边框与文字都用 color-text） ---- */
+/* ---- 引用（§5.1：3px 全强度墨条 → 2px border-strong） ---- */
 .typomd .ProseMirror blockquote {
-  border-left: 3px solid var(--typomd-color-text);
+  border-left: 2px solid var(--typomd-color-border-strong);
   color: var(--typomd-color-text);
   margin: 0;
-  padding: 0 var(--typomd-space-3);
+  padding: var(--typomd-space-0_5) var(--typomd-space-3);
 }
 
-/* ---- 行内代码（§4） ---- */
+/* ---- 行内代码（§5.1：文字色独立 code-text） ---- */
 .typomd .ProseMirror code {
+  /* font-family/font-size/padding/radius 不变 */
   font-family: var(--typomd-font-mono);
   font-size: 0.85em;
   background: var(--typomd-color-code-bg);
+  color: var(--typomd-color-code-text);
   border-radius: var(--typomd-radius-sm);
   padding: 0.15em 0.35em;
 }
 
-/* ---- 代码块（§4：卡片化） ---- */
+/* ---- 代码块（§5.1：独立行高 1.55，不走内容 1.6） ---- */
 .typomd .ProseMirror pre {
+  /* 底/边框/radius-lg/padding 不变（raised 阶随令牌改值自动拉开） */
   font-family: var(--typomd-font-mono);
   font-size: 0.85em;
   background: var(--typomd-color-code-bg);
@@ -202,6 +206,7 @@ exports[`theme tokens > buildCss/buildAutoCss 输出快照（§11：含 content.
   border-radius: var(--typomd-radius-lg);
   padding: var(--typomd-space-3) var(--typomd-space-4);
   overflow-x: auto;
+  line-height: 1.55;
 }
 .typomd .ProseMirror pre code {
   background: none;
@@ -210,21 +215,27 @@ exports[`theme tokens > buildCss/buildAutoCss 输出快照（§11：含 content.
   font-size: inherit;
 }
 
-/* ---- 表格（§4） ---- */
+/* ---- 表格（§5.1：去竖向边框，hairline + 行 hover；裸 table 无 wrapper，接受直角） ---- */
 .typomd .ProseMirror table { border-collapse: collapse; width: 100%; }
 .typomd .ProseMirror th,
 .typomd .ProseMirror td {
-  border: 1px solid var(--typomd-color-border);
-  padding: 6px 10px;
+  border: none;
+  border-bottom: 1px solid var(--typomd-color-border-subtle);
+  padding: var(--typomd-space-2) var(--typomd-space-3);
   text-align: left;
 }
-.typomd .ProseMirror th { background: var(--typomd-color-bg-secondary); font-weight: 600; }
+.typomd .ProseMirror th {
+  background: var(--typomd-color-bg-secondary);
+  font-weight: 600;
+  border-bottom: 1px solid var(--typomd-color-border-strong);
+}
+.typomd .ProseMirror tbody tr:hover { background: var(--typomd-color-hover); }
 
-/* ---- 分割线（§4） ---- */
+/* ---- 分割线（§5.1：border → border-strong；margin space-5 → space-6） ---- */
 .typomd .ProseMirror hr {
   border: none;
-  border-top: 1px solid var(--typomd-color-border);
-  margin: var(--typomd-space-5) 0;
+  border-top: 1px solid var(--typomd-color-border-strong);
+  margin: var(--typomd-space-6) 0;
 }
 
 /* ---- 链接（§4） ---- */
@@ -239,16 +250,33 @@ exports[`theme tokens > buildCss/buildAutoCss 输出快照（§11：含 content.
 /* ---- 图片（§4） ---- */
 .typomd .ProseMirror img { max-width: 100%; border-radius: var(--typomd-radius-md); }
 
-/* ---- 选区 ---- */
+/* ---- 选区与光标（§5.1） ---- */
 .typomd .ProseMirror ::selection { background: var(--typomd-color-selection); }
+.typomd .ProseMirror { caret-color: var(--typomd-color-text); } /* 防嵌入方全局 caret-color 污染 */
 
-/* ---- math/mermaid 失败降级角标 ---- */
+/* ---- math/mermaid 失败降级角标（§5.1：danger 新值 + 8% alpha 合成底） ---- */
 .typomd-node-error {
   color: var(--typomd-color-danger);
+  background: color-mix(in srgb, var(--typomd-color-danger) 8%, transparent);
   border: 1px dashed var(--typomd-color-danger);
   border-radius: var(--typomd-radius-md);
   padding: var(--typomd-space-1) var(--typomd-space-2);
 }
+
+/* ---- 加载骨架块（§5.3/§5.4：mermaid/math 渲染中占位） ---- */
+.typomd-skeleton {
+  width: 100%;
+  height: 96px;
+  background: var(--typomd-color-skeleton);
+  border-radius: var(--typomd-radius-lg);
+}
+
+/* ---- mermaid 容器（§5.3：图是内容不是 chrome，不另加底框） ---- */
+.typomd-mermaid { display: flex; justify-content: center; padding: var(--typomd-space-3) 0; }
+.typomd-mermaid svg { max-width: 100%; height: auto; }
+
+/* ---- math 块级公式（§5.4） ---- */
+.typomd .ProseMirror .katex-display { padding: var(--typomd-space-2) 0; margin: 0; }
 
 /* KaTeX 官方样式由 build-css.mjs 内联（katex.min.css + dist/fonts/*.woff2）。
    不要在此藏 .katex-html——官方 CSS 才是跨浏览器公式层。 */
@@ -268,6 +296,7 @@ exports[`theme tokens > buildCss/buildAutoCss 输出快照（§11：含 content.
      需补 .ProseMirror { position: relative } */
   position: absolute;
   pointer-events: none;
+  font-style: normal; /* 防嵌入方 italic 继承 */
 }
 
 /* content-dark.css — 类限定的暗色内容规则。
@@ -276,6 +305,12 @@ exports[`theme tokens > buildCss/buildAutoCss 输出快照（§11：含 content.
 /* Shiki 双主题（core codeHighlight preset 输出 --shiki-light/--shiki-dark 变量） */
 .typomd-dark .ProseMirror pre span {
   color: var(--shiki-dark) !important;
+}
+
+/* 任务列表暗色对钩（§5.1：暗色 accent 是近白，对钩必须用暗色 accent-contrast 近黑；
+   data-URI 隔离文档不继承 currentColor，色值写死 + %23 编码） */
+.typomd-dark .ProseMirror li[data-checked='true']::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='%231a1a1a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
 /* katex.min.css（构建期内联，woff2 见 dist/fonts） */
@@ -404,83 +439,87 @@ exports[`theme tokens > buildCss/buildAutoCss 输出快照（§11：含 content.
 }
 /* 不设 max-width：嵌入方自行约束（§4） */
 
-/* ---- 块节奏（§4） ---- */
-.typomd .ProseMirror > * + * { margin-top: var(--typomd-block-gap, 6px); }
+/* ---- 块节奏（§5.1：0.5em=8px，保持变量可覆写） ---- */
+.typomd .ProseMirror > * + * { margin-top: var(--typomd-block-gap, 0.5em); }
+
+/* ---- 标题（§5.1：独立色/行高/字距；margin 用 rem 锚定根字号——em 会相对标题自身字号放大；
+     字号仍用 em 相对正文缩放。前距 = 块间距 ×3（h1 24px）/ ×2.5（h2/h3 20px） ---- */
 .typomd .ProseMirror h1,
 .typomd .ProseMirror h2,
-.typomd .ProseMirror h3 { font-weight: 600; letter-spacing: -0.01em; }
-.typomd .ProseMirror h1 { font-size: 1.875em; margin-top: 1.2em; margin-bottom: 0; }
-.typomd .ProseMirror h2 { font-size: 1.5em; margin-top: 1.1em; margin-bottom: 0; }
-.typomd .ProseMirror h3 { font-size: 1.25em; margin-top: 1em; margin-bottom: 0; }
+.typomd .ProseMirror h3 {
+  color: var(--typomd-color-heading);
+  line-height: var(--typomd-line-height-heading);
+  letter-spacing: var(--typomd-letter-spacing-heading);
+}
+.typomd .ProseMirror h1 { font-size: 1.953125em; font-weight: var(--typomd-font-weight-bold); margin-top: 1.5rem; margin-bottom: 0; }
+.typomd .ProseMirror h2 { font-size: 1.5625em; font-weight: var(--typomd-font-weight-semibold); margin-top: 1.25rem; margin-bottom: 0; }
+.typomd .ProseMirror h3 { font-size: 1.25em; font-weight: var(--typomd-font-weight-semibold); margin-top: 1.25rem; margin-bottom: 0; }
+/* 首子元素 margin-top 归零（不变） */
 .typomd .ProseMirror > h1:first-child,
 .typomd .ProseMirror > h2:first-child,
 .typomd .ProseMirror > h3:first-child { margin-top: 0; }
 
-/* ---- 列表（§4） ---- */
+/* ---- 列表（§5.1：li 间距 2px → space-1） ---- */
 .typomd .ProseMirror ul,
 .typomd .ProseMirror ol { padding-left: 1.5em; margin: 0; }
-.typomd .ProseMirror li { margin-top: 2px; }
+.typomd .ProseMirror li { margin-top: var(--typomd-space-1); }
 .typomd .ProseMirror li > p { margin: 0; }
 
-/* 任务列表（GFM；DOM 侦查为 li[data-checked] 无原生 checkbox，用 ::before 画勾选框 + accent 色） */
+/* ---- 任务列表（§5.1：flex 对齐替代 magic number；::after 整套删除；
+     对钩用 ::before 背景 data-URI——隔离文档不继承 currentColor，色值写死且 %23 编码） ---- */
 .typomd .ProseMirror li[data-checked='true'],
 .typomd .ProseMirror li[data-checked='false'] {
   list-style: none;
-  position: relative;
-  padding-left: var(--typomd-space-6);
+  display: flex;
+  gap: 0.5em;
+  align-items: baseline;
 }
 .typomd .ProseMirror li[data-checked]::before {
   content: '';
-  position: absolute;
-  left: 0;
-  top: 0.35em;
-  width: 0.85em;
-  height: 0.85em;
-  box-sizing: border-box;
-  border: 1px solid var(--typomd-color-accent);
+  width: 0.8125em;
+  height: 0.8125em;
+  flex: none;
+  align-self: center;
+  border: 1px solid var(--typomd-color-border-strong);
   border-radius: var(--typomd-radius-sm);
   background: var(--typomd-color-bg);
 }
 .typomd .ProseMirror li[data-checked='true']::before {
   background: var(--typomd-color-accent);
+  border-color: var(--typomd-color-accent);
+  /* 亮色对钩：白色写死于 SVG（accent-contrast 语义），%23 编码 */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-size: 70%;
+  background-repeat: no-repeat;
+  background-position: center;
 }
-/* 勾：accent 底上用 contrast 色画对钩（无原生 checkbox） */
-.typomd .ProseMirror li[data-checked='true']::after {
-  content: '';
-  position: absolute;
-  left: 0.16em;
-  top: 0.5em;
-  width: 0.38em;
-  height: 0.2em;
-  box-sizing: border-box;
-  border: 1.5px solid var(--typomd-color-accent-contrast);
-  border-top: none;
-  border-right: none;
-  transform: rotate(-45deg);
-  pointer-events: none;
-}
-.typomd .ProseMirror li[data-checked='true'] { color: var(--typomd-color-text-secondary); }
-.typomd .ProseMirror li[data-checked='true'] > p { text-decoration: line-through; }
+/* 既有 li[data-checked] 的 position:relative/padding-left 与 ::before/::after 绝对定位规则删除
+   （flex 布局替代；完成态文字保持 text-secondary→改 text-muted + 删除线） */
+.typomd .ProseMirror li[data-checked='true'] { color: var(--typomd-color-text-muted); }
+.typomd .ProseMirror li[data-checked='true'] > p { text-decoration: line-through; margin: 0; }
 
-/* ---- 引用（§4：Notion 引用不是灰色——边框与文字都用 color-text） ---- */
+/* ---- 引用（§5.1：3px 全强度墨条 → 2px border-strong） ---- */
 .typomd .ProseMirror blockquote {
-  border-left: 3px solid var(--typomd-color-text);
+  border-left: 2px solid var(--typomd-color-border-strong);
   color: var(--typomd-color-text);
   margin: 0;
-  padding: 0 var(--typomd-space-3);
+  padding: var(--typomd-space-0_5) var(--typomd-space-3);
 }
 
-/* ---- 行内代码（§4） ---- */
+/* ---- 行内代码（§5.1：文字色独立 code-text） ---- */
 .typomd .ProseMirror code {
+  /* font-family/font-size/padding/radius 不变 */
   font-family: var(--typomd-font-mono);
   font-size: 0.85em;
   background: var(--typomd-color-code-bg);
+  color: var(--typomd-color-code-text);
   border-radius: var(--typomd-radius-sm);
   padding: 0.15em 0.35em;
 }
 
-/* ---- 代码块（§4：卡片化） ---- */
+/* ---- 代码块（§5.1：独立行高 1.55，不走内容 1.6） ---- */
 .typomd .ProseMirror pre {
+  /* 底/边框/radius-lg/padding 不变（raised 阶随令牌改值自动拉开） */
   font-family: var(--typomd-font-mono);
   font-size: 0.85em;
   background: var(--typomd-color-code-bg);
@@ -488,6 +527,7 @@ exports[`theme tokens > buildCss/buildAutoCss 输出快照（§11：含 content.
   border-radius: var(--typomd-radius-lg);
   padding: var(--typomd-space-3) var(--typomd-space-4);
   overflow-x: auto;
+  line-height: 1.55;
 }
 .typomd .ProseMirror pre code {
   background: none;
@@ -496,21 +536,27 @@ exports[`theme tokens > buildCss/buildAutoCss 输出快照（§11：含 content.
   font-size: inherit;
 }
 
-/* ---- 表格（§4） ---- */
+/* ---- 表格（§5.1：去竖向边框，hairline + 行 hover；裸 table 无 wrapper，接受直角） ---- */
 .typomd .ProseMirror table { border-collapse: collapse; width: 100%; }
 .typomd .ProseMirror th,
 .typomd .ProseMirror td {
-  border: 1px solid var(--typomd-color-border);
-  padding: 6px 10px;
+  border: none;
+  border-bottom: 1px solid var(--typomd-color-border-subtle);
+  padding: var(--typomd-space-2) var(--typomd-space-3);
   text-align: left;
 }
-.typomd .ProseMirror th { background: var(--typomd-color-bg-secondary); font-weight: 600; }
+.typomd .ProseMirror th {
+  background: var(--typomd-color-bg-secondary);
+  font-weight: 600;
+  border-bottom: 1px solid var(--typomd-color-border-strong);
+}
+.typomd .ProseMirror tbody tr:hover { background: var(--typomd-color-hover); }
 
-/* ---- 分割线（§4） ---- */
+/* ---- 分割线（§5.1：border → border-strong；margin space-5 → space-6） ---- */
 .typomd .ProseMirror hr {
   border: none;
-  border-top: 1px solid var(--typomd-color-border);
-  margin: var(--typomd-space-5) 0;
+  border-top: 1px solid var(--typomd-color-border-strong);
+  margin: var(--typomd-space-6) 0;
 }
 
 /* ---- 链接（§4） ---- */
@@ -525,16 +571,33 @@ exports[`theme tokens > buildCss/buildAutoCss 输出快照（§11：含 content.
 /* ---- 图片（§4） ---- */
 .typomd .ProseMirror img { max-width: 100%; border-radius: var(--typomd-radius-md); }
 
-/* ---- 选区 ---- */
+/* ---- 选区与光标（§5.1） ---- */
 .typomd .ProseMirror ::selection { background: var(--typomd-color-selection); }
+.typomd .ProseMirror { caret-color: var(--typomd-color-text); } /* 防嵌入方全局 caret-color 污染 */
 
-/* ---- math/mermaid 失败降级角标 ---- */
+/* ---- math/mermaid 失败降级角标（§5.1：danger 新值 + 8% alpha 合成底） ---- */
 .typomd-node-error {
   color: var(--typomd-color-danger);
+  background: color-mix(in srgb, var(--typomd-color-danger) 8%, transparent);
   border: 1px dashed var(--typomd-color-danger);
   border-radius: var(--typomd-radius-md);
   padding: var(--typomd-space-1) var(--typomd-space-2);
 }
+
+/* ---- 加载骨架块（§5.3/§5.4：mermaid/math 渲染中占位） ---- */
+.typomd-skeleton {
+  width: 100%;
+  height: 96px;
+  background: var(--typomd-color-skeleton);
+  border-radius: var(--typomd-radius-lg);
+}
+
+/* ---- mermaid 容器（§5.3：图是内容不是 chrome，不另加底框） ---- */
+.typomd-mermaid { display: flex; justify-content: center; padding: var(--typomd-space-3) 0; }
+.typomd-mermaid svg { max-width: 100%; height: auto; }
+
+/* ---- math 块级公式（§5.4） ---- */
+.typomd .ProseMirror .katex-display { padding: var(--typomd-space-2) 0; margin: 0; }
 
 /* KaTeX 官方样式由 build-css.mjs 内联（katex.min.css + dist/fonts/*.woff2）。
    不要在此藏 .katex-html——官方 CSS 才是跨浏览器公式层。 */
@@ -554,6 +617,7 @@ exports[`theme tokens > buildCss/buildAutoCss 输出快照（§11：含 content.
      需补 .ProseMirror { position: relative } */
   position: absolute;
   pointer-events: none;
+  font-style: normal; /* 防嵌入方 italic 继承 */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -563,6 +627,12 @@ exports[`theme tokens > buildCss/buildAutoCss 输出快照（§11：含 content.
   /* Shiki 双主题（core codeHighlight preset 输出 --shiki-light/--shiki-dark 变量） */
   .typomd .ProseMirror pre span {
     color: var(--shiki-dark) !important;
+  }
+
+  /* 任务列表暗色对钩（§5.1：暗色 accent 是近白，对钩必须用暗色 accent-contrast 近黑；
+     data-URI 隔离文档不继承 currentColor，色值写死 + %23 编码） */
+  .typomd .ProseMirror li[data-checked='true']::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='%231a1a1a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   }
 }
 

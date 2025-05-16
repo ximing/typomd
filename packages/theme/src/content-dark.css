@@ -5,3 +5,9 @@
 .typomd-dark .ProseMirror pre span {
   color: var(--shiki-dark) !important;
 }
+
+/* 任务列表暗色对钩（§5.1：暗色 accent 是近白，对钩必须用暗色 accent-contrast 近黑；
+   data-URI 隔离文档不继承 currentColor，色值写死 + %23 编码） */
+.typomd-dark .ProseMirror li[data-checked='true']::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='%231a1a1a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}

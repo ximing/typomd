@@ -116,13 +116,24 @@ describe('theme tokens', () => {
       '.typomd .ProseMirror blockquote', '.typomd .ProseMirror pre',
       '.typomd .ProseMirror table', '.typomd .ProseMirror th',
       '.typomd .ProseMirror hr', '.typomd .ProseMirror a', '.typomd .ProseMirror img',
-      '--typomd-block-gap, 6px',
+      '--typomd-block-gap, 0.5em',   // §5.1：8px = 0.5 × 16px 正文
     ]) {
       expect(css).toContain(sel)
     }
-    // 任务列表（选择器以 Step 1 侦查到的实际 DOM 为准）
+    // 任务列表（§5.1：::after 整套删除，对钩改 ::before 背景 data-URI）
     expect(css).toContain('data-checked')
-    expect(css).toContain("li[data-checked='true']::after")
+    expect(css).toContain("li[data-checked='true']::before")
+    expect(css).not.toContain("li[data-checked='true']::after")
+    expect(css).toContain('data:image/svg+xml') // 对钩 data-URI
+    // §5.1 关键规则存在性
+    for (const sel of [
+      'var(--typomd-color-heading)', 'var(--typomd-line-height-heading)',
+      'var(--typomd-letter-spacing-heading)', 'var(--typomd-color-code-text)',
+      'var(--typomd-color-border-subtle)', 'var(--typomd-color-skeleton)',
+      'caret-color', 'font-style: normal', 'color-mix(in srgb, var(--typomd-color-danger) 8%, transparent)',
+    ]) {
+      expect(css).toContain(sel)
+    }
     // 官方 katex.min.css 内联 + woff2 字体路径
     expect(css).toContain('font-family:KaTeX_Main')
     expect(css).toContain('url(./fonts/')
