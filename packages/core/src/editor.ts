@@ -39,7 +39,11 @@ export async function createEditor(options: CreateEditorOptions): Promise<Editor
   for (const [name, loader] of Object.entries(featureLoaders)) {
     if (!features[name as keyof typeof features]) continue
     try {
-      plugins.push(...loader({ onError, ...(options.onUploadImage ? { onUploadImage: options.onUploadImage } : {}) }))
+      plugins.push(...loader({
+        onError,
+        ...(options.onUploadImage ? { onUploadImage: options.onUploadImage } : {}),
+        ...(options.mermaidThemes ? { mermaidThemes: options.mermaidThemes } : {}),
+      }))
     } catch (cause) {
       onError({ source: `preset:${name}`, cause })
     }

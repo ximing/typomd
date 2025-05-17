@@ -33,4 +33,6 @@ export interface CreateEditorOptions {
   onChangeDebounce?: number
   onError?: (error: EditorError) => void
   onUploadImage?: (file: File) => Promise<{ src: string; alt?: string }>
+  /** mermaid 明/暗双主题覆写（§5.3）；缺省用与令牌同步的内置双主题 */
+  mermaidThemes?: { light?: import('mermaid').MermaidConfig; dark?: import('mermaid').MermaidConfig }
 }

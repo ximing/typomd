@@ -1,6 +1,7 @@
 // presets/index.ts
 import type { MilkdownPlugin } from '@milkdown/ctx'
 import type { CreateEditorOptions, EditorError } from '../types'
+import type { MermaidFeatureConfig } from './mermaid/ctx'
 import { mathPreset } from './math/index'
 import { mermaidPreset } from './mermaid/index'
 import { codeHighlightPreset } from './code-highlight'
@@ -8,6 +9,7 @@ import { codeHighlightPreset } from './code-highlight'
 export interface FeatureContext {
   onError: (error: EditorError) => void
   onUploadImage?: CreateEditorOptions['onUploadImage']
+  mermaidThemes?: MermaidFeatureConfig['themes']
 }
 
 /**
