@@ -111,6 +111,11 @@ function createMermaidView(onError: (e: EditorError) => void, themes?: ThemeSet)
         preview.appendChild(sk)
       }
       const kickoff = () => {
+        // dom 现已挂载到文档（ProseMirror 构造后同步挂载）：解析 .typomd-root 祖先并观察其 class
+        // （嵌入方把主题类挂在库根的场景，§5.3）。构造期 dom 未挂载、closest 拿不到祖先，故延迟到此。
+        // 必须在 IntersectionObserver 早退之前执行——jsdom 无 IO 走早退分支，libRoot 观察仍需建立。
+        const libRoot = dom.closest('.typomd-root')
+        if (libRoot instanceof HTMLElement) themeObserver?.observe(libRoot, { attributes: true, attributeFilter: ['class'] })
         if (typeof IntersectionObserver === 'undefined') { void render(value); return }
         observer = new IntersectionObserver((entries) => {
           if (entries.some((e) => e.isIntersecting)) {
@@ -124,14 +129,13 @@ function createMermaidView(onError: (e: EditorError) => void, themes?: ThemeSet)
     }
     lazyRender(node.attrs.value as string)
 
-    // 主题变化重渲染（§5.3）：观察 documentElement class（demo 把主题类挂在 <html>）
-    // 以及最近的 .typomd-root 祖先 class（嵌入方把类挂在库根）。挂在中间层容器属已知限制（文档明示）。
+    // 主题变化重渲染（§5.3）：documentElement 是全局节点、不依赖 dom 挂载状态，可同步观察
+    // （demo 把主题类挂在 <html>）。.typomd-root 祖先依赖 dom 挂载后的祖先链，延至 kickoff 内解析。
+    // 挂在中间层容器属已知限制（文档明示）。
     themeObserver = new MutationObserver(() => {
       if (rendered) void render(node.attrs.value as string)
     })
     themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
-    const libRoot = dom.closest('.typomd-root')
-    if (libRoot instanceof HTMLElement) themeObserver.observe(libRoot, { attributes: true, attributeFilter: ['class'] })
 
     // 点击进入源码编辑态（spec §5.2 Typora 式）
     const startEdit = () => {

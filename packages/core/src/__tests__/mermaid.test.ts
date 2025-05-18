@@ -146,4 +146,26 @@ describe('mermaid preset', () => {
     expect(mermaid.initialize).toHaveBeenCalledWith(expect.objectContaining({ theme: 'forest' }))
     handle.destroy()
   })
+
+  test('主题类变化触发重渲染（MutationObserver 挂 .typomd-root 库根，§5.3）', async () => {
+    // 嵌入方把主题类挂在 .typomd-root（React wrapper 库根），而非 <html>。
+    // 专属代码串 M-->N（B1 缓存隔离）。
+    const libRoot = document.createElement('div')
+    libRoot.classList.add('typomd-root')
+    document.body.appendChild(libRoot)
+    const root = document.createElement('div')
+    libRoot.appendChild(root)
+    const handle = await createEditor({
+      root, defaultValue: '```mermaid\ngraph TD\n    M-->N\n```', features: { mermaid: true },
+    })
+    await vi.waitFor(() => expect(root.querySelector('svg')).not.toBeNull())
+    const mermaid = (await import('mermaid')).default
+    const before = (mermaid.render as ReturnType<typeof vi.fn>).mock.calls.length
+    // 在 .typomd-root（非 documentElement）上切换主题类——必须触发重渲染
+    libRoot.classList.add('typomd-dark')
+    await vi.waitFor(() =>
+      expect((mermaid.render as ReturnType<typeof vi.fn>).mock.calls.length).toBeGreaterThan(before))
+    libRoot.classList.remove('typomd-dark')
+    handle.destroy()
+  })
 })
