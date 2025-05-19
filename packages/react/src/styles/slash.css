@@ -1,4 +1,4 @@
-/* slash.css — 斜杠命令菜单（§5.5：288px 宽 / 瓷贴 / 分组标题；滚动条不定制） */
+/* slash.css — 斜杠命令菜单（§5.5：288px 宽 / 瓷贴 / 分组标题；§5.7 滚动条定制） */
 .typomd-slash {
   position: fixed; /* 与 useFloating strategy:fixed 对齐；coordsAtPos 是视口坐标 */
   z-index: var(--typomd-z-slash);
@@ -18,6 +18,7 @@
 .typomd-slash-group {
   padding: var(--typomd-space-1_5) var(--typomd-space-2) var(--typomd-space-0_5);
   font-size: var(--typomd-font-size-ui-sm);
+  letter-spacing: 0.04em; /* §5.7：分组标题加字距；不转大写（中文分组名转大写无意义，保持原样） */
   color: var(--typomd-color-text-muted);
   user-select: none;
 }
@@ -32,10 +33,16 @@
   text-align: left;
   cursor: pointer;
 }
-.typomd-slash-item[data-selected='true'] { background: var(--typomd-color-hover); }
-/* 空结果态：沿用现有文案，muted 居中（§5.5） */
+.typomd-slash-item[data-selected='true'] { background: var(--typomd-color-accent-subtle); } /* §5.7：color-hover → accent-subtle，与 toolbar 激活态同语义 */
+/* §5.7：选中行瓷贴 border 升档 */
+.typomd-slash-item[data-selected='true'] .typomd-slash-item-icon {
+  border-color: var(--typomd-color-border-strong);
+}
+/* 空结果态：沿用现有文案，muted 居中（§5.5）；上下 padding space-3（§5.7 微调） */
 .typomd-slash-item[aria-disabled='true'] {
   justify-content: center;
+  padding-top: var(--typomd-space-3);
+  padding-bottom: var(--typomd-space-3);
   color: var(--typomd-color-text-muted);
   cursor: default;
 }
@@ -65,3 +72,12 @@
   font-size: var(--typomd-font-size-ui-sm);
   color: var(--typomd-color-text-muted);
 }
+
+/* 滚动条定制（§5.7：推翻上轮「不定制」决策——系统默认滚动条在暗色浮层里出现亮色轨道，突兀） */
+.typomd-slash {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: var(--typomd-color-border-strong) transparent;
+}
+.typomd-slash::-webkit-scrollbar { width: 8px; }
+.typomd-slash::-webkit-scrollbar-thumb { background: var(--typomd-color-border-strong); border-radius: var(--typomd-radius-full); }
+.typomd-slash::-webkit-scrollbar-track { background: transparent; }

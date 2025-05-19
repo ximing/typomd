@@ -9,6 +9,7 @@
   box-sizing: border-box;
   padding: var(--typomd-space-1_5) var(--typomd-space-2);
   border-bottom: 1px solid var(--typomd-color-border);
+  background: var(--typomd-color-bg); /* §5.5：显式容器底，防嵌入方透明底穿透 */
 }
 .typomd-toolbar-button {
   position: relative; /* tooltip ::after 定位上下文 */
@@ -45,7 +46,7 @@
 .typomd-toolbar-separator {
   flex-shrink: 0;
   width: 1px;
-  height: 16px;
+  height: 18px; /* §5.5：16→18px，视觉重心与 28px 按钮对齐 */
   margin: 0 var(--typomd-space-1);
   background: var(--typomd-color-border-strong);
 }
@@ -66,6 +67,7 @@
   white-space: nowrap;
   pointer-events: none;
   opacity: 0;
+  box-shadow: var(--typomd-shadow-tooltip); /* §5.5：浮块阴影精致度 */
   transition: opacity var(--typomd-duration-fast) var(--typomd-ease-standard);
 }
 .typomd-toolbar [data-tooltip]:hover::after,

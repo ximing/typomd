@@ -50,6 +50,7 @@
   white-space: nowrap;
   pointer-events: none;
   opacity: 0;
+  box-shadow: var(--typomd-shadow-tooltip); /* §5.6：向上浮块同样加 shadow-tooltip */
   transition: opacity var(--typomd-duration-fast) var(--typomd-ease-standard);
 }
 .typomd-floating [data-tooltip]:hover::after,
