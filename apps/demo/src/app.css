@@ -1,10 +1,15 @@
 /* app.css — demo 自身门面样式，全部复用库令牌（dogfooding，§7） */
+
+/* ---- 页面分层（§5.8/§3：canvas 暗于 surface；240ms 主题过渡只过渡背景与色，不过渡阴影——掉帧） ---- */
 .demo-page {
   min-height: 100vh;
-  background: var(--typomd-color-bg);
+  background: var(--typomd-color-canvas);
   color: var(--typomd-color-text);
   font-family: var(--typomd-font-text);
+  transition: background-color var(--typomd-duration-slow) var(--typomd-ease-standard),
+              color var(--typomd-duration-slow) var(--typomd-ease-standard);
 }
+
 .demo-header {
   display: flex;
   align-items: center;
@@ -15,24 +20,58 @@
   margin: 0 auto;
   padding: var(--typomd-space-5) var(--typomd-space-6) var(--typomd-space-3);
 }
+
+/* ---- 顶栏品牌区（§5.8：logo mark + display 字号标题 + 独立行 tagline） ---- */
 .demo-brand {
   display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
+  align-items: center;
   gap: var(--typomd-space-3);
   min-width: 0;
   flex: 1;
 }
-.demo-title { font-size: 20px; font-weight: 700; margin: 0; }
-.demo-tagline { margin: 0; font-size: var(--typomd-font-size-ui); color: var(--typomd-color-text-muted); }
+.demo-logo {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  border-radius: var(--typomd-radius-md);
+  background: var(--typomd-color-accent);
+  color: var(--typomd-color-accent-contrast);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--typomd-font-size-ui-sm);
+  font-weight: var(--typomd-font-weight-bold);
+}
+.demo-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+.demo-title {
+  margin: 0;
+  font-size: var(--typomd-font-size-display);
+  font-weight: var(--typomd-font-weight-bold);
+  color: var(--typomd-color-heading);
+  line-height: var(--typomd-line-height-heading);
+}
+.demo-tagline {
+  margin: 0;
+  font-size: var(--typomd-font-size-ui);
+  color: var(--typomd-color-text-muted);
+}
+
 .demo-header-actions {
   display: flex;
   align-items: center;
   flex-shrink: 0;
   gap: var(--typomd-space-3);
 }
-.demo-link { color: var(--typomd-color-text-secondary); font-size: var(--typomd-font-size-ui); text-decoration: none; }
+.demo-link {
+  color: var(--typomd-color-text-secondary);
+  font-size: var(--typomd-font-size-ui);
+  text-decoration: none;
+}
 .demo-link:hover { color: var(--typomd-color-text); }
+
 .demo-main {
   max-width: 780px;
   margin: 0 auto;
@@ -41,19 +80,25 @@
   flex-direction: column;
   gap: var(--typomd-space-5);
 }
+
 .demo-editor-card {
   background: var(--typomd-color-bg);
-  border-radius: var(--typomd-radius-lg);
-  box-shadow: var(--typomd-shadow-popover); /* 含 1px 环，不再叠 border */
+  border-radius: var(--typomd-radius-xl);
+  box-shadow: var(--typomd-shadow-sm); /* 卡片静止 shadow-sm；popover 级留给浮层（修正上轮过重） */
+  transition: background-color var(--typomd-duration-slow) var(--typomd-ease-standard);
   /* 故意无 overflow：浮层（floating/slash）绝对定位于 .typomd-body，
      任何 overflow 裁剪都会切浮层（§9 已知限制——demo 自己不制造该限制） */
 }
+
+/* ---- 区块标题（§5.8） ---- */
 .demo-section-title {
   margin: 0 0 var(--typomd-space-2);
   font-size: var(--typomd-font-size-ui);
-  font-weight: 600;
+  font-weight: var(--typomd-font-weight-semibold);
   color: var(--typomd-color-text-muted);
+  letter-spacing: 0.04em;
 }
+
 .demo-switches { display: flex; flex-wrap: wrap; gap: var(--typomd-space-4); }
 .demo-switch {
   position: relative;
@@ -73,10 +118,12 @@
   opacity: 0;
   cursor: pointer;
 }
+
+/* ---- switch（§5.8：36×20 track / 16px knob / 位移 16px / 焦点环内层 color-canvas） ---- */
 .demo-switch-track {
   position: relative;
-  width: 32px;
-  height: 18px;
+  width: 36px;
+  height: 20px;
   flex: none;
   border-radius: var(--typomd-radius-full);
   background: var(--typomd-color-border-strong);
@@ -87,41 +134,69 @@
   position: absolute;
   top: 2px;
   left: 2px;
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   border-radius: var(--typomd-radius-full);
   background: var(--typomd-color-bg);
   transition: transform var(--typomd-duration-fast) var(--typomd-ease-standard);
 }
 .demo-switch input:checked + .demo-switch-track { background: var(--typomd-color-accent); }
-.demo-switch input:checked + .demo-switch-track::after { transform: translateX(14px); }
+.demo-switch input:checked + .demo-switch-track::after { transform: translateX(16px); } /* 36−16−4=16 */
 .demo-switch input:focus-visible + .demo-switch-track {
-  box-shadow: 0 0 0 2px var(--typomd-color-bg), 0 0 0 4px var(--typomd-color-focus-ring);
+  /* 内层环取元素所在面底色——demo 页面元素所在面是 canvas（§3 focus 态口径） */
+  box-shadow: 0 0 0 2px var(--typomd-color-canvas), 0 0 0 4px var(--typomd-color-focus-ring);
 }
+.demo-switch-label {
+  font-size: var(--typomd-font-size-ui);
+  color: var(--typomd-color-text-secondary);
+}
+
 .demo-controls { display: flex; flex-wrap: wrap; gap: var(--typomd-space-3); }
+
+/* ---- demo-btn（§5.8：hover 提升/press 下沉/双层焦点环内层 color-canvas） ---- */
 .demo-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--typomd-space-1_5);
   padding: var(--typomd-space-1_5) var(--typomd-space-3);
   border: 1px solid var(--typomd-color-border-strong);
   border-radius: var(--typomd-radius-md);
-  background: var(--typomd-color-bg-elevated);
+  background: var(--typomd-color-bg);
   color: var(--typomd-color-text);
   font-size: var(--typomd-font-size-ui);
   white-space: nowrap;
   cursor: pointer;
+  transition: background-color var(--typomd-duration-fast) var(--typomd-ease-standard),
+              box-shadow var(--typomd-duration-slow) var(--typomd-ease-standard);
 }
-.demo-btn:hover { background: var(--typomd-color-hover); }
+.demo-btn:hover {
+  background: var(--typomd-color-hover);
+  box-shadow: var(--typomd-shadow-sm);
+}
+.demo-btn:active {
+  background: var(--typomd-color-active);
+  transform: translateY(0.5px);
+}
+.demo-btn:focus-visible {
+  outline: none;
+  /* 内层环取元素所在面底色——demo 页面元素所在面是 canvas（§3 focus 态口径） */
+  box-shadow: 0 0 0 2px var(--typomd-color-canvas), 0 0 0 4px var(--typomd-color-focus-ring);
+}
+
+/* ---- 输出卡片（§5.8：bg 底 + border-subtle + radius-xl；卡片头 bg-secondary） ---- */
 .demo-output-card {
-  background: var(--typomd-color-bg-secondary);
-  border: 1px solid var(--typomd-color-border);
-  border-radius: var(--typomd-radius-lg);
+  background: var(--typomd-color-bg);
+  border: 1px solid var(--typomd-color-border-subtle);
+  border-radius: var(--typomd-radius-xl);
   overflow: hidden;
 }
 .demo-output-title {
   margin: 0;
   padding: var(--typomd-space-2) var(--typomd-space-3);
-  border-bottom: 1px solid var(--typomd-color-border);
+  background: var(--typomd-color-bg-secondary);
+  border-bottom: 1px solid var(--typomd-color-border-subtle);
   font-size: var(--typomd-font-size-ui-sm);
-  font-weight: 600;
+  font-weight: var(--typomd-font-weight-semibold);
   color: var(--typomd-color-text-muted);
 }
 .demo-output-pre {
@@ -129,5 +204,36 @@
   padding: var(--typomd-space-3);
   font-family: var(--typomd-font-mono);
   font-size: var(--typomd-font-size-ui-sm);
+  line-height: 1.55;
   white-space: pre-wrap;
+  max-height: 320px;
+  overflow: auto;
+  /* 滚动条定制同 §5.7 */
+  scrollbar-width: thin;
+  scrollbar-color: var(--typomd-color-border-strong) transparent;
+}
+.demo-output-pre::-webkit-scrollbar { width: 8px; height: 8px; }
+.demo-output-pre::-webkit-scrollbar-thumb {
+  background: var(--typomd-color-border-strong);
+  border-radius: var(--typomd-radius-full);
+}
+.demo-output-pre::-webkit-scrollbar-track { background: transparent; }
+
+/* ---- reduced-motion 兜底（§7：demo 不在 .typomd-root 内，必须自带） ---- */
+@media (prefers-reduced-motion: reduce) {
+  .demo-page,
+  .demo-page *,
+  .demo-page *::before,
+  .demo-page *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---- 响应式（§5.9：库不内置断点，demo 作用域覆写） ---- */
+@media (max-width: 639px) {
+  .demo-main { padding: 0 var(--typomd-space-3) var(--typomd-space-8); }
+  .demo-editor-card { border-radius: 0; } /* 通栏贴边 */
+  .demo-editor-card .ProseMirror { padding: var(--typomd-space-4) var(--typomd-space-4); }
 }
