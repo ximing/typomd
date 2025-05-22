@@ -5,6 +5,46 @@ import { DEMO_MARKDOWN } from './fixtures'
 
 const FEATURE_KEYS = ['math', 'mermaid', 'codeHighlight', 'slash', 'floatingToolbar'] as const
 
+// §5.8 顶栏图标：内联 Lucide 风格 16px SVG（与 packages/react/src/icons.tsx 同制式，
+// 但 demo 自带——api-freeze 不导出图标，不从 react 包 import）。stroke=currentColor、aria-hidden。
+const GithubIcon = (
+  <svg
+    width="16" height="16" viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M15 22v-2a8.94 8.94 0 0 0 2.32-5.09 9 9 0 0 0-3.57-7.71 8.84 8.84 0 0 0-4-1.94 9.08 9.08 0 0 0-5.62 1.84 9 9 0 0 0-1.12 13.39 9.04 9.04 0 0 0 3.65 2.51v2" />
+    <path d="M9 22v-2" />
+  </svg>
+)
+// dark 态显示太阳（点击切回亮色），亮态显示月亮（点击切到暗色）
+const SunIcon = (
+  <svg
+    width="16" height="16" viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 2v2" />
+    <path d="M12 20v2" />
+    <path d="m4.93 4.93 1.41 1.41" />
+    <path d="m17.66 17.66 1.41 1.41" />
+    <path d="M2 12h2" />
+    <path d="M20 12h2" />
+    <path d="m6.34 17.66-1.41 1.41" />
+    <path d="m19.07 4.93-1.41 1.41" />
+  </svg>
+)
+const MoonIcon = (
+  <svg
+    width="16" height="16" viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+  </svg>
+)
+
 export function App() {
   const [enabled, setEnabled] = useState<Record<string, boolean>>({
     math: true, mermaid: true, codeHighlight: true, slash: true, floatingToolbar: true,
@@ -26,15 +66,23 @@ export function App() {
     <div className={`demo-page${dark ? ' typomd-dark' : ''}`}>
       <header className="demo-header">
         <div className="demo-brand">
-          <h1 className="demo-title">typomd</h1>
-          <p className="demo-tagline">Milkdown 驱动的 Markdown 编辑器组件库</p>
+          <span className="demo-logo" aria-hidden="true">T</span>
+          <div className="demo-brand-text">
+            <h1 className="demo-title">typomd</h1>
+            <p className="demo-tagline">Milkdown 驱动的 Markdown 编辑器组件库</p>
+          </div>
         </div>
         <nav className="demo-header-actions">
           <a className="demo-link" href="https://github.com/ximing/typomd" target="_blank" rel="noreferrer">
-            GitHub
+            {GithubIcon}{' '}GitHub
           </a>
-          <button className="demo-btn" data-testid="theme-toggle" onClick={() => setDark((v) => !v)}>
-            {dark ? '切到亮色' : '切到暗色'}
+          <button
+            className="demo-btn"
+            data-testid="theme-toggle"
+            aria-label={dark ? '切换到亮色主题' : '切换到暗色主题'}
+            onClick={() => setDark((v) => !v)}
+          >
+            {dark ? SunIcon : MoonIcon}
           </button>
         </nav>
       </header>
