@@ -4,6 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>typomd demo</title>
+    <script>
+      // 防闪烁（§6）：首帧渲染前把 typomd-dark 加到 <html>；与 App.tsx 读同一键
+      ;(function () {
+        try {
+          var t = localStorage.getItem('typomd-demo-theme')
+          var dark = t ? t === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches
+          if (dark) document.documentElement.classList.add('typomd-dark')
+        } catch (e) { /* localStorage 不可用时跟随 CSS 默认（亮） */ }
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>

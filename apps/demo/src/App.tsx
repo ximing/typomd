@@ -1,5 +1,5 @@
 // src/App.tsx
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Typomd, type EditorHandle, type FeatureFlags } from '@typomd/react'
 import { DEMO_MARKDOWN } from './fixtures'
 
@@ -45,11 +45,21 @@ const MoonIcon = (
   </svg>
 )
 
+// §6 主题键：与 index.html 防闪烁脚本读同一键、同一语义（'dark' | 'light' | null）
+const THEME_KEY = 'typomd-demo-theme'
+
+function initialDark(): boolean {
+  try {
+    const t = localStorage.getItem(THEME_KEY)
+    return t ? t === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches
+  } catch { return false }
+}
+
 export function App() {
   const [enabled, setEnabled] = useState<Record<string, boolean>>({
     math: true, mermaid: true, codeHighlight: true, slash: true, floatingToolbar: true,
   })
-  const [dark, setDark] = useState(false)
+  const [dark, setDark] = useState(initialDark)
   const [toolbarVisible, setToolbarVisible] = useState(true)
   const [output, setOutput] = useState(DEMO_MARKDOWN)
   const [editorKey, setEditorKey] = useState(0)
@@ -57,13 +67,36 @@ export function App() {
 
   const features: FeatureFlags = Object.fromEntries(FEATURE_KEYS.map((k) => [k, enabled[k]]))
 
+  // 类挂 <html>（§6：.demo-page 选择器是后代选择器，html 挂类整页生效）
+  useEffect(() => {
+    document.documentElement.classList.toggle('typomd-dark', dark)
+  }, [dark])
+
+  // 未显式切换过时跟随系统（§6：仅无 localStorage 记录时响应 change）
+  useEffect(() => {
+    const mq = matchMedia('(prefers-color-scheme: dark)')
+    const onChange = (e: MediaQueryListEvent) => {
+      try { if (!localStorage.getItem(THEME_KEY)) setDark(e.matches) } catch { /* noop */ }
+    }
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
+
+  const toggleTheme = () => {
+    setDark((v) => {
+      const next = !v
+      try { localStorage.setItem(THEME_KEY, next ? 'dark' : 'light') } catch { /* noop */ }
+      return next
+    })
+  }
+
   const toggleFeature = (key: string) => {
     setEnabled((prev) => ({ ...prev, [key]: !prev[key] }))
     setEditorKey((k) => k + 1) // 非受控语义：demo 通过 key 重建编辑器
   }
 
   return (
-    <div className={`demo-page${dark ? ' typomd-dark' : ''}`}>
+    <div className="demo-page">
       <header className="demo-header">
         <div className="demo-brand">
           <span className="demo-logo" aria-hidden="true">T</span>
@@ -80,7 +113,7 @@ export function App() {
             className="demo-btn"
             data-testid="theme-toggle"
             aria-label={dark ? '切换到亮色主题' : '切换到暗色主题'}
-            onClick={() => setDark((v) => !v)}
+            onClick={toggleTheme}
           >
             {dark ? SunIcon : MoonIcon}
           </button>
