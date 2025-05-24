@@ -82,6 +82,22 @@ export function App() {
     return () => mq.removeEventListener('change', onChange)
   }, [])
 
+  // axe aria-input-field-name：Milkdown 的 .ProseMirror[role=textbox] 缺可访问名；
+  // 编辑器异步挂载后补 aria-label（§7/§8.5；demo 层修补，不动库 DOM 管理职责）
+  useEffect(() => {
+    const host = document.querySelector('[data-testid="typomd"]')
+    if (!host) return
+    const setLabel = () => {
+      const pm = host.querySelector('.ProseMirror')
+      if (pm) { pm.setAttribute('aria-label', 'Markdown 编辑器'); return true }
+      return false
+    }
+    if (setLabel()) return
+    const obs = new MutationObserver(() => { if (setLabel()) obs.disconnect() })
+    obs.observe(host, { childList: true, subtree: true })
+    return () => obs.disconnect()
+  }, [editorKey])
+
   const toggleTheme = () => {
     setDark((v) => {
       const next = !v
@@ -197,7 +213,7 @@ export function App() {
         <section className="demo-section">
           <div className="demo-output-card">
             <h2 className="demo-output-title">onChange 输出</h2>
-            <pre className="demo-output-pre" data-testid="markdown-output">{output}</pre>
+            <pre className="demo-output-pre" data-testid="markdown-output" tabIndex={0}>{output}</pre>
           </div>
         </section>
       </main>

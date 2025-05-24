@@ -67,8 +67,9 @@
   background-position: center;
 }
 /* 既有 li[data-checked] 的 position:relative/padding-left 与 ::before/::after 绝对定位规则删除
-   （flex 布局替代；完成态文字保持 text-secondary→改 text-muted + 删除线） */
-.typomd .ProseMirror li[data-checked='true'] { color: var(--typomd-color-text-muted); }
+   （flex 布局替代；完成态文字 text-secondary + 删除线——§8.5 axe color-contrast：text-muted 对
+   color-bg 实算 <4.5:1（亮 2.49 / 暗 4.05），为达标 0 violations 回退到 text-secondary，删除线仍表达完成态） */
+.typomd .ProseMirror li[data-checked='true'] { color: var(--typomd-color-text-secondary); }
 .typomd .ProseMirror li[data-checked='true'] > p { text-decoration: line-through; margin: 0; }
 
 /* ---- 引用（§5.1：3px 全强度墨条 → 2px border-strong） ---- */

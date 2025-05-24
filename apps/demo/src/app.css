@@ -56,7 +56,7 @@
 .demo-tagline {
   margin: 0;
   font-size: var(--typomd-font-size-ui);
-  color: var(--typomd-color-text-muted);
+  color: var(--typomd-color-text-secondary); /* §7：text-muted 对 canvas 达不到 4.5:1，副标题升至 secondary */
 }
 
 .demo-header-actions {
@@ -95,7 +95,7 @@
   margin: 0 0 var(--typomd-space-2);
   font-size: var(--typomd-font-size-ui);
   font-weight: var(--typomd-font-weight-semibold);
-  color: var(--typomd-color-text-muted);
+  color: var(--typomd-color-text-secondary); /* §7：text-muted 对 canvas 达不到 4.5:1，升至 secondary */
   letter-spacing: 0.04em;
 }
 
@@ -197,7 +197,7 @@
   border-bottom: 1px solid var(--typomd-color-border-subtle);
   font-size: var(--typomd-font-size-ui-sm);
   font-weight: var(--typomd-font-weight-semibold);
-  color: var(--typomd-color-text-muted);
+  color: var(--typomd-color-text-secondary); /* §7：text-muted 对 bg-secondary 达不到 4.5:1，升至 secondary */
 }
 .demo-output-pre {
   margin: 0;
