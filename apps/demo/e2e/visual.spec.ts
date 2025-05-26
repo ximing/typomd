@@ -19,10 +19,16 @@ const TYPOMD = '[data-testid="typomd"]'
 const EDITOR = `${TYPOMD} .ProseMirror`
 const MERMAID_SVG = `${EDITOR} .typomd-mermaid svg`
 
-/** 打开页面并等编辑器就绪 + 字体 + mermaid 首屏渲染落定（§8.4：避免异步渲染抖动） */
+/** 打开页面并等编辑器就绪 + 字体 + mermaid 首屏渲染落定（§8.4：避免异步渲染抖动）
+ *
+ * 冷启超时健壮性：vite dev 按需模块变换在 4 核 Linux 容器首帧要把 mermaid/katex/shiki
+ * 深依赖图全量变换，默认 goto('load') 会卡在变换瀑布 >60s；故 goto 改 'domcontentloaded'
+ * （HTML 解析即返回），真正的就绪交由下方显式等待（data-ready + mermaid svg + fonts）。
+ * 不改变截图内容——显式等待仍保证同一落定态，仅 goto 返回时机 + 断言/用例超时放宽。 */
 async function ready(page: Page) {
-  await page.goto('/')
-  await expect(page.locator(TYPOMD)).toHaveAttribute('data-ready', 'true')
+  await page.goto('/', { waitUntil: 'domcontentloaded' })
+  // 冷启 createEditor + 模块瀑布 + mermaid/katex/shiki 在 4 核容器首帧远超默认 5s，放宽到 60s
+  await expect(page.locator(TYPOMD)).toHaveAttribute('data-ready', 'true', { timeout: 60_000 })
   await expect(page.locator(MERMAID_SVG).first()).toBeVisible({ timeout: 15_000 })
   await page.evaluate(() => document.fonts.ready)
 }
@@ -54,7 +60,9 @@ async function openFloating(page: Page) {
 }
 
 test.describe('视觉基线', () => {
-  test.describe.configure({ timeout: 60_000 })
+  // 冷启首帧（editor-light）vite 模块瀑布 ~60-90s；放宽到 180s 覆盖冷启，
+  // 后续 14 用例命中 vite 暖缓存即快。仅此文件（describe 级，覆盖全部 15 用例）。
+  test.describe.configure({ timeout: 180_000 })
   test.skip(() => !process.env.CI && !process.env.VISUAL_LOCAL, '基线环境外跳过（设 VISUAL_LOCAL=1 本机强制跑）')
 
   // 1. 全页 亮
