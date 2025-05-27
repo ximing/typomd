@@ -177,6 +177,11 @@ test.describe('视觉基线', () => {
   // 14. 代码块特写 亮
   test('代码块特写：亮色', async ({ page }) => {
     await ready(page)
+    // Shiki-gate：code-highlight.ts 用 createHighlighter().then(refresh) 异步应用
+    // 双主题 token decoration（inline style 含 color + --shiki-dark），data-ready 早于
+    // Shiki 落定——冷启首帧会捕获未高亮代码（§2/§5.2 已知风险，上轮基线即此缺陷）。
+    // 等首个带 inline style 的 token span 出现再截图，确保高亮已应用。
+    await expect(page.locator(`${EDITOR} pre code span[style]`).first()).toBeVisible({ timeout: 15_000 })
     await expect(page.locator(`${EDITOR} pre`).first()).toHaveScreenshot('block-code-light.png')
   })
 
@@ -184,6 +189,10 @@ test.describe('视觉基线', () => {
   test('代码块特写：暗色', async ({ page }) => {
     await ready(page)
     await enableDark(page)
+    // Shiki-gate（同上）：双主题一次 tokenize 产 light color + --shiki-dark，
+    // 暗色由 CSS 切 color:var(--shiki-dark) 实现，不重渲染——enableDark 后 span 仍在，
+    // gate 仍确认 Shiki 已应用（防冷启未高亮）。
+    await expect(page.locator(`${EDITOR} pre code span[style]`).first()).toBeVisible({ timeout: 15_000 })
     await expect(page.locator(`${EDITOR} pre`).first()).toHaveScreenshot('block-code-dark.png')
   })
 })
