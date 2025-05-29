@@ -40,3 +40,7 @@ v1 仅交付契约（本文档 + `src/index.ts` 类型），不实现。协议�
 - **阴影刻度**：`shadow-popover` 需拆解映射为 RN shadow 属性——iOS `shadowColor/shadowOffset/shadowOpacity/shadowRadius`（取两段投影中视觉主导的一段），Android `elevation`（建议 8）；精确映射在 v2 实现时标定。
 - **亮/暗两组颜色键完全对齐**：RN 侧按主题切换同一组常量，键集合差异会在 theme 构建期直接失败。
 - v2 breaking：`color-error` → `color-danger`；`color-quote-border` 删除（引用块并入 `color-text`）；`radius` → `radius-sm/md/lg/full`。
+
+## v3 新增键映射说明（2025-05-20 视觉精修）
+
+tokens.json v3 为增量扩展（无删除键），新增键映射规则不变：px→dp 直读、rgba 直传、shadow-sm/shadow-tooltip 同 shadow-popover 拆解规则。新增颜色键（color-canvas/-heading/-border-subtle/-code-text/-mermaid-node/-mermaid-edge/-skeleton）在 RN v2 实现时按同名语义消费；v3 改值键（dark surface 阶/danger/selection 等）RN 侧重新读值即可，无结构变更。

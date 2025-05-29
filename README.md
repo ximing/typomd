@@ -49,6 +49,8 @@ import '@typomd/react/styles.css'
 - 层级：`z-sticky(10) / z-floating(20) / z-slash(30) / z-tooltip(40)`
 - 阴影：`shadow-popover`
 
+v3 新增：`color-canvas / -heading / -border-subtle / -code-text / -mermaid-node / -mermaid-edge / -skeleton`、`shadow-sm / shadow-tooltip`、`space-7/10/12/16`、`radius-xl`、`font-size-display`、`font-weight-*`、`line-height-heading / -ui`、`letter-spacing-heading`、`duration-slow`。
+
 ### v0.1 → v0.2 令牌迁移对照（§10）
 
 | 旧令牌（已删除） | 新令牌 |
@@ -59,6 +61,25 @@ import '@typomd/react/styles.css'
 | `--typomd-color-accent-subtle` | 保留键名，语义调整为「激活态底」 |
 
 新增：`color-bg-secondary / -bg-elevated / -text-secondary / -border-strong / -hover / -active / -accent-contrast / -focus-ring / -code-bg`、`space-0_5/1_5/5/8`、`radius-sm/lg/full`、`font-size-ui / -ui-sm`、`duration-* / ease-*`、`z-*`、`shadow-popover`。
+
+### 防闪烁初始化（嵌入方）
+
+暗色类若由 JS 在渲染后添加，首帧会闪亮色。在 `<head>` 内联一小段脚本，首帧前把类加到 `<html>`：
+
+```html
+<script>
+  ;(function () {
+    try {
+      var t = localStorage.getItem('your-theme-key')
+      if (t ? t === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.classList.add('typomd-dark')
+      }
+    } catch (e) {}
+  })()
+</script>
+```
+
+参考实现见 `apps/demo/index.html` 与 `apps/demo/src/App.tsx`（localStorage sticky + 系统偏好跟随）。
 
 ## 开发
 
