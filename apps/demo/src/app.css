@@ -212,6 +212,11 @@
   scrollbar-width: thin;
   scrollbar-color: var(--typomd-color-border-strong) transparent;
 }
+/* §7：pre 可键盘聚焦（tabIndex=0，axe scrollable-region-fix），补双层焦点环与 demo-btn 一致 */
+.demo-output-pre:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--typomd-color-canvas), 0 0 0 4px var(--typomd-color-focus-ring);
+}
 .demo-output-pre::-webkit-scrollbar { width: 8px; height: 8px; }
 .demo-output-pre::-webkit-scrollbar-thumb {
   background: var(--typomd-color-border-strong);
