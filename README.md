@@ -1,70 +1,152 @@
 # typomd
 
-Typora 式 WYSIWYG markdown 编辑器组件库。
+[English](./README.md) · [简体中文](./README.zh-CN.md)
 
-- `@typomd/core` — headless 编辑器内核（Milkdown/ProseMirror），markdown 是唯一数据源
-- `@typomd/react` — `<Typomd>` 组件、顶部工具栏、悬浮工具栏、Slash 菜单
-- `@typomd/theme` — CSS variables 设计令牌 + 亮/暗主题（令牌同时导出 JSON，含 `auto.css` 跟随系统主题）
-- `@typomd/react-native` — v1 仅桥接协议契约（见 BRIDGE.md），v2 实现
+[![npm](https://img.shields.io/npm/v/@typomd/react.svg)](https://www.npmjs.com/package/@typomd/react)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+[![demo](https://img.shields.io/badge/demo-live-2383e2.svg)](https://ximing.github.io/typomd/)
 
-## 安装
+Typora-like **WYSIWYG Markdown** editor for React. You type Markdown; you see formatted text. The document is always Markdown — no proprietary JSON as source of truth.
+
+**[Live demo →](https://ximing.github.io/typomd/)**
+
+![typomd light theme](docs/images/editor-light.png)
+
+![typomd dark theme](docs/images/editor-dark.png)
+
+## Features
+
+- **WYSIWYG Markdown** — headings, lists, quotes, tables, task lists, GFM strikethrough
+- **Slash menu** — type `/` to insert blocks (headings, lists, code, math, Mermaid, …)
+- **Floating toolbar** — select text to bold / italic / link / lists
+- **Math** — KaTeX inline `$...$` and block `$$...$$`
+- **Diagrams** — Mermaid fences, light/dark aware
+- **Code** — Shiki highlighting, languages loaded on demand
+- **Images** — paste or drop with your own upload hook
+- **Themes** — light, dark, or follow the system; override with CSS variables
+- **Accessible** — keyboard toolbar, focus rings, `prefers-reduced-motion`
+
+<p>
+  <img src="docs/images/slash.png" alt="Slash command menu" width="360" />
+  <img src="docs/images/floating.png" alt="Floating selection toolbar" width="360" />
+</p>
+
+## Install
 
 ```bash
 npm install @typomd/core @typomd/react @typomd/theme
 ```
 
-## 用法
+Peer: React 18.3+ or 19.
+
+## Quick start
 
 ```tsx
-import { Typomd } from '@typomd/react'
+import { useRef } from 'react'
+import { Typomd, type EditorHandle } from '@typomd/react'
 import '@typomd/theme/default.css'
 import '@typomd/react/styles.css'
 
-<Typomd
-  defaultValue="# Hello"
-  features={{ math: true, mermaid: true, codeHighlight: true, slash: true, floatingToolbar: true }}
-  toolbar={{ visible: true }}
-  onChange={(markdown, json) => {}}
-  onUploadImage={async (file) => ({ src: '...' })}
-  ref={editorRef} // EditorHandle: getMarkdown/setMarkdown/getJSON/focus/insert/execCommand/setReadOnly/on/destroy
-/>
+export function App() {
+  const editorRef = useRef<EditorHandle>(null)
+
+  return (
+    <Typomd
+      ref={editorRef}
+      defaultValue="# Hello typomd"
+      placeholder="Type / for commands…"
+      features={{
+        math: true,
+        mermaid: true,
+        codeHighlight: true,
+        slash: true,
+        floatingToolbar: true,
+      }}
+      toolbar={{ visible: true }}
+      onChange={(markdown) => console.log(markdown)}
+      onUploadImage={async (file) => {
+        // upload, then return a public URL
+        return { src: URL.createObjectURL(file), alt: file.name }
+      }}
+    />
+  )
+}
 ```
 
-## 主题
+Read the current document:
 
-三套入口（暗色默认只覆写颜色类令牌）：
+```ts
+editorRef.current?.getMarkdown()
+editorRef.current?.setMarkdown('# replaced\n')
+editorRef.current?.insert('**bold**')
+editorRef.current?.execCommand('bold')
+editorRef.current?.focus()
+```
 
-- `@typomd/theme/default.css` — 默认：亮色为基，暗色经 `.typomd-dark` 类切换（在任意祖先元素加类）
-- `@typomd/theme/auto.css` — 跟随系统 `prefers-color-scheme`
-- `@typomd/theme/tokens.json` — 令牌 JSON（自定义构建 / RN 映射用）
+## Using the editor
 
-逐项覆写令牌：CSS 中重定义 `--typomd-*` 变量即可。
+### Toolbar, slash, selection bar
 
-### 令牌速览
-
-- 颜色：`color-bg / -bg-secondary / -bg-elevated / -text / -text-secondary / -text-muted / -border / -border-strong / -hover / -active / -accent / -accent-contrast / -accent-subtle / -focus-ring / -selection / -danger / -code-bg`（前缀均为 `--typomd-`）
-- 尺寸：`space-0_5…8`、`radius-sm/md/lg/full`
-- 字体：`font-text / font-mono / font-size / font-size-ui / font-size-ui-sm / line-height`
-- 动效：`duration-fast(100ms) / duration-base(160ms)`、`ease-standard / ease-out`
-- 层级：`z-sticky(10) / z-floating(20) / z-slash(30) / z-tooltip(40)`
-- 阴影：`shadow-popover`
-
-v3 新增：`color-canvas / -heading / -border-subtle / -code-text / -mermaid-node / -mermaid-edge / -skeleton`、`shadow-sm / shadow-tooltip`、`space-7/10/12/16`、`radius-xl`、`font-size-display`、`font-weight-*`、`line-height-heading / -ui`、`letter-spacing-heading`、`duration-slow`。
-
-### v0.1 → v0.2 令牌迁移对照（§10）
-
-| 旧令牌（已删除） | 新令牌 |
+| Action | How |
 | --- | --- |
-| `--typomd-radius` | `--typomd-radius-md`（另有 `-sm/-lg/-full`） |
-| `--typomd-color-error` | `--typomd-color-danger` |
-| `--typomd-color-quote-border` | 删除——引用块左边框并入 `--typomd-color-text` |
-| `--typomd-color-accent-subtle` | 保留键名，语义调整为「激活态底」 |
+| Format a line | Click the top toolbar, or type `/` and pick a command |
+| Format a selection | Select text — a floating bar appears |
+| Insert math / Mermaid / table / image | `/` then choose from **Media** |
+| Undo / redo | Toolbar or `⌘Z` / `⌘⇧Z` |
 
-新增：`color-bg-secondary / -bg-elevated / -text-secondary / -border-strong / -hover / -active / -accent-contrast / -focus-ring / -code-bg`、`space-0_5/1_5/5/8`、`radius-sm/lg/full`、`font-size-ui / -ui-sm`、`duration-* / ease-*`、`z-*`、`shadow-popover`。
+Slash menu and toolbars share the same command registry, so labels stay consistent.
 
-### 防闪烁初始化（嵌入方）
+### Markdown you can type
 
-暗色类若由 JS 在渲染后添加，首帧会闪亮色。在 `<head>` 内联一小段脚本，首帧前把类加到 `<html>`：
+| You type | You see |
+| --- | --- |
+| `# Title` | Heading |
+| `- item` / `1. item` / `- [ ] task` | Lists |
+| `> quote` | Block quote |
+| `**bold**` `*italic*` `~~strike~~` `` `code` `` | Marks |
+| `$E=mc^2$` / `$$...$$` | KaTeX |
+| ` ```ts ` / ` ```mermaid ` | Highlighted code / diagram |
+
+Markdown is the only stored format. `onChange` gives you the canonical string (and a ProseMirror JSON snapshot if you need it).
+
+### Keyboard
+
+| Shortcut | Command |
+| --- | --- |
+| `⌘B` | Bold |
+| `⌘I` | Italic |
+| `⌘E` | Inline code |
+| `⌘⌥X` | Strikethrough |
+| `⌘⇧B` | Quote |
+| `⌘⌥C` | Code block |
+| `⌘⌥8` / `⌘⌥7` | Bullet / ordered list |
+| `/` | Slash menu |
+| `Esc` | Close menus / return focus |
+
+On Windows/Linux, `⌘` is `Ctrl`.
+
+## Theming
+
+Three CSS entries:
+
+| Import | Behavior |
+| --- | --- |
+| `@typomd/theme/default.css` | Light by default; add `.typomd-dark` on any ancestor (usually `<html>`) for dark |
+| `@typomd/theme/auto.css` | Follows `prefers-color-scheme` |
+| `@typomd/theme/tokens.json` | Token map for custom builds / React Native |
+
+Override any token:
+
+```css
+:root {
+  --typomd-color-accent: #0f766e;
+  --typomd-radius-md: 8px;
+}
+```
+
+### Avoid a light flash in dark mode
+
+If you toggle `.typomd-dark` from JavaScript after paint, the first frame is light. Inline this in `<head>`:
 
 ```html
 <script>
@@ -79,14 +161,80 @@ v3 新增：`color-canvas / -heading / -border-subtle / -code-text / -mermaid-no
 </script>
 ```
 
-参考实现见 `apps/demo/index.html` 与 `apps/demo/src/App.tsx`（localStorage sticky + 系统偏好跟随）。
+## API
 
-## 开发
+### `<Typomd>`
+
+| Prop | Type | Default | Notes |
+| --- | --- | --- | --- |
+| `defaultValue` | `string` | `''` | Uncontrolled initial Markdown |
+| `placeholder` | `string` | | Shown when the doc is empty |
+| `readOnly` | `boolean` | `false` | |
+| `features.math` | `boolean` | `true` | KaTeX |
+| `features.mermaid` | `boolean` | `true` | Mermaid |
+| `features.codeHighlight` | `boolean` | `true` | Shiki |
+| `features.slash` | `boolean` | `true` | `/` menu |
+| `features.floatingToolbar` | `boolean` | `true` | Selection bar |
+| `toolbar.visible` | `boolean` | `true` | Hide the top bar only |
+| `toolbar.items` | `(string \| render)[]` | built-in | Command ids, `'\|'` separators, or custom renderers |
+| `onChange` | `(md, json) => void` | | Debounced Markdown + JSON |
+| `onChangeDebounce` | `number` | | ms |
+| `onError` | `(err) => void` | | Preset failures (bad math, etc.) |
+| `onUploadImage` | `(file) => Promise<{src, alt?}>` | | Required for image insert / paste / drop |
+| `ref` | `EditorHandle` | | Imperative API |
+
+### `EditorHandle`
+
+```ts
+getMarkdown(): string
+setMarkdown(markdown: string): void  // no onChange; clears undo
+getJSON(): Record<string, unknown>
+focus(): void
+insert(markdown: string): void
+execCommand(name: string, args?: unknown): void
+setReadOnly(readOnly: boolean): void
+on(event, cb): () => void            // 'change' | 'selectionChange' | 'slashTrigger' | 'error'
+destroy(): void
+```
+
+`setMarkdown` replaces the document, drops pending `onChange`, and resets undo — use it for loading files, not for keystrokes.
+
+### Headless core
+
+Need the editor without React chrome? Use `@typomd/core`:
+
+```ts
+import { createEditor } from '@typomd/core'
+
+const handle = await createEditor({
+  root: document.getElementById('host')!,
+  defaultValue: '# Hi',
+  onChange: (md) => {},
+})
+```
+
+## Packages
+
+| Package | What it is |
+| --- | --- |
+| [`@typomd/react`](https://www.npmjs.com/package/@typomd/react) | `<Typomd>`, toolbar, floating bar, slash menu |
+| [`@typomd/core`](https://www.npmjs.com/package/@typomd/core) | Headless editor + command registry |
+| [`@typomd/theme`](https://www.npmjs.com/package/@typomd/theme) | CSS variables, light/dark, `tokens.json` |
+| [`@typomd/react-native`](https://www.npmjs.com/package/@typomd/react-native) | Bridge **types** only in 1.x (see `BRIDGE.md`) |
+
+## Develop
 
 ```bash
 pnpm install
-pnpm build        # turbo 构建全部包
-pnpm test         # 单测（core roundtrip / react 组件）
+pnpm build
+pnpm test
 pnpm typecheck
-pnpm e2e          # Playwright（先 pnpm --filter demo exec playwright install chromium）
+pnpm --filter demo dev    # http://localhost:5173
+pnpm e2e
 ```
+
+Requires Node 18+ and pnpm 9.5+.
+
+## License
+
+[MIT](./LICENSE) © 2025 ximing

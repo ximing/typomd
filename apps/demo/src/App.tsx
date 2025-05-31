@@ -118,10 +118,13 @@ export function App() {
           <span className="demo-logo" aria-hidden="true">T</span>
           <div className="demo-brand-text">
             <h1 className="demo-title">typomd</h1>
-            <p className="demo-tagline">Milkdown 驱动的 Markdown 编辑器组件库</p>
+            <p className="demo-tagline">Typora-like WYSIWYG Markdown editor for React</p>
           </div>
         </div>
         <nav className="demo-header-actions">
+          <a className="demo-link" href="https://www.npmjs.com/package/@typomd/react" target="_blank" rel="noreferrer">
+            npm
+          </a>
           <a className="demo-link" href="https://github.com/ximing/typomd" target="_blank" rel="noreferrer">
             {GithubIcon}{' '}GitHub
           </a>
