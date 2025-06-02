@@ -1,9 +1,21 @@
 {
   "name": "@typomd/core",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "Headless Typora-like WYSIWYG Markdown editor core (Milkdown/ProseMirror). Markdown is the only source of truth.",
+  "keywords": ["markdown", "wysiwyg", "editor", "prosemirror", "milkdown", "typora", "headless"],
+  "license": "MIT",
+  "author": "ximing",
+  "homepage": "https://ximing.github.io/typomd/",
+  "bugs": { "url": "https://github.com/ximing/typomd/issues" },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ximing/typomd.git",
+    "directory": "packages/core"
+  },
+  "publishConfig": { "access": "public" },
   "type": "module",
   "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
-  "files": ["dist"],
+  "files": ["dist", "LICENSE", "README.md"],
   "scripts": {
     "build": "tsup",
     "test": "vitest run",

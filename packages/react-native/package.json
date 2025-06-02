@@ -1,10 +1,22 @@
 {
   "name": "@typomd/react-native",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "Bridge protocol types for embedding typomd in React Native (contract only in 1.x; runtime lands in 2.x).",
+  "keywords": ["markdown", "react-native", "editor", "typomd", "bridge"],
+  "license": "MIT",
+  "author": "ximing",
+  "homepage": "https://ximing.github.io/typomd/",
+  "bugs": { "url": "https://github.com/ximing/typomd/issues" },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ximing/typomd.git",
+    "directory": "packages/react-native"
+  },
+  "publishConfig": { "access": "public" },
   "type": "module",
   "exports": { ".": { "types": "./src/index.ts" } },
   "types": "./src/index.ts",
-  "files": ["src", "BRIDGE.md"],
+  "files": ["src", "BRIDGE.md", "LICENSE", "README.md"],
   "scripts": {
     "typecheck": "tsc --noEmit",
     "test": "echo 'no runtime code to test' && exit 0"

@@ -1,12 +1,25 @@
 {
   "name": "@typomd/react",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "React WYSIWYG Markdown editor: toolbar, floating selection bar, slash menu. Typora-like editing with GFM, math, Mermaid, and Shiki.",
+  "keywords": ["markdown", "wysiwyg", "editor", "react", "typora", "prosemirror", "milkdown", "slash-commands"],
+  "license": "MIT",
+  "author": "ximing",
+  "homepage": "https://ximing.github.io/typomd/",
+  "bugs": { "url": "https://github.com/ximing/typomd/issues" },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ximing/typomd.git",
+    "directory": "packages/react"
+  },
+  "publishConfig": { "access": "public" },
   "type": "module",
+  "sideEffects": ["**/*.css"],
   "exports": {
     ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
     "./styles.css": "./dist/styles.css"
   },
-  "files": ["dist"],
+  "files": ["dist", "LICENSE", "README.md"],
   "scripts": {
     "build": "tsup && cat src/styles/base.css src/styles/toolbar.css src/styles/floating.css src/styles/slash.css > dist/styles.css",
     "test": "vitest run",

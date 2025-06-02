@@ -1,14 +1,27 @@
 {
   "name": "@typomd/theme",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "Design tokens and light/dark CSS for typomd. CSS variables, auto theme, and JSON export for React Native mapping.",
+  "keywords": ["markdown", "theme", "css", "design-tokens", "dark-mode", "typomd"],
+  "license": "MIT",
+  "author": "ximing",
+  "homepage": "https://ximing.github.io/typomd/",
+  "bugs": { "url": "https://github.com/ximing/typomd/issues" },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ximing/typomd.git",
+    "directory": "packages/theme"
+  },
+  "publishConfig": { "access": "public" },
   "type": "module",
+  "sideEffects": ["**/*.css"],
   "exports": {
     ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
     "./default.css": "./dist/default.css",
     "./auto.css": "./dist/auto.css",
     "./tokens.json": "./dist/tokens.json"
   },
-  "files": ["dist"],
+  "files": ["dist", "LICENSE", "README.md"],
   "scripts": {
     "build": "node scripts/build-css.mjs && tsup",
     "test": "vitest run",
